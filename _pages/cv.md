@@ -15,23 +15,23 @@ Education
 
 Work experience
 ======
-* April 2024 - Current: Research Assistant | Paul G. Allen School of Computer Science Engineering, University of Washington, United State
+* April 2024 - Current: Research Assistant Paul G. Allen School of Computer Science Engineering, University of Washington, United State
   * Research Area: Computational Biology
   * Duties includes:
     * On going independent research project on cell type classification using deep learning models
   * Supervisor: Professor Sheng Wang
 
-* July 2023 - September 2023: Research Intern | The National Center for Nano-Science and Technology, Beijing, China
+* July 2023 - September 2023: Research Intern The National Center for Nano-Science and Technology, Beijing, China
   * Research Area: Chiral Semiconductor
   * Supervisor: Professor Zhiyong Tang
 
-* June 2019 – June 2022: Research Assistant | Soft Material Laboratory at Southwest University, Chongqing, China
+* June 2019 – June 2022: Research Assistant Soft Material Laboratory at Southwest University, Chongqing, China
   * Research Area: Cellulose Nano-Crystals
   * Duties included:
     *  Synthesis of assembly-induced emission of vertical assembled CNCs
   * Supervisor: Professor Lin Gan
  
-* July 2020 – May 2022: Research Assistant | Soft Material Laboratory at Southwest University, Chongqing, China
+* July 2020 – May 2022: Research Assistant Soft Material Laboratory at Southwest University, Chongqing, China
   * Research Area: Negative Poisson’s Ratio Material through 3D printing
   * Duties included:
     *  Project on possible applicant of auxetic materials in noise reduction
