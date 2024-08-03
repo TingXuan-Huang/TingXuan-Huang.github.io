@@ -11,35 +11,41 @@ redirect_from:
 
 Education
 ======
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
-* M.S. in Jekyll, GitHub University, 2014
-* B.S. in GitHub, GitHub University, 2012
+* B.S. in Computer Science, University of Washington, 2023-2027 (expected)
 
 Work experience
 ======
-* Spring 2024: Academic Pages Collaborator
-  * Github University
-  * Duties includes: Updates and improvements to template
-  * Supervisor: The Users
+* April 2024 - Current: Research Assistant | Paul G. Allen School of Computer Science Engineering, University of Washington, United State
+  * Research Area: Computational Biology
+  * Duties includes:
+    * On going independent research project on cell type classification using deep learning models
+  * Supervisor: Professor Sheng Wang
 
-* Fall 2015: Research Assistant
-  * Github University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
+* July 2023 - September 2023: Research Intern | The National Center for Nano-Science and Technology, Beijing, China
+  * Research Area: Chiral Semiconductor
+  * Supervisor: Professor Zhiyong Tang
 
-* Summer 2015: Research Assistant
-  * Github University
-  * Duties included: Tagging issues
-  * Supervisor: Professor Git
+* June 2019 – June 2022: Research Assistant | Soft Material Laboratory at Southwest University, Chongqing, China
+  * Research Area: Cellulose Nano-Crystals
+  * Duties included:
+    *  Synthesis of assembly-induced emission of vertical assembled CNCs
+  * Supervisor: Professor Lin Gan
+ 
+* July 2020 – May 2022: Research Assistant | Soft Material Laboratory at Southwest University, Chongqing, China
+  * Research Area: Negative Poisson’s Ratio Material through 3D printing
+  * Duties included:
+    *  Project on possible applicant of auxetic materials in noise reduction
+    *  A Chinese patents as first inventor
+  * Supervisor:
   
 Skills
 ======
-* Skill 1
-* Skill 2
-  * Sub-skill 2.1
-  * Sub-skill 2.2
-  * Sub-skill 2.3
-* Skill 3
+* Java
+* Python
+  * PyTorch
+  * NumPy
+  * Flask
+* LaTex
 
 Publications
 ======
