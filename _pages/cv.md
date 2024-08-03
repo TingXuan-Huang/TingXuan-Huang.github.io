@@ -41,11 +41,15 @@ Work experience
 Skills
 ======
 * Java
+* Git/GitHub
 * Python
   * PyTorch
   * NumPy
   * Flask
 * LaTex
+* C4D
+* Solidwork
+* Deep learning
 
 Publications
 ======
@@ -67,4 +71,13 @@ Teaching
   
 Service and leadership
 ======
-* Currently signed in to 43 different slack teams
+* 
+
+Awards and Honors
+======
+* Gold in 54th annual Chemistry Olympiad, 2022 (UK Round 1)
+* The Second Prize in the Preliminary of 35th Chinese Chemistry Olympiad
+* Grand Prize in 2020 Nanotechnology Innovation and Entrepreneurship Competition in
+Western China
+* The Second Prize in 2022 Nanotechnology Innovation and Entrepreneurship Competition
+in Western China
