@@ -24,15 +24,15 @@ author:
   avatar           : "profile.png"
   name             : "Tingxuan Huang 黄廷轩"
   pronouns         : # example: "she/her"  
-  bio              : "Short biography for the left-hand sidebar"
+  bio              : "I am currently a sophomore at the University of Washington, pursuing an undergraduate degree in Computer Science."
   location         : "Seattle, WA, United State"
   employer         : "University of Washington"
   uri              : # URL
-  email            : "thuang27@uw.edu" 
+  email            : "thuang27@uw.edu"
 
   # Academic websites
   arxiv            : URL - Update with the correct link to your profile
-  googlescholar    : "https://scholar.google.com/citations?user=PS_CX0AAAAAJ"
+  googlescholar    : "https://scholar.google.com"
   # impactstory      : # URL
   # orcid            : "http://orcid.org/yourorcidurl"
   # semantic         : # URL
@@ -44,7 +44,7 @@ author:
   bitbucket        : # Username - Update with your username on the site
   codepen          : # Username
   dribbble         : # Username
-  github           : "TingXuan-Huang"
+  github           : "https://github.com/TingXuan-Huang"
   kaggle           : # Username  
   stackoverflow    : # User number or user number and name (i.e., use "1" or "1/jeff-atwood")    
 
