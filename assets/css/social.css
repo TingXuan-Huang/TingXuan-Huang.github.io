@@ -1,0 +1,162 @@
+/* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Ensure HTML and body occupy full height */
+html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+/* Flexbox layout for the entire page */
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Header styling */
+header {
+    background-color: #2a2a5c;
+    color: #fff;
+    padding: 10px 0;
+    flex-shrink: 0;
+}
+
+/* Navigation container styling */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navigation menu styling */
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+/* Navigation link styling */
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 20px;
+    margin: 0 10px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: #38386e;
+}
+
+/* Content wrapper styling */
+.content-wrapper {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    overflow: auto;
+}
+
+/* Sidebar styling */
+.sidebar {
+    flex: 1;
+    margin-right: 20px;
+}
+
+/* Main content styling */
+.main-content {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Photo styling */
+.photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+/* Heading color styling */
+h1, h2, h3 {
+    color: #2a2a5c;
+}
+
+/* Social icons container styling */
+.social-icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Social icon styling */
+.social-icon {
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #333;
+    margin: 5px 0;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.social-icon i {
+    margin-right: 10px;
+}
+
+/* Specific social icon color styling */
+.social-icon.bilibili { background-color: #00A1D6; color: #fff; }
+
+/* Hover effect for social icons */
+.social-icon:hover {
+    background-color: #ddd;
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #2a2a5c;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    nav {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+    }
+    nav a {
+        margin: 0;
+        padding: 10px 0;
+    }
+    .content-wrapper {
+        flex-direction: column;
+        margin: 0;
+    }
+    .sidebar {
+        margin: 0 0 20px;
+    }
+}
