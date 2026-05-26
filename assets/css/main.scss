@@ -450,6 +450,44 @@ body {
   padding: 2rem 0;
 }
 
+/* Search */
+.search-bar {
+  margin-bottom: 2rem;
+}
+
+.search-input {
+  width: 100%;
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 1.5;
+  padding: 0.65rem 0.9rem;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--divider);
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.15s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.search-input:focus {
+  border-color: var(--sky);
+}
+
+.search-input::placeholder {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.search-status {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0.65rem 0 0;
+  min-height: 1em;
+}
+
 /* ============================================================================
    Site footer
    ============================================================================ */
