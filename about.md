@@ -14,7 +14,9 @@ This site is a small, quiet corner of the internet where I keep a few kinds of w
 - **Notes** — research-leaning and technical. Method walkthroughs, debugging logs, and the kind of small write-ups I wish more people published.
 - **Learning** — theory-oriented summaries of things I'm working through, in roughly textbook order.
 - **Thoughts** — literary-review style commentary on current topics — papers, debates, whatever's in the air.
+- **Research** — running logs and write-ups from research projects I'm actively working on.
 - **Interests** — D&D design, side projects, hobby write-ups. Whatever else doesn't fit the categories above.
+- **News** — short updates on what I'm working on, week to week.
 
 It all lives here because I needed somewhere that wasn't a notebook, wasn't a tweet, and wasn't a paper.
 

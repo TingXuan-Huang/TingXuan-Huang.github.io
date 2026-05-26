@@ -1,0 +1,42 @@
+---
+layout: default
+---
+{% if page.title %}
+<header class="page-header">
+  <h1 class="page-title">{{ page.title }}</h1>
+  {% if page.description %}
+    <p class="page-description">{{ page.description }}</p>
+  {% endif %}
+</header>
+{% endif %}
+
+{% comment %} Count matches so we can show an empty state. {% endcomment %}
+{% assign match_count = 0 %}
+{% for post in site.posts %}
+  {% assign cat = post.category | default: "essay" %}
+  {% if page.categories contains cat %}
+    {% assign match_count = match_count | plus: 1 %}
+  {% endif %}
+{% endfor %}
+
+<section class="post-list">
+  {% if match_count == 0 %}
+    <p class="empty-state">No posts here yet.</p>
+  {% else %}
+    {% for post in site.posts %}
+      {% assign cat = post.category | default: "essay" %}
+      {% if page.categories contains cat %}
+        <a class="post-entry post-entry--{{ cat }}" href="{{ post.url | relative_url }}">
+          <div class="post-meta">
+            <time class="post-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+            <span class="post-tag">{{ cat }}</span>
+          </div>
+          <h2 class="post-title">{{ post.title }}</h2>
+          {% if post.excerpt %}
+            <p class="post-excerpt">{{ post.excerpt | strip_html | strip_newlines }}</p>
+          {% endif %}
+        </a>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+</section>

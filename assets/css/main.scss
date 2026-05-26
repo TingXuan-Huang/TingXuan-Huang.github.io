@@ -20,6 +20,8 @@
   --moss:     #5D7548;
   --plum:     #7D4858;
   --amber:    #B88947;
+  --indigo:   #5A4A8A;
+  --coral:    #C2725A;
 
   --excerpt:  #6B6357;
 
@@ -225,6 +227,12 @@ body {
 .post-entry--interest .post-tag,
 .post-tag--interest { color: var(--amber); }
 
+.post-entry--research .post-tag,
+.post-tag--research { color: var(--indigo); }
+
+.post-entry--news .post-tag,
+.post-tag--news { color: var(--coral); }
+
 .post-title {
   font-family: var(--font-serif);
   font-size: 21px;
@@ -241,6 +249,8 @@ body {
 .post-entry--learning:hover .post-title { color: var(--moss); }
 .post-entry--thoughts:hover .post-title { color: var(--plum); }
 .post-entry--interest:hover .post-title { color: var(--amber); }
+.post-entry--research:hover .post-title { color: var(--indigo); }
+.post-entry--news:hover     .post-title { color: var(--coral); }
 
 .post-excerpt {
   font-family: var(--font-serif);
@@ -405,6 +415,40 @@ body {
 
 /* Page (about) — slightly tighter top so the first h1 sits closer to the header */
 .prose.page > :first-child { margin-top: 0; }
+
+/* ============================================================================
+   Filter pages (category index — Notes / Interests / News / Research)
+   ============================================================================ */
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.page-title {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 0 0 0.5rem;
+}
+
+.page-description {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0;
+  max-width: 460px;
+}
+
+.empty-state {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  color: var(--muted);
+  font-style: italic;
+  padding: 2rem 0;
+}
 
 /* ============================================================================
    Site footer
