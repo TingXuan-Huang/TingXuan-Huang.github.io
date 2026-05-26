@@ -15,6 +15,12 @@
   --sky-dark: #3D6E8F;
   --sky-wash: #E8F0F7;
   --clay:     #B0552F;
+
+  /* Additional category accents */
+  --moss:     #5D7548;
+  --plum:     #7D4858;
+  --amber:    #B88947;
+
   --excerpt:  #6B6357;
 
   --now-ink:  #2A4A60;
@@ -210,6 +216,15 @@ body {
 .post-entry--essay .post-tag,
 .post-tag--essay { color: var(--clay); }
 
+.post-entry--learning .post-tag,
+.post-tag--learning { color: var(--moss); }
+
+.post-entry--thoughts .post-tag,
+.post-tag--thoughts { color: var(--plum); }
+
+.post-entry--interest .post-tag,
+.post-tag--interest { color: var(--amber); }
+
 .post-title {
   font-family: var(--font-serif);
   font-size: 21px;
@@ -222,7 +237,10 @@ body {
 }
 
 .post-entry:hover .post-title { color: var(--clay); }
-.post-entry--note:hover  .post-title { color: var(--sky-dark); }
+.post-entry--note:hover     .post-title { color: var(--sky-dark); }
+.post-entry--learning:hover .post-title { color: var(--moss); }
+.post-entry--thoughts:hover .post-title { color: var(--plum); }
+.post-entry--interest:hover .post-title { color: var(--amber); }
 
 .post-excerpt {
   font-family: var(--font-serif);
