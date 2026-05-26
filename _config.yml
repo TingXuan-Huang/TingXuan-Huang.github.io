@@ -44,6 +44,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
+  - SETUP.md
   - vendor/
   - .bundle/
   - node_modules/

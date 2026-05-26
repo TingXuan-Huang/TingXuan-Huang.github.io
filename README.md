@@ -1,141 +1,52 @@
-# tingxuan — personal blog
+# Tingxuan Huang
 
-A small, warm-minimal Jekyll site published at `https://tingxuan-huang.github.io/TingXuan-Huang/`
-(or at the root `https://tingxuan-huang.github.io/` if the repo is later renamed to
-`TingXuan-Huang.github.io`).
+_Undergraduate at the University of Washington — class of 2027. Working somewhere between computational chemistry, machine learning, and the parts of the brain that nobody has a clean model for yet._
 
-Two kinds of writing live here:
+I gravitate toward problems that sit between fields: molecular dynamics that needs better-than-classical potentials, statistical methods that need to survive contact with messy data, and the slow work of turning a vague idea into something you can actually measure.
 
-- **Essays** — personal and reflective (tagged `essay`, accented in clay).
-- **Notes** — research-leaning and technical (tagged `note`, accented in sky blue).
+When I'm not at a terminal, I'm usually reading or writing — about science, about books, about the long arc of small daily work.
 
-## Install
+---
 
-Requires Ruby 3.x and Bundler. On macOS the system Ruby works, but a version
-manager (`rbenv` or `asdf`) is recommended.
+## Now
 
-```bash
-# 1. Install dependencies (first time only, and after any Gemfile change)
-bundle install
-```
+Running LAMMPS simulations with the UMA potential — and writing a long essay about Jingwei.
 
-## Run locally
+<sub>This line mirrors the "Now" callout on my blog. I try to keep it honest.</sub>
 
-```bash
-bundle exec jekyll serve --livereload
-```
+---
 
-Then open <http://localhost:4000/TingXuan-Huang/> (the trailing slash matters
-because of the `baseurl` setting — see "Deploy" below).
+## Writing
 
-`--livereload` rebuilds and refreshes the page whenever a source file changes.
+I keep a small blog at **[tingxuan-huang.github.io/TingXuan-Huang](https://tingxuan-huang.github.io/TingXuan-Huang/)** — essays and research-leaning notes, written for myself but published in case anyone else finds them useful.
 
-To do a clean rebuild without the server:
+A few recent pieces:
 
-```bash
-bundle exec jekyll build
-```
+- _[Notes on running UMA potentials in LAMMPS](https://tingxuan-huang.github.io/TingXuan-Huang/2026/uma-potentials/)_ — getting Meta's UMA potential running in LAMMPS for a small water box.
+- _[On Jingwei, and other small persistences](https://tingxuan-huang.github.io/TingXuan-Huang/2026/on-jingwei/)_ — practice as direction, not destination.
 
-The built site lands in `_site/`.
+---
 
-## Write a new post
+## Projects
 
-1. Create a new Markdown file in `_posts/` named `YYYY-MM-DD-slug.md`.
-2. Use this frontmatter shape:
+<!-- TODO: Replace these with 2–4 repos you want to feature. -->
+<!-- Each line: link to repo + one-sentence description of what it does. -->
 
-   ```yaml
-   ---
-   layout: post
-   title: "On something that took a while to understand"
-   date: 2026-05-26
-   category: essay   # or "note"
-   excerpt: "One or two sentences that show up on the homepage list."
-   ---
-   ```
+- _[project-name](https://github.com/TingXuan-Huang/project-name)_ — what it does in one short sentence.
+- _[project-name](https://github.com/TingXuan-Huang/project-name)_ — what it does in one short sentence.
 
-3. Write the post body in plain Markdown below the frontmatter. Fenced code
-   blocks, blockquotes, headings (`##`, `###`), and images all render with
-   the site's typography.
-4. The `category` field controls the colored tag and hover accent. Defaults
-   to `essay` if omitted.
+---
 
-The post URL is `/<year>/<slug>/` (set by `permalink` in `_config.yml`).
+## Elsewhere
 
-## Update the "Now" line
+- **Email** — [thuang27@uw.edu](mailto:thuang27@uw.edu)
 
-The blue callout on the homepage comes from one line in `_config.yml`:
+<!-- TODO: Uncomment any of these you want public on your profile. -->
+<!-- - **Google Scholar** — [scholar.google.com/citations?user=...](https://scholar.google.com/citations?user=...) -->
+<!-- - **ORCID** — [orcid.org/0000-0000-0000-0000](https://orcid.org/0000-0000-0000-0000) -->
+<!-- - **LinkedIn** — [linkedin.com/in/...](https://www.linkedin.com/in/...) -->
+<!-- - **Personal site** — [your-other-link.com](https://your-other-link.com) -->
 
-```yaml
-now: "Running LAMMPS simulations with the UMA potential — and writing a long essay about Jingwei."
-```
+---
 
-Edit that string, save, and the homepage updates on the next build (or
-immediately with `--livereload`).
-
-## Deploy
-
-GitHub Pages builds Jekyll sites automatically — no GitHub Actions required.
-
-1. Commit and push to the `main` branch of `TingXuan-Huang/TingXuan-Huang`.
-2. In the repo's **Settings → Pages**, set **Source** to *Deploy from a branch*,
-   and select `main` / `/ (root)`.
-3. Wait ~1 minute for the first build. The live URL appears at the top of the
-   Pages settings page.
-
-### URL & `baseurl` notes
-
-This repo is a **project page** (`TingXuan-Huang/TingXuan-Huang`), so the live
-URL is `https://tingxuan-huang.github.io/TingXuan-Huang/`. The `baseurl: "/TingXuan-Huang"`
-line in `_config.yml` makes all internal links work under that prefix.
-
-If you want the cleaner root URL `https://tingxuan-huang.github.io/`:
-
-1. Rename the repo to `TingXuan-Huang.github.io` (GitHub → Settings → General → Repository name).
-2. In `_config.yml`, change:
-   ```yaml
-   url: "https://tingxuan-huang.github.io"
-   baseurl: ""
-   ```
-3. Push. The site moves automatically.
-
-## Project structure
-
-```
-.
-├── _config.yml          # Site settings, tagline, "now" line, plugins
-├── Gemfile              # Pinned to github-pages gem
-├── index.md             # Homepage (uses _layouts/home.html)
-├── about.md             # /about/ page (uses _layouts/page.html)
-├── _layouts/
-│   ├── default.html     # Page shell (header + content + footer)
-│   ├── home.html        # Tagline + "Now" callout + post list
-│   ├── post.html        # Single post (date, tag, title, body, back link)
-│   └── page.html        # Plain markdown page (about)
-├── _includes/
-│   ├── head.html        # <head>: fonts, CSS, SEO, feed meta
-│   ├── header.html      # Wordmark + nav
-│   └── footer.html      # RSS · GitHub · year
-├── _posts/              # Posts go here (YYYY-MM-DD-slug.md)
-├── assets/
-│   └── css/main.scss    # All styles. Design tokens at the top.
-└── README.md
-```
-
-## Design tokens
-
-All colors and fonts are defined as CSS custom properties at the top of
-`assets/css/main.scss`. Change them there and the whole site updates — no
-hardcoded hex values live in component selectors.
-
-| Token         | Use                              |
-|---------------|----------------------------------|
-| `--paper`     | Page background                  |
-| `--ink`       | Body text, post titles           |
-| `--ink-soft`  | Tagline                          |
-| `--muted`     | Dates, meta, nav links           |
-| `--divider`   | Hairline rules between posts     |
-| `--sky`       | Note accent + blockquote border  |
-| `--sky-dark`  | Note tag text, links, inline code |
-| `--sky-wash`  | Code-block / blockquote / Now bg |
-| `--clay`      | Essay tag + essay hover accent   |
-| `--excerpt`   | Homepage post-list excerpt text  |
+<sub>This repo is also the source of my blog — see [SETUP.md](SETUP.md) for local build and deploy instructions.</sub>
