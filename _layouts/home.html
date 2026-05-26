@@ -1,0 +1,29 @@
+---
+layout: default
+---
+<section class="intro">
+  <p class="tagline">{{ site.tagline }}</p>
+</section>
+
+{% if site.now %}
+<aside class="now-callout" aria-label="Now">
+  <div class="now-label">Now</div>
+  <p class="now-text">{{ site.now }}</p>
+</aside>
+{% endif %}
+
+<section class="post-list">
+  {% for post in site.posts %}
+    {% assign category = post.category | default: "essay" %}
+    <a class="post-entry post-entry--{{ category }}" href="{{ post.url | relative_url }}">
+      <div class="post-meta">
+        <time class="post-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+        <span class="post-tag">{{ category }}</span>
+      </div>
+      <h2 class="post-title">{{ post.title }}</h2>
+      {% if post.excerpt %}
+        <p class="post-excerpt">{{ post.excerpt | strip_html | strip_newlines }}</p>
+      {% endif %}
+    </a>
+  {% endfor %}
+</section>

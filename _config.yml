@@ -1,0 +1,49 @@
+title: "tingxuan"
+tagline: "Notes from a graduate student — on computational chemistry, the brain, and the things in between."
+now: "Running LAMMPS simulations with the UMA potential — and writing a long essay about Jingwei."
+
+description: "Essays and notes by Tingxuan Huang."
+author: "Tingxuan Huang"
+
+github_url: "https://github.com/TingXuan-Huang"
+
+# IMPORTANT: this repo is currently `TingXuan-Huang/TingXuan-Huang`, which is a
+# *project* page. Live URL will be https://tingxuan-huang.github.io/TingXuan-Huang/.
+# If you rename the repo to `TingXuan-Huang.github.io` for a root user page,
+# change `url` below and set `baseurl: ""`.
+url: "https://tingxuan-huang.github.io"
+baseurl: "/TingXuan-Huang"
+
+# Pretty URLs: /2026/on-jingwei/
+permalink: /:year/:slug/
+
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Sass is compiled by jekyll-sass-converter; output the compressed CSS to /assets/css/main.css.
+sass:
+  style: compressed
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
+      category: essay
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor/
+  - .bundle/
+  - node_modules/

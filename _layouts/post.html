@@ -1,0 +1,21 @@
+---
+layout: default
+---
+<article class="post">
+  {% assign category = page.category | default: "essay" %}
+  <header class="post-header">
+    <div class="post-meta">
+      <time class="post-date" datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
+      <span class="post-tag post-tag--{{ category }}">{{ category }}</span>
+    </div>
+    <h1 class="post-title-page">{{ page.title }}</h1>
+  </header>
+
+  <div class="prose">
+    {{ content }}
+  </div>
+
+  <footer class="post-footer">
+    <a class="back-link" href="{{ '/' | relative_url }}">← Back to writing</a>
+  </footer>
+</article>

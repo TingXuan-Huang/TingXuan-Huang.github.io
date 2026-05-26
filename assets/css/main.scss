@@ -1,0 +1,432 @@
+---
+# Empty frontmatter so Jekyll's Sass converter processes this file.
+---
+
+/* ============================================================================
+   Design tokens
+   ============================================================================ */
+:root {
+  --paper:    #F8F5EE;
+  --ink:      #252220;
+  --ink-soft: #4A4238;
+  --muted:    #8A7F70;
+  --divider:  #E3DED1;
+  --sky:      #6CA0C8;
+  --sky-dark: #3D6E8F;
+  --sky-wash: #E8F0F7;
+  --clay:     #B0552F;
+  --excerpt:  #6B6357;
+
+  --now-ink:  #2A4A60;
+
+  --max-w: 640px;
+
+  --font-serif: "Source Serif 4", Georgia, serif;
+  --font-sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ============================================================================
+   Reset & base
+   ============================================================================ */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+}
+
+body {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ============================================================================
+   Page shell
+   ============================================================================ */
+.page {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+@media (min-width: 640px) {
+  .page {
+    padding: 4rem 1.5rem 2rem;
+  }
+}
+
+/* ============================================================================
+   Site header
+   ============================================================================ */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.wordmark {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.005em;
+}
+
+.site-nav {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.site-nav a {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.site-nav a:hover { color: var(--ink); }
+
+/* ============================================================================
+   Homepage — intro / tagline
+   ============================================================================ */
+.intro {
+  margin-bottom: 1.5rem;
+}
+
+.tagline {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 460px;
+  margin: 0;
+}
+
+/* ============================================================================
+   Now callout
+   ============================================================================ */
+.now-callout {
+  background: var(--sky-wash);
+  border-left: 2px solid var(--sky);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 18px;
+  margin: 2rem 0 2.5rem;
+}
+
+.now-label {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--sky-dark);
+  margin-bottom: 0.4rem;
+}
+
+.now-text {
+  font-family: var(--font-serif);
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--now-ink);
+  margin: 0;
+}
+
+/* ============================================================================
+   Post list (homepage)
+   ============================================================================ */
+.post-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-entry {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: 1.5rem 0;
+  border-bottom: 0.5px solid var(--divider);
+}
+
+.post-entry:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.post-entry:first-child {
+  padding-top: 0.5rem;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-sans);
+}
+
+.post-date {
+  font-size: 12px;
+  color: var(--muted);
+  min-width: 90px;
+  font-feature-settings: "tnum";
+}
+
+.post-tag {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--clay); /* default = essay */
+}
+
+.post-entry--note .post-tag,
+.post-tag--note { color: var(--sky-dark); }
+
+.post-entry--essay .post-tag,
+.post-tag--essay { color: var(--clay); }
+
+.post-title {
+  font-family: var(--font-serif);
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 0 0 0.5rem;
+  transition: color 0.15s ease;
+}
+
+.post-entry:hover .post-title { color: var(--clay); }
+.post-entry--note:hover  .post-title { color: var(--sky-dark); }
+
+.post-excerpt {
+  font-family: var(--font-serif);
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--excerpt);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ============================================================================
+   Post page
+   ============================================================================ */
+.post-header {
+  margin-bottom: 2rem;
+}
+
+.post-title-page {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 0.75rem 0 0;
+}
+
+.post-footer {
+  margin-top: 3rem;
+}
+
+.back-link {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.back-link:hover { color: var(--ink); }
+
+/* ============================================================================
+   Prose — shared markdown typography for posts and pages
+   ============================================================================ */
+.prose {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+}
+
+.prose > :first-child { margin-top: 0; }
+.prose > :last-child  { margin-bottom: 0; }
+
+.prose p,
+.prose ul,
+.prose ol {
+  margin: 1rem 0;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.5rem;
+}
+
+.prose li + li { margin-top: 0.35rem; }
+
+.prose h1 {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 2.5rem 0 0.75rem;
+}
+
+.prose h2 {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ink);
+  margin: 2.5rem 0 0.75rem;
+}
+
+.prose h3 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ink);
+  margin: 2rem 0 0.75rem;
+}
+
+.prose a {
+  color: var(--sky-dark);
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-style 0.15s ease;
+}
+
+.prose a:hover {
+  text-decoration: underline solid;
+}
+
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  color: var(--sky-dark);
+}
+
+.prose pre {
+  background: var(--sky-wash);
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  line-height: 1.55;
+}
+
+.prose pre code {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: none;
+  padding: 0;
+}
+
+.prose blockquote {
+  border-left: 2px solid var(--sky);
+  background: var(--sky-wash);
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  font-family: var(--font-serif);
+  color: var(--ink-soft);
+}
+
+.prose blockquote p { margin: 0; }
+.prose blockquote p + p { margin-top: 0.75rem; }
+
+.prose img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 1.5rem auto;
+}
+
+.prose hr {
+  border: none;
+  border-top: 0.5px solid var(--divider);
+  margin: 2.5rem 0;
+}
+
+/* Page (about) — slightly tighter top so the first h1 sits closer to the header */
+.prose.page > :first-child { margin-top: 0; }
+
+/* ============================================================================
+   Site footer
+   ============================================================================ */
+.site-footer {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.site-footer p {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.site-footer a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.site-footer a:hover { color: var(--ink); }
+
+.site-footer .sep {
+  margin: 0 0.5rem;
+  color: var(--divider);
+}
+
+/* ============================================================================
+   Selection & focus
+   ============================================================================ */
+::selection {
+  background: var(--sky-wash);
+  color: var(--ink);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--sky);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
