@@ -7,12 +7,10 @@ author: "Tingxuan Huang"
 
 github_url: "https://github.com/TingXuan-Huang"
 
-# IMPORTANT: this repo is currently `TingXuan-Huang/TingXuan-Huang`, which is a
-# *project* page. Live URL will be https://tingxuan-huang.github.io/TingXuan-Huang/.
-# If you rename the repo to `TingXuan-Huang.github.io` for a root user page,
-# change `url` below and set `baseurl: ""`.
+# Repo is named `TingXuan-Huang.github.io`, which makes this a user page served
+# at the root of the domain. baseurl is therefore empty.
 url: "https://tingxuan-huang.github.io"
-baseurl: "/TingXuan-Huang"
+baseurl: ""
 
 # Pretty URLs: /2026/on-jingwei/
 permalink: /:year/:slug/

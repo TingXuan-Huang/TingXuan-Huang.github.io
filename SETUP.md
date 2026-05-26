@@ -1,9 +1,7 @@
 # Setup
 
-Local build and deployment notes for the Jekyll blog source in this repo. The
-rendered site lives at <https://tingxuan-huang.github.io/TingXuan-Huang/> (or
-at the root `https://tingxuan-huang.github.io/` if the repo is later renamed to
-`TingXuan-Huang.github.io`).
+Local build and deployment notes for the Jekyll blog source in this repo.
+The rendered site lives at <https://tingxuan-huang.github.io/>.
 
 Two kinds of writing live here:
 
@@ -26,8 +24,7 @@ bundle install
 bundle exec jekyll serve --livereload
 ```
 
-Then open <http://localhost:4000/TingXuan-Huang/> (the trailing slash matters
-because of the `baseurl` setting — see "Deploy" below).
+Then open <http://localhost:4000/>.
 
 `--livereload` rebuilds and refreshes the page whenever a source file changes.
 
@@ -77,27 +74,18 @@ immediately with `--livereload`).
 
 GitHub Pages builds Jekyll sites automatically — no GitHub Actions required.
 
-1. Commit and push to the `main` branch of `TingXuan-Huang/TingXuan-Huang`.
+1. Commit and push to the `main` branch of `TingXuan-Huang/TingXuan-Huang.github.io`.
 2. In the repo's **Settings → Pages**, set **Source** to *Deploy from a branch*,
    and select `main` / `/ (root)`.
 3. Wait ~1 minute for the first build. The live URL appears at the top of the
    Pages settings page.
 
-### URL & `baseurl` notes
+### URL notes
 
-This repo is a **project page** (`TingXuan-Huang/TingXuan-Huang`), so the live
-URL is `https://tingxuan-huang.github.io/TingXuan-Huang/`. The `baseurl: "/TingXuan-Huang"`
-line in `_config.yml` makes all internal links work under that prefix.
-
-If you want the cleaner root URL `https://tingxuan-huang.github.io/`:
-
-1. Rename the repo to `TingXuan-Huang.github.io` (GitHub → Settings → General → Repository name).
-2. In `_config.yml`, change:
-   ```yaml
-   url: "https://tingxuan-huang.github.io"
-   baseurl: ""
-   ```
-3. Push. The site moves automatically.
+Because the repo is named `TingXuan-Huang.github.io` (matching the
+`<username>.github.io` user-page convention), the site is served at the
+**root** of the domain — `https://tingxuan-huang.github.io/`. The `baseurl`
+in `_config.yml` is therefore empty.
 
 ## Project structure
 
