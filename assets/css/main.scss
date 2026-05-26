@@ -203,7 +203,8 @@ body {
   font-feature-settings: "tnum";
 }
 
-.post-tag {
+.post-tag,
+.post-topic {
   font-family: var(--font-sans);
   font-size: 10px;
   font-weight: 500;
@@ -212,26 +213,39 @@ body {
   color: var(--clay); /* default = essay */
 }
 
-.post-entry--note .post-tag,
-.post-tag--note { color: var(--sky-dark); }
+.post-tag-group {
+  display: inline-flex;
+  align-items: baseline;
+}
 
-.post-entry--essay .post-tag,
-.post-tag--essay { color: var(--clay); }
+.post-topic-sep {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--muted);
+  margin: 0 0.4rem;
+}
 
-.post-entry--learning .post-tag,
-.post-tag--learning { color: var(--moss); }
+.post-entry--note .post-tag, .post-entry--note .post-topic,
+.post-tag--note, .post-topic--note { color: var(--sky-dark); }
 
-.post-entry--thoughts .post-tag,
-.post-tag--thoughts { color: var(--plum); }
+.post-entry--essay .post-tag, .post-entry--essay .post-topic,
+.post-tag--essay, .post-topic--essay { color: var(--clay); }
 
-.post-entry--interest .post-tag,
-.post-tag--interest { color: var(--amber); }
+.post-entry--learning .post-tag, .post-entry--learning .post-topic,
+.post-tag--learning, .post-topic--learning { color: var(--moss); }
 
-.post-entry--research .post-tag,
-.post-tag--research { color: var(--indigo); }
+.post-entry--thoughts .post-tag, .post-entry--thoughts .post-topic,
+.post-tag--thoughts, .post-topic--thoughts { color: var(--plum); }
 
-.post-entry--news .post-tag,
-.post-tag--news { color: var(--coral); }
+.post-entry--interest .post-tag, .post-entry--interest .post-topic,
+.post-tag--interest, .post-topic--interest { color: var(--amber); }
+
+.post-entry--research .post-tag, .post-entry--research .post-topic,
+.post-tag--research, .post-topic--research { color: var(--indigo); }
+
+.post-entry--news .post-tag, .post-entry--news .post-topic,
+.post-tag--news, .post-topic--news { color: var(--coral); }
 
 .post-title {
   font-family: var(--font-serif);

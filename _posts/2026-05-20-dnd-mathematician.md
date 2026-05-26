@@ -3,6 +3,7 @@ layout: post
 title: "Sample — designing a Mathematician class for D&D 5e"
 date: 2026-05-20
 category: interest
+topic: "d&d"
 excerpt: "A weekend homebrew: a class whose features are gated by probabilistic resource management. First draft of the table, plus what I'm worried about."
 ---
 
