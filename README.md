@@ -1,6 +1,6 @@
 # Tingxuan Huang
 
-_Undergraduate at the University of Washington — class of 2027. Working somewhere between computational chemistry, machine learning, and the parts of the brain that nobody has a clean model for yet._
+_ I am an undergraduate at the University of Washington — class of 2026. Interested in exploring various ideas in science, and experiencing the world around us._
 
 I gravitate toward problems that sit between fields: molecular dynamics that needs better-than-classical potentials, statistical methods that need to survive contact with messy data, and the slow work of turning a vague idea into something you can actually measure.
 
