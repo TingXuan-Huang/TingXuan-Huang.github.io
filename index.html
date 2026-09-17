@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tingxuan Huang</title>
+<meta name="description" content="Tingxuan Huang — machine learning for the physical and life sciences, in settings where data is expensive, scarce or unlabelled. Selected projects, background and publications.">
+<meta name="author" content="Tingxuan Huang">
+<link rel="canonical" href="https://tingxuan-huang.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B6B59'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' font-weight='700' fill='%23FFFFFF' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#0B6B59" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111514" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Tingxuan Huang">
+<meta property="og:description" content="Tingxuan Huang — machine learning for the physical and life sciences, in settings where data is expensive, scarce or unlabelled. Selected projects, background and publications.">
+<meta property="og:url" content="https://tingxuan-huang.github.io/">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="application/atom+xml" title="Tingxuan Huang — writing" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --paper:#F2F4F2;
+    --surface:#FBFCFB;
+    --ink:#15191A;
+    --ink-2:#3E4749;
+    --ink-3:#6B7678;
+    --rule:#D3DAD8;
+    --rule-soft:#E4E9E7;
+    --accent:#0B6B59;
+    --accent-ink:#075346;
+    --accent-soft:#E2EEEA;
+    --ochre:#8F6412;
+    --font-display:"Zilla Slab",Georgia,"Times New Roman",serif;
+    --font-body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+    --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#111514;
+      --surface:#181D1C;
+      --ink:#E9EEEC;
+      --ink-2:#B6C1BE;
+      --ink-3:#818E8B;
+      --rule:#2B3533;
+      --rule-soft:#222B2A;
+      --accent:#54C9AE;
+      --accent-ink:#7FDCC5;
+      --accent-soft:#14312B;
+      --ochre:#D7A648;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#111514;
+    --surface:#181D1C;
+    --ink:#E9EEEC;
+    --ink-2:#B6C1BE;
+    --ink-3:#818E8B;
+    --rule:#2B3533;
+    --rule-soft:#222B2A;
+    --accent:#54C9AE;
+    --accent-ink:#7FDCC5;
+    --accent-soft:#14312B;
+    --ochre:#D7A648;
+  }
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .sheet{
+    max-width:1060px;
+    margin:0 auto;
+    padding-inline:20px;
+    padding-block:0 4rem;
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead{padding-block:3.25rem 2.25rem;border-bottom:2px solid var(--ink);}
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:.7rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink-3);
+    margin:0 0 1.25rem;
+  }
+  h1{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:clamp(2.5rem,7vw,4rem);
+    line-height:1.02;
+    letter-spacing:-.015em;
+    margin:0;
+    text-wrap:balance;
+  }
+  .standfirst{
+    font-family:var(--font-display);
+    font-weight:500;
+    font-size:clamp(1.15rem,2.6vw,1.5rem);
+    line-height:1.36;
+    color:var(--ink-2);
+    max-width:34ch;
+    margin:.85rem 0 0;
+    text-wrap:balance;
+  }
+  .contact{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.4rem 1.4rem;
+    margin:1.75rem 0 0;
+    padding:0;
+    list-style:none;
+    font-family:var(--font-mono);
+    font-size:.82rem;
+  }
+  .contact span{color:var(--ink-3);}
+  a{color:var(--accent-ink);text-decoration:none;border-bottom:1px solid var(--accent);}
+  a:hover{background:var(--accent-soft);}
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;}
+
+  /* ---------- notebook rows ---------- */
+  .row{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:.5rem 2.5rem;
+    padding-block:2.5rem;
+    border-bottom:1px solid var(--rule);
+  }
+  .row:last-of-type{border-bottom:none;}
+  .rail{
+    font-family:var(--font-mono);
+    font-size:.7rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink-3);
+    padding-top:.35rem;
+  }
+  .col{min-width:0;}
+  @media (min-width:880px){
+    .row{grid-template-columns:9.5rem minmax(0,1fr);}
+    .rail{text-align:right;border-right:1px solid var(--rule-soft);padding-right:2.5rem;margin-right:-2.5rem;}
+  }
+
+  h2{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:1.6rem;
+    line-height:1.2;
+    letter-spacing:-.01em;
+    margin:0 0 1rem;
+    text-wrap:balance;
+  }
+  p{margin:0 0 1rem;max-width:66ch;}
+  p:last-child{margin-bottom:0;}
+  .lede{font-size:1.06rem;}
+
+  /* ---------- exchange table ---------- */
+  .scroller{overflow-x:auto;margin-block:.25rem 1rem;}
+  table{border-collapse:collapse;width:100%;min-width:620px;font-size:.92rem;font-variant-numeric:tabular-nums;}
+  caption{
+    font-family:var(--font-mono);
+    font-size:.72rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-3);
+    text-align:left;
+    padding-bottom:.7rem;
+  }
+  th{
+    font-family:var(--font-mono);
+    font-weight:500;
+    font-size:.72rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-3);
+    text-align:left;
+    padding:0 1.2rem .55rem 0;
+    border-bottom:1px solid var(--ink);
+  }
+  td{
+    padding:.85rem 1.2rem .85rem 0;
+    border-bottom:1px solid var(--rule-soft);
+    vertical-align:top;
+    color:var(--ink-2);
+  }
+  td:first-child{color:var(--ink);width:30%;}
+  td:nth-child(2){width:44%;}
+  td.src{font-family:var(--font-mono);font-size:.76rem;color:var(--ink-3);}
+  tr:last-child td{border-bottom:none;}
+
+  /* ---------- record ---------- */
+  .record{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));
+    gap:1.4rem 2.5rem;
+    margin:0;
+  }
+  .record div{border-top:1px solid var(--rule);padding-top:.7rem;}
+  .record dt{
+    font-family:var(--font-mono);
+    font-size:.7rem;
+    letter-spacing:.11em;
+    text-transform:uppercase;
+    color:var(--ink-3);
+    margin-bottom:.3rem;
+  }
+  .record dd{margin:0;font-size:.95rem;color:var(--ink);}
+
+  /* ---------- work entries ---------- */
+  .entry{padding-block:2rem;border-top:1px solid var(--rule-soft);}
+  .entry:first-of-type{padding-top:0;border-top:none;}
+  .domain{
+    font-family:var(--font-mono);
+    font-size:.7rem;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    color:var(--accent-ink);
+    margin:0 0 .5rem;
+  }
+  .entry h3{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:1.28rem;
+    line-height:1.24;
+    margin:0 0 .7rem;
+    max-width:44ch;
+    text-wrap:balance;
+  }
+  .method{
+    font-family:var(--font-mono);
+    font-size:.8rem;
+    line-height:1.62;
+    color:var(--ink-3);
+    border-left:2px solid var(--rule);
+    padding:.1rem 0 .1rem 1rem;
+    margin:1rem 0 0;
+    max-width:74ch;
+  }
+  .method b{font-weight:500;color:var(--ochre);letter-spacing:.06em;text-transform:uppercase;font-size:.72rem;}
+
+  /* ---------- timeline ---------- */
+  .timeline{margin:0 0 2rem;padding:0;list-style:none;}
+  .timeline li{
+    position:relative;
+    margin-left:.3rem;
+    padding:0 0 1.5rem 1.9rem;
+    border-left:1px solid var(--rule);
+  }
+  .timeline li:last-child{padding-bottom:0;border-left-color:transparent;}
+  .timeline li::before{
+    content:"";
+    position:absolute;
+    left:-4.5px;
+    top:.5rem;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--accent);
+  }
+  .when{
+    display:block;
+    font-family:var(--font-mono);
+    font-size:.71rem;
+    letter-spacing:.11em;
+    text-transform:uppercase;
+    color:var(--ink-3);
+    margin-bottom:.12rem;
+  }
+  .what{
+    display:block;
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:1.04rem;
+    line-height:1.3;
+  }
+  .where{display:block;font-size:.93rem;color:var(--ink-2);margin-top:.15rem;max-width:62ch;}
+
+  /* ---------- publications ---------- */
+  .pubs{margin:0;padding:0;list-style:none;display:grid;gap:1.4rem;}
+  .pubs li{max-width:70ch;border-left:2px solid var(--accent);padding-left:1.1rem;}
+  .status{
+    display:block;
+    font-family:var(--font-mono);
+    font-size:.7rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ochre);
+    margin-bottom:.3rem;
+  }
+  .pub-title{display:block;font-family:var(--font-display);font-weight:600;font-size:1.06rem;line-height:1.32;}
+  .pub-meta{display:block;font-size:.93rem;color:var(--ink-2);margin-top:.2rem;}
+
+  footer{
+    margin-top:3rem;
+    padding-top:1.5rem;
+    border-top:2px solid var(--ink);
+    font-family:var(--font-mono);
+    font-size:.8rem;
+    color:var(--ink-3);
+    display:flex;
+    flex-wrap:wrap;
+    gap:.5rem 1.5rem;
+    justify-content:space-between;
+  }
+
+  /* ---------- figures ---------- */
+  .figure{margin:1.5rem 0 0;}
+  .figure-frame{
+    border:1px solid var(--rule);
+    background:var(--surface);
+    padding:1.1rem;
+    overflow-x:auto;
+  }
+  .figure-frame.plate{background:#FFFFFF;}
+  .figure-frame img{display:block;width:100%;min-width:480px;height:auto;}
+  figcaption{
+    font-family:var(--font-mono);
+    font-size:.76rem;
+    line-height:1.58;
+    color:var(--ink-3);
+    margin-top:.65rem;
+    max-width:74ch;
+  }
+  figcaption em{
+    font-style:normal;
+    color:var(--ochre);
+    letter-spacing:.07em;
+    text-transform:uppercase;
+    font-size:.69rem;
+  }
+  .dg{display:block;width:100%;min-width:600px;height:auto;}
+  .dg text{font-family:var(--font-mono);font-size:11px;fill:var(--ink-2);letter-spacing:.03em;}
+  .dg .dg-step{font-size:9.5px;letter-spacing:.14em;fill:var(--accent-ink);}
+  .dg .th{font-size:8.5px;letter-spacing:.12em;fill:var(--ink-3);}
+  .dg .dg-big{font-family:var(--font-display);font-weight:600;font-size:14.5px;fill:var(--ink);letter-spacing:0;}
+  .dg .fill-on{fill:var(--accent);}
+  .dg .fill-off{fill:none;stroke:var(--rule);stroke-width:1;}
+  .dg .paper{fill:var(--surface);stroke:var(--rule);stroke-width:1;}
+  .dg .viewfinder{fill:var(--paper);stroke:var(--rule);stroke-width:1;}
+  .dg .line{fill:var(--rule);}
+  .dg .cell{fill:var(--rule-soft);}
+  .dg .arrow{stroke:var(--ink-3);stroke-width:1.25;fill:none;}
+  .dg .arrowhead{fill:var(--ink-3);}
+  .dg .box{fill:none;stroke:var(--ink);stroke-width:1.25;}
+  .dg .dash{fill:none;stroke:var(--accent);stroke-width:1.25;stroke-dasharray:4 3;}
+  .dg .rule,.dg .hrule{stroke:var(--rule);stroke-width:1;}
+  .dg .brace{stroke:var(--ink-3);stroke-width:1.25;}
+  .dg .th2{font-size:7.6px;letter-spacing:.09em;fill:var(--ink-3);}
+  .dg .tok{font-size:9px;fill:var(--ink);}
+  .dg .tok2{font-size:6.4px;letter-spacing:.06em;fill:var(--ink-2);}
+  .dg .gene{transition:fill-opacity .15s ease;}
+  .dg .gene:hover{fill-opacity:1;}
+  .dg .lead{stroke:var(--rule);stroke-width:1;stroke-dasharray:2 3;}
+  .dg .shape{fill:var(--accent-ink);}
+  .dg .ui{font-size:9.5px;fill:#15191A;}
+  .dg .ui-val{font-size:9.5px;fill:#3E4749;}
+  .dg .ui-sm{font-size:8px;fill:#6B7678;}
+  .dg .ui-tag{font-size:7.5px;letter-spacing:.08em;fill:#08322A;}
+  .dg .ui-tag-l{font-size:7.5px;letter-spacing:.08em;fill:#FFFFFF;}
+  .dg .ui-bar{font-family:var(--font-display);font-size:12px;font-weight:600;fill:#FFFFFF;}
+  .dg .ui-h{font-family:var(--font-display);font-size:11px;font-weight:600;fill:#15191A;}
+  .dg .ui-rule{stroke:#DFE4E2;stroke-width:1;}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
+
+  /* ---------- site chrome (front page only) ---------- */
+  .sitenav{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:baseline;
+    gap:.4rem 1.25rem;
+    padding-block:1.15rem;
+    border-bottom:1px solid var(--rule-soft);
+    font-family:var(--font-mono);
+    font-size:.74rem;
+    letter-spacing:.07em;
+    text-transform:uppercase;
+  }
+  .sitenav strong{color:var(--ink);font-weight:500;margin-right:auto;}
+  .sitenav a{border-bottom:none;color:var(--ink-3);}
+  .sitenav a:hover{color:var(--accent-ink);background:none;}
+  .masthead{padding-block:2.5rem 2.25rem;}
+
+  /* the Artifact runtime supplies these; a plain page has to declare them itself */
+  html{-webkit-text-size-adjust:100%;}
+  :root{
+    color-scheme:light dark;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  body{margin:0;}
+  img{max-width:100%;}
+  [hidden]{display:none!important;}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <nav class="sitenav" aria-label="Site">
+    <strong>Tingxuan Huang</strong>
+    <a href="/blog/">writing</a>
+    <a href="/notes/">notes</a>
+    <a href="/research/">research</a>
+    <a href="/interests/">interests</a>
+    <a href="/news/">news</a>
+    <a href="/about/">about</a>
+    <a href="/search/">search</a>
+  </nav>
+
+  <header class="masthead">
+    <p class="eyebrow">Collaborator profile &middot; Updated 16 September 2026</p>
+    <h1>Tingxuan Huang</h1>
+    <p class="standfirst">I build the software layer that turns a research question into an answer you can check.</p>
+    <ul class="contact">
+      <li><span>Email</span> <a href="mailto:thuang27@cs.washington.edu">thuang27@cs.washington.edu</a></li>
+      <li><span>Code</span> <a href="https://github.com/TingXuan-Huang">github.com/TingXuan-Huang</a></li>
+      <li><span>Writing</span> <a href="https://tingxuan-huang.github.io/">tingxuan-huang.github.io</a></li>
+      <li><span>Base</span> Seattle, WA</li>
+    </ul>
+  </header>
+
+  <section class="row">
+    <p class="rail">Interests</p>
+    <div class="col">
+      <h2>Research interests</h2>
+      <p class="lede">My interest is in machine learning for the physical and life sciences, and
+      particularly in problems where the binding constraint is the data rather than the model:
+      properties obtainable only from first-principles simulation too costly to run at scale,
+      measurements reported only in unstructured published literature, and biological and
+      behavioural data for which reliable annotation does not exist.</p>
+      <p>Across these settings the recurring methodological question is how far a result can be
+      trusted, so my work has concentrated on evaluation as much as on modelling: holding out
+      conditions rather than samples, reporting performance on rare regimes separately from
+      aggregate accuracy, and comparing design choices under a single protocol instead of across
+      papers.</p>
+      <p>I have worked in three research groups at the University of Washington &mdash; in materials
+      and sensing, in program analysis, and in computational biology &mdash; in each case alongside
+      domain scientists rather than other computer scientists. I am seeking collaborations of the
+      same kind, where the scientific question is the difficult part and the computational work
+      needs someone to take responsibility for it end to end.</p>
+    </div>
+  </section>
+
+  <section class="row">
+    <p class="rail">Research</p>
+    <div class="col">
+      <h2>Problem settings I have worked in</h2>
+      <p>Each row below corresponds to work described later on this page, with the associated code or
+      manuscript status given in the third column. Nothing listed is hypothetical or in planning.</p>
+      <div class="scroller">
+        <table>
+          <caption>Selected problem settings, outputs and artefacts</caption>
+          <thead>
+            <tr><th scope="col">Problem setting</th><th scope="col">What the work produces</th><th scope="col">Code or status</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Outdoor webcam imagery</td>
+              <td>Air-temperature estimates per frame, with error reported separately for cameras held out of training</td>
+              <td class="src">DIR-SkyFinder</td>
+            </tr>
+            <tr>
+              <td>Unstructured chemistry literature</td>
+              <td>A structured dataset of the experimental measurements reported across a large body of papers</td>
+              <td class="src">manuscript under review</td>
+            </tr>
+            <tr>
+              <td>Raw potentiostat exports</td>
+              <td>Batch electrochemical analysis &mdash; Tafel, EIS and linear polarisation resistance</td>
+              <td class="src">gamry-corrosion-analyzer</td>
+            </tr>
+            <tr>
+              <td>Ab-initio and molecular-dynamics simulation, too costly to run per candidate</td>
+              <td>A surrogate model approximating the same transport quantities at far lower compute cost</td>
+              <td class="src">Chem_AI</td>
+            </tr>
+            <tr>
+              <td>Unlabelled behavioural video</td>
+              <td>Behaviour embeddings and classification without frame-by-frame manual annotation</td>
+              <td class="src">behavior_analysis</td>
+            </tr>
+            <tr>
+              <td>Single-cell transcriptomic atlases</td>
+              <td>Four input encoders trained and compared under one evaluation protocol</td>
+              <td class="src">single_cell</td>
+            </tr>
+            <tr>
+              <td>A colourimetric paper sensor and a phone camera</td>
+              <td>Humidity, pH and gas readings computed on the device, without network access</td>
+              <td class="src">Ubicomp sensor application</td>
+            </tr>
+            <tr>
+              <td>A theorem with two distinct informal proofs</td>
+              <td>A measurement of whether the generated formal proof follows the supplied strategy</td>
+              <td class="src">proof-conditioned-faithfulness</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <p class="rail">Background</p>
+    <div class="col">
+      <h2>Background</h2>
+      <ul class="timeline">
+        <li>
+          <span class="when">2024 &ndash; present</span>
+          <span class="what">Undergraduate researcher &mdash; Ubicomp Lab, Paul G. Allen School</span>
+          <span class="where">With Prof. Shwetak Patel and Zhihan Zhang. Physics-informed machine learning
+          for solid-state electrolytes, LLM-based extraction from the chemistry literature, and
+          biodegradable chipless sensing.</span>
+        </li>
+        <li>
+          <span class="when">April &ndash; September 2025</span>
+          <span class="what">Undergraduate researcher &mdash; PLSE, Paul G. Allen School</span>
+          <span class="where">With Prof. Ren&eacute; Just and Moses Lurbur. Self-supervised
+          representation learning for animal behaviour, and what vision foundation-model latents
+          encode about it.</span>
+        </li>
+        <li>
+          <span class="when">April &ndash; December 2024</span>
+          <span class="what">Undergraduate researcher &mdash; computational biology, Paul G. Allen School</span>
+          <span class="where">With Prof. Sheng Wang and Zixuan Liu. Pathology foundation models for
+          spatial transcriptomics, and cross-modal retinal image generation.</span>
+        </li>
+        <li>
+          <span class="when">2023 &ndash; 2026</span>
+          <span class="what">B.S. Computer Science, Honors &mdash; University of Washington</span>
+          <span class="where">Conferred August 2026. GPA 3.90.</span>
+        </li>
+      </ul>
+      <dl class="record">
+        <div><dt>Keywords</dt><dd>Physics-informed machine learning; scientific information extraction; representation learning under label scarcity; evaluation under distribution shift.</dd></div>
+        <div><dt>Technical background</dt><dd>Python and PyTorch primarily; also C/C++, Java, JavaScript, OCaml and SQL. Domain tooling: LAMMPS, ASE, MDAnalysis, RDKit, OpenCV.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="row">
+    <p class="rail">Selected work</p>
+    <div class="col">
+      <h2>Selected projects</h2>
+
+      <article class="entry">
+        <p class="domain">Materials science</p>
+        <h3>Predicting a battery material without the week-long simulation</h3>
+        <p>Solid-state lithium batteries made from nanocellulose &mdash; essentially processed plant fibre &mdash; could be safer and biodegradable. The problem is that testing one design change costs days of physics simulation on a supercomputer, so researchers only ever try a handful. I built the pipeline that runs those simulations to generate trustworthy training data, then trains a model to approximate the result at a small fraction of the cost. Instead of five candidate designs, you can screen hundreds.</p>
+        <p class="method"><b>Method</b><br>DFT for electronic-structure ground truth, molecular dynamics for transport; LAMMPS with DeepMD DPA-2 and a Meta UMA cross-check; k-fold cross-validation because the simulation budget is small and overfitting would be invisible otherwise.</p>
+        <figure class="figure">
+<div class="figure-frame">
+<svg class="dg" viewBox="0 0 720 214" role="img" aria-label="Schematic: only a couple of candidate designs can be simulated directly, while a model trained on those simulations screens many more.">
+  <text class="dg-step" x="0" y="12">WITHOUT A MODEL</text>
+  <text class="dg-step" x="430" y="12">WITH THE MODEL</text>
+  <rect class="fill-on" x="0" y="28" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="21" y="28" width="16" height="16" rx="2"/>
+  <rect class="fill-off" x="42" y="28" width="16" height="16" rx="2"/>
+  <rect class="fill-off" x="63" y="28" width="16" height="16" rx="2"/>
+  <rect class="fill-off" x="0" y="49" width="16" height="16" rx="2"/>
+  <rect class="fill-off" x="21" y="49" width="16" height="16" rx="2"/>
+  <rect class="fill-off" x="42" y="49" width="16" height="16" rx="2"/>
+  <rect class="fill-off" x="63" y="49" width="16" height="16" rx="2"/>
+  <rect class="fill-off" x="0" y="70" width="16" height="16" rx="2"/>
+  <rect class="fill-off" x="21" y="70" width="16" height="16" rx="2"/>
+  <rect class="fill-off" x="42" y="70" width="16" height="16" rx="2"/>
+  <rect class="fill-off" x="63" y="70" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="430" y="28" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="451" y="28" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="472" y="28" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="493" y="28" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="514" y="28" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="535" y="28" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="556" y="28" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="577" y="28" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="430" y="49" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="451" y="49" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="472" y="49" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="493" y="49" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="514" y="49" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="535" y="49" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="556" y="49" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="577" y="49" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="430" y="70" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="451" y="70" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="472" y="70" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="493" y="70" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="514" y="70" width="16" height="16" rx="2"/>
+  <rect class="fill-on" x="535" y="70" width="16" height="16" rx="2"/>
+  <rect class="fill-off" x="556" y="70" width="16" height="16" rx="2"/>
+  <rect class="fill-off" x="577" y="70" width="16" height="16" rx="2"/>
+  <text x="214" y="48">DFT + MD MAKE THE</text>
+  <text x="214" y="62">GROUND TRUTH, THEN</text>
+  <text x="214" y="76">TRAIN THE SURROGATE</text>
+  <line class="arrow" x1="200" y1="92" x2="413" y2="92"/><path class="arrowhead" d="M413,88 L420,92 L413,96 Z"/>
+  <text class="dg-big" x="0" y="118">A handful of candidates</text>
+  <text x="0" y="138">Each filled square is one design you</text>
+  <text x="0" y="153">could afford to simulate outright:</text>
+  <text x="0" y="168">days of cluster time, one answer.</text>
+  <text class="dg-big" x="430" y="118">The whole design space</text>
+  <text x="430" y="138">The model learns from the runs you</text>
+  <text x="430" y="153">could afford, then predicts the rest</text>
+  <text x="430" y="168">far more cheaply.</text>
+  <line class="rule" x1="0" y1="188" x2="720" y2="188"/>
+  <text x="0" y="206">SCHEMATIC. Square counts illustrate the idea; they are not a measured speed-up.</text>
+</svg>
+</div>
+<figcaption><em>Schematic</em> &nbsp;Drawn for this page. The square counts illustrate why a surrogate model changes what you can afford to ask &mdash; they are not a measured speed-up.</figcaption>
+</figure>
+      </article>
+
+      <article class="entry">
+        <p class="domain">Literature at scale</p>
+        <h3>An AI agent that reads chemistry papers so people don&rsquo;t have to</h3>
+        <p>Most of the measurements you need to design a new recyclable material have already been published &mdash; scattered across thousands of papers as prose, in tables, in figure captions, never as data. I built a retrieval pipeline that mines those papers into a structured dataset, which then feeds an inverse-design workflow: you state the properties you want, it proposes materials that should have them. The resulting paper is now under review.</p>
+        <p class="method"><b>Method</b><br>Transformer-based retrieval with structured prompting, chosen because rule-based parsers break the moment scientific prose stops being consistent &mdash; which is immediately.</p>
+        <figure class="figure">
+<div class="figure-frame">
+<svg class="dg" viewBox="0 0 720 240" role="img" aria-label="Schematic: overlapping paper documents on the left, a structured table with material, property, value and source columns on the right.">
+  <text class="dg-step" x="0" y="12">WHAT IS PUBLISHED</text>
+  <text class="dg-step" x="430" y="12">WHAT YOU CAN COMPUTE ON</text>
+  <g transform="translate(0,22)">
+  <rect class="paper" x="24" y="16" width="150" height="112" rx="2"/>
+  <rect class="paper" x="12" y="8" width="150" height="112" rx="2"/>
+  <rect class="paper" x="0" y="0" width="150" height="112" rx="2"/>
+  <rect class="line" x="14" y="34" width="96" height="3" rx="1.5"/>
+  <rect class="line" x="14" y="43" width="118" height="3" rx="1.5"/>
+  <rect class="line" x="14" y="52" width="74" height="3" rx="1.5"/>
+  <rect class="line" x="14" y="61" width="110" height="3" rx="1.5"/>
+  <rect class="line" x="14" y="70" width="88" height="3" rx="1.5"/>
+  </g>
+  <line class="hrule" x1="430" y1="38" x2="700" y2="38"/>
+  <text class="th" x="430" y="32">MATERIAL</text>
+  <text class="th" x="498" y="32">PROPERTY</text>
+  <text class="th" x="554" y="32">VALUE</text>
+  <text class="th" x="598" y="32">SOURCE</text>
+  <rect class="cell" x="430" y="44" width="58" height="10" rx="2"/>
+  <rect class="cell" x="498" y="44" width="46" height="10" rx="2"/>
+  <rect class="cell" x="554" y="44" width="34" height="10" rx="2"/>
+  <rect class="cell" x="598" y="44" width="42" height="10" rx="2"/>
+  <rect class="cell" x="430" y="64" width="58" height="10" rx="2"/>
+  <rect class="cell" x="498" y="64" width="46" height="10" rx="2"/>
+  <rect class="cell" x="554" y="64" width="34" height="10" rx="2"/>
+  <rect class="cell" x="598" y="64" width="42" height="10" rx="2"/>
+  <rect class="cell" x="430" y="84" width="58" height="10" rx="2"/>
+  <rect class="cell" x="498" y="84" width="46" height="10" rx="2"/>
+  <rect class="cell" x="554" y="84" width="34" height="10" rx="2"/>
+  <rect class="cell" x="598" y="84" width="42" height="10" rx="2"/>
+  <rect class="cell" x="430" y="104" width="58" height="10" rx="2"/>
+  <rect class="cell" x="498" y="104" width="46" height="10" rx="2"/>
+  <rect class="cell" x="554" y="104" width="34" height="10" rx="2"/>
+  <rect class="cell" x="598" y="104" width="42" height="10" rx="2"/>
+  <text x="214" y="60">RETRIEVAL +</text>
+  <text x="214" y="74">STRUCTURED</text>
+  <text x="214" y="88">EXTRACTION</text>
+  <line class="arrow" x1="200" y1="104" x2="413" y2="104"/><path class="arrowhead" d="M413,100 L420,104 L413,108 Z"/>
+  <text class="dg-big" x="0" y="168">Prose, tables, captions</text>
+  <text x="0" y="188">The number you need is in there, written</text>
+  <text x="0" y="203">a different way in every paper.</text>
+  <text class="dg-big" x="430" y="168">One dataset</text>
+  <text x="430" y="188">Same fields every row, so it can feed</text>
+  <text x="430" y="203">a model instead of a reading list.</text>
+  <line class="rule" x1="0" y1="216" x2="720" y2="216"/>
+  <text x="0" y="230">SCHEMATIC. Column names are the shape of the output; the cells are blanks, not extracted values.</text>
+</svg>
+</div>
+<figcaption><em>Schematic</em> &nbsp;Drawn for this page. Column names are the shape of the output; the cells are blanks, not extracted values.</figcaption>
+</figure>
+      </article>
+
+      <article class="entry">
+        <p class="domain">Climate imaging</p>
+        <h3>Air temperature from one outdoor photo, with an honest error bar</h3>
+        <p>Hand the model a single frame from an outdoor webcam and it estimates the air temperature. The accuracy on cameras it trained with is the boring part. The part I care about: I tested it on cameras it had never seen, and on the rare extreme temperatures where models quietly fall apart while the average score still looks fine. That gap is the difference between a demo and a result you can build on.</p>
+        <p class="method"><b>Method</b><br>Deep imbalanced regression (label- and feature-distribution smoothing) on the SkyFinder dataset; an 8-experiment by 5-fold sweep run as SLURM array jobs on UW Hyak; leave-one-camera-out test split; ablations for noisy labels and dropped rare bins; constant and metadata-tree baselines so improvements have something to beat.</p>
+        <figure class="figure">
+<div class="figure-frame">
+<svg class="dg" viewBox="0 0 720 250" role="img" aria-label="Concept map: five cameras used for training and one held out entirely, beside a falling profile showing that common temperatures are abundant and rare ones are not.">
+  <text class="dg-step" x="0" y="12">THE SPLIT THAT MATTERS</text>
+  <text class="dg-step" x="390" y="12">HOW THE LABELS ARE DISTRIBUTED</text>
+  <rect class="paper" x="0" y="30" width="34" height="26" rx="3"/><circle class="fill-on" cx="17" cy="43" r="7"/>
+  <rect class="paper" x="46" y="30" width="34" height="26" rx="3"/><circle class="fill-on" cx="63" cy="43" r="7"/>
+  <rect class="paper" x="92" y="30" width="34" height="26" rx="3"/><circle class="fill-on" cx="109" cy="43" r="7"/>
+  <rect class="paper" x="138" y="30" width="34" height="26" rx="3"/><circle class="fill-on" cx="155" cy="43" r="7"/>
+  <rect class="paper" x="184" y="30" width="34" height="26" rx="3"/><circle class="fill-on" cx="201" cy="43" r="7"/>
+  <rect class="dash" x="240" y="30" width="34" height="26" rx="3"/><circle class="fill-off" cx="257" cy="43" r="7"/>
+  <text class="th" x="0" y="74">TRAINED ON THESE</text>
+  <text class="th" x="240" y="74">NEVER SEEN</text>
+  <rect class="fill-on" x="390" y="70" width="22" height="70" rx="1"/>
+  <rect class="fill-on" x="418" y="74" width="22" height="66" rx="1"/>
+  <rect class="fill-on" x="446" y="82" width="22" height="58" rx="1"/>
+  <rect class="fill-on" x="474" y="94" width="22" height="46" rx="1"/>
+  <rect class="fill-on" x="502" y="106" width="22" height="34" rx="1"/>
+  <rect class="fill-on" x="530" y="116" width="22" height="24" rx="1"/>
+  <rect class="fill-on" x="558" y="124" width="22" height="16" rx="1"/>
+  <rect class="fill-on" x="586" y="130" width="22" height="10" rx="1"/>
+  <line class="hrule" x1="390" y1="140" x2="612" y2="140"/>
+  <text class="th" x="390" y="156">COMMON TEMPERATURES</text>
+  <text class="th" x="566" y="156">RARE</text>
+  <text class="dg-big" x="0" y="190">Two ways to be wrong</text>
+  <text x="0" y="210">Holding out frames from cameras the model already knows is the easy test; holding out a whole</text>
+  <text x="0" y="225">camera is the real one. And because the rare temperatures on the right are scarce, an aggregate</text>
+  <text x="0" y="240">score is dominated by the left-hand end and says almost nothing about the right.</text>
+</svg>
+</div>
+<figcaption><em>Concept map</em> &nbsp;Drawn for this page. The falling profile shows that rare temperatures are scarce, which is a real property of the dataset and the reason this project exists; the bar heights are illustrative rather than counted.</figcaption>
+</figure>
+      </article>
+
+      <article class="entry">
+        <p class="domain">Sensors and mobile</p>
+        <h3>A paper sensor you read with a phone camera</h3>
+        <p>Disposable electronics are a fast-growing waste stream. Our lab built a biodegradable sensor from cellulose that changes colour in response to humidity, pH, stretch and toxic gases. I built the Android side: point the camera at the sensor and get a reading, with the model running on the phone itself so it works with no signal and no server.</p>
+        <p class="method"><b>Method</b><br>Image segmentation to locate the sensor region, because simple colour thresholds fail the moment lighting stops being a lab bench; on-device inference for latency and offline use.</p>
+        <figure class="figure">
+<div class="figure-frame">
+<svg class="dg" viewBox="0 0 720 472" role="img" aria-label="A mock-up of the Android reader: a camera viewfinder with the paper sensor outlined by the segmentation model, and a results panel listing pH, humidity and heavy-metal readings, with the model running on the device.">
+  <text class="dg-step" x="0" y="12">THE READER, AS IT WOULD LOOK IN THE FIELD</text>
+  <rect class="box" x="30" y="24" width="220" height="440" rx="22"/>
+  <rect x="40" y="34" width="200" height="420" rx="14" fill="#FFFFFF"/>
+  <rect x="40" y="34" width="200" height="26" rx="0" fill="#FFFFFF"/>
+  <text class="ui-sm" x="52" y="51">9:41</text>
+  <text class="ui-sm" x="228" y="51" text-anchor="end">no signal &#183; 74%</text>
+  <rect x="40" y="60" width="200" height="34" fill="#0B6B59"/>
+  <text class="ui-bar" x="54" y="82">Sensor Read</text>
+  <circle cx="222" cy="71" r="1.6" fill="#FFFFFF"/><circle cx="222" cy="77" r="1.6" fill="#FFFFFF"/><circle cx="222" cy="83" r="1.6" fill="#FFFFFF"/>
+  <rect x="40" y="94" width="200" height="184" fill="#2A2F31"/>
+  <rect x="96" y="150" width="88" height="62" rx="4" fill="#8E5AA8" transform="rotate(-7 140 181)"/>
+  <rect x="88" y="142" width="104" height="78" rx="6" fill="none" stroke="#6FE3C6" stroke-width="2" stroke-dasharray="6 4"/>
+  <rect x="88" y="126" width="88" height="14" rx="3" fill="#6FE3C6"/>
+  <text class="ui-tag" x="94" y="136">SENSOR FOUND</text>
+  <rect x="48" y="252" width="94" height="16" rx="8" fill="#0B6B59" fill-opacity="0.9"/>
+  <text class="ui-tag-l" x="55" y="263">ON DEVICE</text>
+  <text class="ui-h" x="56" y="296">Reading</text>
+  <rect x="56" y="306" width="10" height="10" rx="2" fill="#8E5AA8"/><text class="ui" x="74" y="315">pH</text><text class="ui-val" x="222" y="315" text-anchor="end">5.5</text><line class="ui-rule" x1="56" y1="325" x2="222" y2="325"/>
+  <rect x="56" y="336" width="10" height="10" rx="2" fill="#4F8DBE"/><text class="ui" x="74" y="345">Humidity</text><text class="ui-val" x="222" y="345" text-anchor="end">62% RH</text><line class="ui-rule" x1="56" y1="355" x2="222" y2="355"/>
+  <rect x="56" y="366" width="10" height="10" rx="2" fill="#8A9694"/><text class="ui" x="74" y="375">Hg / Cd / Pb</text><text class="ui-val" x="222" y="375" text-anchor="end">not detected</text>
+  <circle cx="140" cy="416" r="20" fill="none" stroke="#0B6B59" stroke-width="3"/>
+  <circle cx="140" cy="416" r="13" fill="#0B6B59"/>
+  <text class="ui-sm" x="140" y="450" text-anchor="middle">Capture</text>
+  <line class="lead" x1="196" y1="168" x2="330" y2="132"/>
+  <text class="dg-big" x="330" y="120">Segmentation, not a colour threshold</text>
+  <text x="330" y="140">The model finds the strip first, so shadow, tint and angle</text>
+  <text x="330" y="155">do not become part of the measurement.</text>
+  <line class="lead" x1="150" y1="258" x2="330" y2="196"/>
+  <text class="dg-big" x="330" y="184">No signal required</text>
+  <text x="330" y="204">Inference runs on the handset. The badge is there because</text>
+  <text x="330" y="219">fieldwork happens where the network does not reach.</text>
+  <line class="lead" x1="240" y1="312" x2="330" y2="260"/>
+  <text class="dg-big" x="330" y="248">One strip, several quantities</text>
+  <text x="330" y="268">The same cellulose strip responds to pH, humidity, stretch</text>
+  <text x="330" y="283">and heavy metals, each in its own region.</text>
+  <text class="th" x="330" y="324">THE STRIP&#8217;S COLOUR SCALE, ACIDIC TO BASIC</text>
+  <rect x="330" y="336" width="22" height="16" rx="2" fill="#C3363C"/>
+  <rect x="356" y="336" width="22" height="16" rx="2" fill="#B5497E"/>
+  <rect x="382" y="336" width="22" height="16" rx="2" fill="#8E5AA8"/>
+  <rect x="408" y="336" width="22" height="16" rx="2" fill="#6A62B4"/>
+  <rect x="434" y="336" width="22" height="16" rx="2" fill="#3F6FB5"/>
+</svg>
+</div>
+<figcaption><em>Mock-up, not a screenshot</em> &nbsp;Drawn for this page to show what the reader does: find the strip, then report the quantities. The layout and the readings are illustrative; the measured quantities, the segmentation-first approach and the offline on-device design are the real ones.</figcaption>
+</figure>
+      </article>
+
+      <article class="entry">
+        <p class="domain">Cell biology</p>
+        <h3>A brain-cell foundation model, and a fair fight between four designs</h3>
+        <p>&ldquo;Foundation models&rdquo; for cells are the field&rsquo;s current bet, but papers rarely compare designs under identical conditions, so nobody can say which choice actually helped. I trained four different ways of feeding gene-expression data into a model, at two model sizes, on the same Allen Brain Atlas mouse data, and evaluated every one on the same suite. The deliverable is an honest comparison table, not another leaderboard claim.</p>
+        <p class="method"><b>Method</b><br>Dense highly-variable-gene baseline, sparse EmbeddingBag, Geneformer-style rank tokens, scGPT-style binned-value tokens; linear and kNN probes plus geometry and biology checks; synthetic-data fixtures so the whole thing can be developed on a laptop before it touches a GPU.</p>
+        <figure class="figure">
+<div class="figure-frame">
+<svg class="dg" viewBox="0 0 720 456" role="img" aria-label="Concept map: one cell's gene-expression profile shown as a coloured track, then the four different ways the encoders read that same profile, all trained at two sizes and evaluated on one shared suite.">
+  <text class="dg-step" x="0" y="12">ONE CELL, MEASURED ACROSS THOUSANDS OF GENES</text>
+  <circle cx="20" cy="45" r="14" fill="none" stroke="var(--accent, #0B6B59)" stroke-width="1.5"/>
+  <circle cx="20" cy="45" r="5.5" fill="var(--accent, #0B6B59)" fill-opacity="0.45"/>
+  <rect class="gene" x="48" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.9"/>
+  <rect class="gene" x="66" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.93"/>
+  <rect class="gene" x="84" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.85"/>
+  <rect class="gene" x="102" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.14"/>
+  <rect class="gene" x="120" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.5"/>
+  <rect class="gene" x="138" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.34"/>
+  <rect class="gene" x="156" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.44"/>
+  <rect class="gene" x="174" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.15"/>
+  <rect class="gene" x="192" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.18"/>
+  <rect class="gene" x="210" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.36"/>
+  <rect class="gene" x="228" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.2"/>
+  <rect class="gene" x="246" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.37"/>
+  <rect class="gene" x="264" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.12"/>
+  <rect class="gene" x="282" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.14"/>
+  <rect class="gene" x="300" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.63"/>
+  <rect class="gene" x="318" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.34"/>
+  <rect class="gene" x="336" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.42"/>
+  <rect class="gene" x="354" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.66"/>
+  <rect class="gene" x="372" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.29"/>
+  <rect class="gene" x="390" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.13"/>
+  <rect class="gene" x="408" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.72"/>
+  <rect class="gene" x="426" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.5"/>
+  <rect class="gene" x="444" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.57"/>
+  <rect class="gene" x="462" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.53"/>
+  <rect class="gene" x="480" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.96"/>
+  <rect class="gene" x="498" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.29"/>
+  <rect class="gene" x="516" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.69"/>
+  <rect class="gene" x="534" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.3"/>
+  <rect class="gene" x="552" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.48"/>
+  <rect class="gene" x="570" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.57"/>
+  <rect class="gene" x="588" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.26"/>
+  <rect class="gene" x="606" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.14"/>
+  <rect class="gene" x="624" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.39"/>
+  <rect class="gene" x="642" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.64"/>
+  <rect class="gene" x="660" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.5"/>
+  <rect class="gene" x="678" y="34" width="16" height="22" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.36"/>
+  <text x="48" y="74">Each square is one gene&#8217;s expression in this cell. Darker means more of it. This row, not a DNA</text>
+  <text x="48" y="89">sequence, is what a cell model actually reads.</text>
+  <line class="hrule" x1="0" y1="104" x2="720" y2="104"/>
+  <text class="dg-step" x="0" y="126">FOUR WAYS TO READ THE SAME ROW</text>
+  <g transform="translate(0,140)"><text class="th" x="0" y="12">DENSE VECTOR</text>
+  <text class="th2" x="0" y="26">TOP 2,000 VARIABLE GENES</text>
+  <rect class="gene" x="170" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.9"/>
+  <rect class="gene" x="188" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.93"/>
+  <rect class="gene" x="206" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.85"/>
+  <rect class="gene" x="224" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.14"/>
+  <rect class="gene" x="242" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.5"/>
+  <rect class="gene" x="260" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.34"/>
+  <rect class="gene" x="278" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.44"/>
+  <rect class="gene" x="296" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.15"/>
+  <rect class="gene" x="314" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.18"/>
+  <rect class="gene" x="332" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.36"/>
+  <rect class="gene" x="350" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.2"/>
+  <rect class="gene" x="368" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.37"/>
+  <rect class="gene" x="386" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.12"/>
+  <rect class="gene" x="404" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.14"/>
+  <rect class="gene" x="422" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.63"/>
+  <rect class="gene" x="440" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.34"/>
+  <rect class="gene" x="458" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.42"/>
+  <rect class="gene" x="476" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.66"/>
+  <rect class="gene" x="494" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.29"/>
+  <rect class="gene" x="512" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.13"/>
+  <rect class="gene" x="530" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.72"/>
+  <rect class="gene" x="548" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.5"/>
+  <rect class="gene" x="566" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.57"/>
+  <rect class="gene" x="584" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.53"/>
+  <rect class="gene" x="602" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.96"/>
+  <rect class="gene" x="620" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.29"/>
+  <rect class="gene" x="638" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.69"/>
+  <rect class="gene" x="656" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.3"/>
+  <rect class="gene" x="674" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.48"/>
+  <rect class="gene" x="692" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.57"/></g>
+  <g transform="translate(0,196)"><text class="th" x="0" y="12">EMBEDDING BAG</text>
+  <text class="th2" x="0" y="26">SPARSE, WEIGHTED SUM</text>
+  <rect x="170" y="0" width="16" height="20" rx="1.5" fill="none" stroke="var(--rule, #D3DAD8)" stroke-width="1"/>
+  <rect class="gene" x="188" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.93"/>
+  <rect class="gene" x="206" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.85"/>
+  <rect class="gene" x="224" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.14"/>
+  <rect x="242" y="0" width="16" height="20" rx="1.5" fill="none" stroke="var(--rule, #D3DAD8)" stroke-width="1"/>
+  <rect class="gene" x="260" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.34"/>
+  <rect class="gene" x="278" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.44"/>
+  <rect class="gene" x="296" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.15"/>
+  <rect class="gene" x="314" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.18"/>
+  <rect class="gene" x="332" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.36"/>
+  <rect x="350" y="0" width="16" height="20" rx="1.5" fill="none" stroke="var(--rule, #D3DAD8)" stroke-width="1"/>
+  <rect x="368" y="0" width="16" height="20" rx="1.5" fill="none" stroke="var(--rule, #D3DAD8)" stroke-width="1"/>
+  <rect class="gene" x="386" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.12"/>
+  <rect class="gene" x="404" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.14"/>
+  <rect class="gene" x="422" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.63"/>
+  <rect class="gene" x="440" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.34"/>
+  <rect x="458" y="0" width="16" height="20" rx="1.5" fill="none" stroke="var(--rule, #D3DAD8)" stroke-width="1"/>
+  <rect x="476" y="0" width="16" height="20" rx="1.5" fill="none" stroke="var(--rule, #D3DAD8)" stroke-width="1"/>
+  <rect class="gene" x="494" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.29"/>
+  <rect class="gene" x="512" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.13"/>
+  <rect x="530" y="0" width="16" height="20" rx="1.5" fill="none" stroke="var(--rule, #D3DAD8)" stroke-width="1"/>
+  <rect x="548" y="0" width="16" height="20" rx="1.5" fill="none" stroke="var(--rule, #D3DAD8)" stroke-width="1"/>
+  <rect x="566" y="0" width="16" height="20" rx="1.5" fill="none" stroke="var(--rule, #D3DAD8)" stroke-width="1"/>
+  <rect class="gene" x="584" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.53"/>
+  <rect x="602" y="0" width="16" height="20" rx="1.5" fill="none" stroke="var(--rule, #D3DAD8)" stroke-width="1"/>
+  <rect x="620" y="0" width="16" height="20" rx="1.5" fill="none" stroke="var(--rule, #D3DAD8)" stroke-width="1"/>
+  <rect x="638" y="0" width="16" height="20" rx="1.5" fill="none" stroke="var(--rule, #D3DAD8)" stroke-width="1"/>
+  <rect x="656" y="0" width="16" height="20" rx="1.5" fill="none" stroke="var(--rule, #D3DAD8)" stroke-width="1"/>
+  <rect class="gene" x="674" y="0" width="16" height="20" rx="1.5" fill="var(--accent, #0B6B59)" fill-opacity="0.48"/>
+  <rect x="692" y="0" width="16" height="20" rx="1.5" fill="none" stroke="var(--rule, #D3DAD8)" stroke-width="1"/></g>
+  <g transform="translate(0,252)"><text class="th" x="0" y="12">RANK TOKENS</text>
+  <text class="th2" x="0" y="26">GENEFORMER-STYLE ORDER</text>
+  <rect x="170" y="0" width="32" height="20" rx="2" fill="var(--accent, #0B6B59)" fill-opacity="0.49"/><text class="tok" x="186" y="14" text-anchor="middle">g1</text>
+  <rect x="206" y="0" width="32" height="20" rx="2" fill="var(--accent, #0B6B59)" fill-opacity="0.48"/><text class="tok" x="222" y="14" text-anchor="middle">g2</text>
+  <rect x="242" y="0" width="32" height="20" rx="2" fill="var(--accent, #0B6B59)" fill-opacity="0.47"/><text class="tok" x="258" y="14" text-anchor="middle">g3</text>
+  <rect x="278" y="0" width="32" height="20" rx="2" fill="var(--accent, #0B6B59)" fill-opacity="0.45"/><text class="tok" x="294" y="14" text-anchor="middle">g4</text>
+  <rect x="314" y="0" width="32" height="20" rx="2" fill="var(--accent, #0B6B59)" fill-opacity="0.41"/><text class="tok" x="330" y="14" text-anchor="middle">g5</text>
+  <rect x="350" y="0" width="32" height="20" rx="2" fill="var(--accent, #0B6B59)" fill-opacity="0.4"/><text class="tok" x="366" y="14" text-anchor="middle">g6</text>
+  <rect x="386" y="0" width="32" height="20" rx="2" fill="var(--accent, #0B6B59)" fill-opacity="0.39"/><text class="tok" x="402" y="14" text-anchor="middle">g7</text>
+  <rect x="422" y="0" width="32" height="20" rx="2" fill="var(--accent, #0B6B59)" fill-opacity="0.38"/><text class="tok" x="438" y="14" text-anchor="middle">g8</text>
+  <rect x="458" y="0" width="32" height="20" rx="2" fill="var(--accent, #0B6B59)" fill-opacity="0.38"/><text class="tok" x="474" y="14" text-anchor="middle">g9</text>
+  <rect x="494" y="0" width="32" height="20" rx="2" fill="var(--accent, #0B6B59)" fill-opacity="0.36"/><text class="tok" x="510" y="14" text-anchor="middle">g10</text>
+  <text class="th2" x="170" y="34">MOST EXPRESSED FIRST, THE REST DROPPED</text></g>
+  <g transform="translate(0,310)"><text class="th" x="0" y="12">VALUE BINS</text>
+  <text class="th2" x="0" y="26">scGPT-STYLE, 51 LEVELS</text>
+  <rect x="170" y="0" width="32" height="9" rx="2" fill="var(--rule-soft, #E4E9E7)"/><text class="tok2" x="186" y="7" text-anchor="middle">g1</text><rect x="170" y="11" width="31" height="9" rx="2" fill="var(--ochre, #8F6412)" fill-opacity="0.85"/>
+  <rect x="206" y="0" width="32" height="9" rx="2" fill="var(--rule-soft, #E4E9E7)"/><text class="tok2" x="222" y="7" text-anchor="middle">g2</text><rect x="206" y="11" width="30" height="9" rx="2" fill="var(--ochre, #8F6412)" fill-opacity="0.85"/>
+  <rect x="242" y="0" width="32" height="9" rx="2" fill="var(--rule-soft, #E4E9E7)"/><text class="tok2" x="258" y="7" text-anchor="middle">g3</text><rect x="242" y="11" width="29" height="9" rx="2" fill="var(--ochre, #8F6412)" fill-opacity="0.85"/>
+  <rect x="278" y="0" width="32" height="9" rx="2" fill="var(--rule-soft, #E4E9E7)"/><text class="tok2" x="294" y="7" text-anchor="middle">g4</text><rect x="278" y="11" width="27" height="9" rx="2" fill="var(--ochre, #8F6412)" fill-opacity="0.85"/>
+  <rect x="314" y="0" width="32" height="9" rx="2" fill="var(--rule-soft, #E4E9E7)"/><text class="tok2" x="330" y="7" text-anchor="middle">g5</text><rect x="314" y="11" width="23" height="9" rx="2" fill="var(--ochre, #8F6412)" fill-opacity="0.85"/>
+  <rect x="350" y="0" width="32" height="9" rx="2" fill="var(--rule-soft, #E4E9E7)"/><text class="tok2" x="366" y="7" text-anchor="middle">g6</text><rect x="350" y="11" width="22" height="9" rx="2" fill="var(--ochre, #8F6412)" fill-opacity="0.85"/>
+  <rect x="386" y="0" width="32" height="9" rx="2" fill="var(--rule-soft, #E4E9E7)"/><text class="tok2" x="402" y="7" text-anchor="middle">g7</text><rect x="386" y="11" width="21" height="9" rx="2" fill="var(--ochre, #8F6412)" fill-opacity="0.85"/>
+  <rect x="422" y="0" width="32" height="9" rx="2" fill="var(--rule-soft, #E4E9E7)"/><text class="tok2" x="438" y="7" text-anchor="middle">g8</text><rect x="422" y="11" width="20" height="9" rx="2" fill="var(--ochre, #8F6412)" fill-opacity="0.85"/>
+  <rect x="458" y="0" width="32" height="9" rx="2" fill="var(--rule-soft, #E4E9E7)"/><text class="tok2" x="474" y="7" text-anchor="middle">g9</text><rect x="458" y="11" width="20" height="9" rx="2" fill="var(--ochre, #8F6412)" fill-opacity="0.85"/>
+  <rect x="494" y="0" width="32" height="9" rx="2" fill="var(--rule-soft, #E4E9E7)"/><text class="tok2" x="510" y="7" text-anchor="middle">g10</text><rect x="494" y="11" width="18" height="9" rx="2" fill="var(--ochre, #8F6412)" fill-opacity="0.85"/>
+  <text class="th2" x="170" y="34">GENE IDENTITY ABOVE, ITS BINNED LEVEL BELOW</text></g>
+  <line class="hrule" x1="0" y1="352" x2="720" y2="352"/>
+  <rect x="0" y="366" width="120" height="20" rx="10" fill="none" stroke="var(--rule, #D3DAD8)"/><text class="th2" x="12" y="380">LINEAR PROBE</text>
+  <rect x="130" y="366" width="120" height="20" rx="10" fill="none" stroke="var(--rule, #D3DAD8)"/><text class="th2" x="142" y="380">kNN PROBE</text>
+  <rect x="260" y="366" width="120" height="20" rx="10" fill="none" stroke="var(--rule, #D3DAD8)"/><text class="th2" x="272" y="380">GEOMETRY</text>
+  <rect x="390" y="366" width="120" height="20" rx="10" fill="none" stroke="var(--rule, #D3DAD8)"/><text class="th2" x="402" y="380">BIOLOGY</text>
+  <rect x="520" y="366" width="140" height="20" rx="10" fill="none" stroke="var(--rule, #D3DAD8)"/><text class="th2" x="532" y="380">1M AND 3M PARAMS</text>
+  <text class="dg-big" x="0" y="412">Four ways to read the same cell</text>
+  <text x="0" y="432">Same data, same sizes, same evaluation suite &#8212; so a difference in the result is a difference</text>
+  <text x="0" y="447">between encoders, rather than a difference between papers.</text>
+</svg>
+</div>
+<figcaption><em>Concept map</em> &nbsp;Drawn for this page. The expression levels shown are illustrative, not measured; the four encoder designs, the 51 bins, the two parameter sizes and the four evaluations are the real ones. Hover a square to bring it to full strength.</figcaption>
+</figure>
+      </article>
+
+      <article class="entry">
+        <p class="domain">Mathematics and AI</p>
+        <h3>Does the AI actually follow the proof you gave it?</h3>
+        <p>Give a proof assistant two different human proofs of the same theorem. Does its machine-checked output follow the strategy you supplied, or does it quietly do its own thing and hand you a green checkmark? I built the benchmark and the pipeline that measures the difference. The write-up targets the MATH-AI workshop at NeurIPS 2026, and the repository&rsquo;s status page lists what failed just as plainly as what worked.</p>
+        <p class="method"><b>Method</b><br>The Lean statement stays fixed while the supplied informal proof switches strategy; calibrated against GPT-OSS 120B, Qwen3-32B and DeepSeek-Prover-V2-7B; 283 tests, Ruff, Pyright and lake build all green at the last checkpoint.</p>
+        <figure class="figure">
+<div class="figure-frame">
+<svg class="dg" viewBox="0 0 720 272" role="img" aria-label="Concept map: two informal proofs using different strategies are each generated and machine-checked against an identical Lean statement, and the question is whether the two resulting proofs differ the way their inputs did.">
+  <text class="dg-step" x="0" y="12">WHAT IS SUPPLIED</text>
+  <text class="dg-step" x="214" y="12">WHAT THE SYSTEM DOES</text>
+  <text class="dg-step" x="428" y="12">WHAT COMES BACK</text>
+  <rect class="paper" x="0" y="26" width="168" height="48" rx="2"/>
+  <text class="th" x="12" y="46">INFORMAL PROOF, ROUTE A</text>
+  <text class="th" x="12" y="62">ONE MATHEMATICAL STRATEGY</text>
+  <line class="arrow" x1="168" y1="50" x2="207" y2="50"/><path class="arrowhead" d="M207,46 L214,50 L207,54 Z"/>
+  <rect class="paper" x="214" y="26" width="168" height="48" rx="2"/>
+  <text class="th" x="226" y="46">GENERATE, THEN</text>
+  <text class="th" x="226" y="62">MACHINE-CHECK IN LEAN</text>
+  <line class="arrow" x1="382" y1="50" x2="421" y2="50"/><path class="arrowhead" d="M421,46 L428,50 L421,54 Z"/>
+  <rect class="paper" x="428" y="26" width="150" height="48" rx="2"/>
+  <text class="th" x="440" y="54">MACHINE-CHECKED PROOF A</text>
+  <rect class="dash" x="0" y="92" width="578" height="38" rx="2"/>
+  <text class="th" x="14" y="116">THE LEAN STATEMENT IS IDENTICAL IN BOTH ROWS &#8212; ONLY THE SUPPLIED PROOF CHANGES</text>
+  <rect class="paper" x="0" y="148" width="168" height="48" rx="2"/>
+  <text class="th" x="12" y="168">INFORMAL PROOF, ROUTE B</text>
+  <text class="th" x="12" y="184">A DIFFERENT STRATEGY</text>
+  <line class="arrow" x1="168" y1="172" x2="207" y2="172"/><path class="arrowhead" d="M207,168 L214,172 L207,176 Z"/>
+  <rect class="paper" x="214" y="148" width="168" height="48" rx="2"/>
+  <text class="th" x="226" y="168">GENERATE, THEN</text>
+  <text class="th" x="226" y="184">MACHINE-CHECK IN LEAN</text>
+  <line class="arrow" x1="382" y1="172" x2="421" y2="172"/><path class="arrowhead" d="M421,168 L428,172 L421,176 Z"/>
+  <rect class="paper" x="428" y="148" width="150" height="48" rx="2"/>
+  <text class="th" x="440" y="176">MACHINE-CHECKED PROOF B</text>
+  <line class="brace" x1="596" y1="50" x2="596" y2="172"/>
+  <line class="brace" x1="596" y1="50" x2="588" y2="50"/>
+  <line class="brace" x1="596" y1="172" x2="588" y2="172"/>
+  <text class="th" x="608" y="105">COMPARE</text>
+  <text class="dg-big" x="0" y="228">The measurement is the difference between the two rows</text>
+  <text x="0" y="248">If the system is genuinely conditioned on the proof it was handed, the two checked outputs should carry</text>
+  <text x="0" y="263">the two strategies. If it quietly does its own thing, both rows land on the same proof and pass anyway.</text>
+</svg>
+</div>
+<figcaption><em>Concept map</em> &nbsp;Drawn for this page. The two routes are labelled A and B rather than named, because what matters to the measurement is only that they are different strategies for the same theorem.</figcaption>
+</figure>
+      </article>
+
+
+      <article class="entry">
+        <p class="domain">Developer tooling</p>
+        <h3>Reading machine-learning code you did not write</h3>
+        <p>In machine-learning code the logic is short but the shapes of the data moving through it are everything, and none of those shapes appear in the source. The usual remedy is to scatter print statements through the forward pass, read the numbers, delete them, and lose the map the moment you clean up. Fusion runs the model under a tracer and prints the shape, dtype and device of every tensor beside the line that produced it, so the understanding survives the edit.</p>
+        <p class="method"><b>Status</b><br>The backend tracer and the shared core are the tested parts; the desktop shell is experimental. Built as a personal tool, n&nbsp;=&nbsp;1, and described that way in the repository.</p>
+        <figure class="figure">
+<div class="figure-frame">
+<svg class="dg" viewBox="0 0 720 244" role="img" aria-label="Concept map: the same three lines of model code, first as written with tensor shapes invisible, then annotated inline with the shape each line produces.">
+  <text class="dg-step" x="0" y="12">THE SOURCE AS WRITTEN</text>
+  <rect class="paper" x="0" y="24" width="500" height="66" rx="2"/>
+  <text x="14" y="44">x = self.norm(x)</text>
+  <text x="14" y="61">q = self.proj(x).view(B, L, H, D)</text>
+  <text x="14" y="78">q = q.transpose(1, 2)</text>
+  <text x="0" y="110">The shapes are the whole meaning of these lines, and none of them are written down.</text>
+  <text class="dg-step" x="0" y="142">UNDER THE TRACER</text>
+  <rect class="paper" x="0" y="142" width="500" height="66" rx="2"/>
+  <text x="14" y="162">x = self.norm(x)</text><line class="lead" x1="127" y1="158" x2="392" y2="158"/><text class="shape" x="400" y="162">[B, L, 512]</text>
+  <text x="14" y="179">q = self.proj(x).view(B, L, H, D)</text><line class="lead" x1="241" y1="175" x2="392" y2="175"/><text class="shape" x="400" y="179">[B, L, 8, 64]</text>
+  <text x="14" y="196">q = q.transpose(1, 2)</text><line class="lead" x1="161" y1="192" x2="392" y2="192"/><text class="shape" x="400" y="196">[B, 8, L, 64]</text>
+  <line class="rule" x1="0" y1="222" x2="720" y2="222"/>
+  <text x="0" y="236">CONCEPT MAP. The annotated shapes follow from the code shown, as the tracer would report them.</text>
+</svg>
+</div>
+<figcaption><em>Concept map</em> &nbsp;Drawn for this page. The annotated shapes follow from the code shown, as the tracer would report them.</figcaption>
+</figure>
+      </article>
+
+      <article class="entry">
+        <p class="domain">Reproducibility</p>
+        <h3>Auditing whether a published prediction still reproduces</h3>
+        <p>My honours-thesis work asks a narrow and uncomfortable question: does a published model for predicting the glass-transition temperature of vitrimers still produce its reported numbers when it is run again from its original checkpoint? The repository is deliberately plan-only &mdash; scientific context, execution plan, acceptance criteria, and a list of decisions reserved for me &mdash; and no result is described as reproduced until the first implementation has actually run.</p>
+        <p class="method"><b>Materials</b><br>The 57&nbsp;MB audited checkpoint and the original inference sources must both be staged before any work begins. Governing documents: CONTEXT, EXECPLAN, SERVER-HANDOFF, RUNBOOK, DECISIONS-NEEDED.</p>
+        <figure class="figure">
+<div class="figure-frame">
+<svg class="dg" viewBox="0 0 720 208" role="img" aria-label="Concept map: a published model and its checkpoint, a written plan, a re-run from that checkpoint, and a comparison against the published value, leading to a reproduced or not-reproduced verdict.">
+  <text class="dg-step" x="0" y="12">THE AUDIT, IN ORDER</text>
+  <rect class="paper" x="0" y="34" width="150" height="50" rx="2"/><text x="12" y="55">Published model</text><text x="12" y="71">and its checkpoint</text>
+  <rect class="paper" x="190" y="34" width="150" height="50" rx="2"/><text x="202" y="55">A written plan</text><text x="202" y="71">before any code</text>
+  <rect class="paper" x="380" y="34" width="150" height="50" rx="2"/><text x="392" y="55">Re-run from</text><text x="392" y="71">that checkpoint</text>
+  <rect class="paper" x="570" y="34" width="150" height="50" rx="2"/><text x="582" y="55">Compare against</text><text x="582" y="71">the published value</text>
+  <line class="arrow" x1="150" y1="59" x2="183" y2="59"/><path class="arrowhead" d="M183,55 L190,59 L183,63 Z"/>
+  <line class="arrow" x1="340" y1="59" x2="373" y2="59"/><path class="arrowhead" d="M373,55 L380,59 L373,63 Z"/>
+  <line class="arrow" x1="530" y1="59" x2="563" y2="59"/><path class="arrowhead" d="M563,55 L570,59 L563,63 Z"/>
+  <rect class="fill-on" x="570" y="108" width="12" height="12" rx="2"/>
+  <text x="590" y="118">Reproduces</text>
+  <rect class="fill-off" x="570" y="130" width="12" height="12" rx="2"/>
+  <text x="590" y="140">Does not</text>
+  <text class="dg-big" x="0" y="120">The gate is step three</text>
+  <text x="0" y="140">Until the re-run has actually happened, nothing in the</text>
+  <text x="0" y="155">repository is described as reproduced &mdash; including by me.</text>
+  <line class="rule" x1="0" y1="176" x2="720" y2="176"/>
+  <text x="0" y="192">CONCEPT MAP. The repository is plan-only: context, execution plan, and decisions reserved for the author.</text>
+</svg>
+</div>
+<figcaption><em>Concept map</em> &nbsp;Drawn for this page. No measured values are shown; the diagram states the order of operations and where the gate sits.</figcaption>
+</figure>
+      </article>
+
+      <article class="entry">
+        <p class="domain">Research meta-analysis</p>
+        <h3>Measuring where a research field is drifting</h3>
+        <p>Human&ndash;computer interaction has grown fast enough that nobody reads all of it, which makes the shape of the field hard to see. This pipeline classifies themes across recent CHI publications using both supervised and unsupervised methods &mdash; and because the answer depends on how the text is represented, it runs the whole analysis through three different scientific text encoders rather than trusting one.</p>
+        <p class="method"><b>Method</b><br>SBERT, SciBERT and SPECTER2 embeddings over the same corpus; UMAP projections by label and cosine-similarity heatmaps produced separately for each encoder.</p>
+        <figure class="figure">
+<div class="figure-frame">
+<svg class="dg" viewBox="0 0 720 200" role="img" aria-label="Concept map: a corpus of conference papers passed through three scientific text encoders, producing a projected space in which themes separate into clusters.">
+  <text class="dg-step" x="0" y="12">ONE CORPUS</text>
+  <text class="dg-step" x="196" y="12">THREE REPRESENTATIONS</text>
+  <text class="dg-step" x="440" y="12">ONE PROJECTION EACH</text>
+  <rect class="paper" x="20" y="38" width="130" height="80" rx="2"/>
+  <rect class="paper" x="10" y="33" width="130" height="80" rx="2"/>
+  <rect class="paper" x="0" y="28" width="130" height="80" rx="2"/>
+  <rect class="line" x="12" y="44" width="100" height="3" rx="1.5"/>
+  <rect class="line" x="12" y="55" width="82" height="3" rx="1.5"/>
+  <rect class="line" x="12" y="66" width="94" height="3" rx="1.5"/>
+  <rect class="line" x="12" y="77" width="70" height="3" rx="1.5"/>
+  <rect class="paper" x="196" y="30" width="118" height="26" rx="2"/><text class="th" x="208" y="47">SBERT</text>
+  <rect class="paper" x="196" y="64" width="118" height="26" rx="2"/><text class="th" x="208" y="81">SCIBERT</text>
+  <rect class="paper" x="196" y="98" width="118" height="26" rx="2"/><text class="th" x="208" y="115">SPECTER2</text>
+  <line class="arrow" x1="150" y1="72" x2="183" y2="72"/><path class="arrowhead" d="M183,68 L190,72 L183,76 Z"/>
+  <line class="arrow" x1="320" y1="72" x2="423" y2="72"/><path class="arrowhead" d="M423,68 L430,72 L423,76 Z"/>
+  <rect class="viewfinder" x="430" y="24" width="270" height="104" rx="2"/>
+  <circle class="fill-on" cx="464" cy="47" r="3"/>
+  <circle class="fill-on" cx="469" cy="41" r="3"/>
+  <circle class="fill-on" cx="448" cy="72" r="3"/>
+  <circle class="fill-on" cx="450" cy="61" r="3"/>
+  <circle class="fill-on" cx="481" cy="41" r="3"/>
+  <circle class="fill-on" cx="476" cy="51" r="3"/>
+  <circle class="fill-on" cx="446" cy="43" r="3"/>
+  <circle class="fill-on" cx="471" cy="64" r="3"/>
+  <circle class="fill-on" cx="448" cy="53" r="3"/>
+  <circle class="fill-on" cx="449" cy="73" r="3"/>
+  <circle class="fill-on" cx="471" cy="41" r="3"/>
+  <circle class="fill-on" cx="586" cy="112" r="3"/>
+  <circle class="fill-on" cx="541" cy="90" r="3"/>
+  <circle class="fill-on" cx="574" cy="116" r="3"/>
+  <circle class="fill-on" cx="571" cy="79" r="3"/>
+  <circle class="fill-on" cx="570" cy="113" r="3"/>
+  <circle class="fill-on" cx="559" cy="79" r="3"/>
+  <circle class="fill-on" cx="548" cy="78" r="3"/>
+  <circle class="fill-on" cx="569" cy="84" r="3"/>
+  <circle class="fill-on" cx="552" cy="102" r="3"/>
+  <circle class="fill-on" cx="543" cy="110" r="3"/>
+  <circle class="fill-on" cx="541" cy="112" r="3"/>
+  <circle class="fill-on" cx="633" cy="67" r="3"/>
+  <circle class="fill-on" cx="666" cy="43" r="3"/>
+  <circle class="fill-on" cx="620" cy="69" r="3"/>
+  <circle class="fill-on" cx="650" cy="72" r="3"/>
+  <circle class="fill-on" cx="626" cy="55" r="3"/>
+  <circle class="fill-on" cx="620" cy="67" r="3"/>
+  <circle class="fill-on" cx="659" cy="36" r="3"/>
+  <circle class="fill-on" cx="650" cy="35" r="3"/>
+  <circle class="fill-on" cx="653" cy="45" r="3"/>
+  <circle class="fill-on" cx="645" cy="66" r="3"/>
+  <circle class="fill-on" cx="641" cy="52" r="3"/>
+  <text class="dg-big" x="0" y="152">The representation is part of the result</text>
+  <text x="0" y="172">Themes that survive all three encoders are findings about the field; themes that appear under only</text>
+  <text x="0" y="187">one are findings about the encoder. Running all three is what tells them apart.</text>
+</svg>
+</div>
+<figcaption><em>Concept map</em> &nbsp;Drawn for this page. The clusters are illustrative of the structure the projection reveals, not plotted from the corpus.</figcaption>
+</figure>
+      </article>
+
+      <article class="entry">
+        <p class="domain">Behavioural neuroscience</p>
+        <h3>Finding behaviour in video without labelling every frame</h3>
+        <p>Manual annotation is the dominant cost in large-scale behavioural work: somebody has to watch the video and mark what the animal is doing, frame by frame. Here a video transformer embeds short clips and the behaviours separate within that embedding space on their own, which turns annotation into a matter of checking clusters rather than marking everything.</p>
+        <p class="method"><b>Method</b><br>VideoMAE embeddings with t-SNE projection over locomotion, rearing, face-grooming, body-grooming and defecation; representative frames plotted at their positions in the embedding. A separate Kaggle MABe workspace supplies a sliding-window PyTorch dataset over pose-tracking files.</p>
+        <figure class="figure">
+<div class="figure-frame">
+<svg class="dg" viewBox="0 0 720 200" role="img" aria-label="Concept map: short video clips encoded by a video transformer, producing an embedding space in which five named mouse behaviours form separate clusters.">
+  <text class="dg-step" x="0" y="12">SHORT CLIPS, UNLABELLED</text>
+  <text class="dg-step" x="430" y="12">EMBEDDING SPACE</text>
+  <rect class="viewfinder" x="0" y="30" width="40" height="30" rx="2"/>
+  <rect class="viewfinder" x="46" y="30" width="40" height="30" rx="2"/>
+  <rect class="viewfinder" x="92" y="30" width="40" height="30" rx="2"/>
+  <text x="0" y="80">Nobody has marked what</text>
+  <text x="0" y="95">the animal is doing here.</text>
+  <rect class="paper" x="190" y="34" width="150" height="34" rx="2"/>
+  <text class="th" x="202" y="55">VIDEO TRANSFORMER</text>
+  <line class="arrow" x1="146" y1="51" x2="179" y2="51"/><path class="arrowhead" d="M179,47 L186,51 L179,55 Z"/>
+  <line class="arrow" x1="344" y1="51" x2="417" y2="51"/><path class="arrowhead" d="M417,47 L424,51 L417,55 Z"/>
+  <rect class="viewfinder" x="424" y="22" width="276" height="112" rx="2"/>
+  <circle class="fill-on" cx="460" cy="64" r="3"/>
+  <circle class="fill-on" cx="467" cy="64" r="3"/>
+  <circle class="fill-on" cx="461" cy="51" r="3"/>
+  <circle class="fill-on" cx="464" cy="64" r="3"/>
+  <circle class="fill-on" cx="469" cy="43" r="3"/>
+  <circle class="fill-on" cx="443" cy="62" r="3"/>
+  <circle class="fill-on" cx="464" cy="52" r="3"/>
+  <circle class="fill-on" cx="472" cy="56" r="3"/>
+  <circle class="fill-on" cx="443" cy="40" r="3"/>
+  <circle class="fill-on" cx="542" cy="90" r="3"/>
+  <circle class="fill-on" cx="523" cy="83" r="3"/>
+  <circle class="fill-on" cx="548" cy="106" r="3"/>
+  <circle class="fill-on" cx="554" cy="82" r="3"/>
+  <circle class="fill-on" cx="552" cy="93" r="3"/>
+  <circle class="fill-on" cx="542" cy="101" r="3"/>
+  <circle class="fill-on" cx="553" cy="101" r="3"/>
+  <circle class="fill-on" cx="524" cy="100" r="3"/>
+  <circle class="fill-on" cx="514" cy="107" r="3"/>
+  <circle class="fill-on" cx="625" cy="31" r="3"/>
+  <circle class="fill-on" cx="595" cy="30" r="3"/>
+  <circle class="fill-on" cx="604" cy="57" r="3"/>
+  <circle class="fill-on" cx="607" cy="48" r="3"/>
+  <circle class="fill-on" cx="593" cy="53" r="3"/>
+  <circle class="fill-on" cx="621" cy="39" r="3"/>
+  <circle class="fill-on" cx="620" cy="47" r="3"/>
+  <circle class="fill-on" cx="604" cy="45" r="3"/>
+  <circle class="fill-on" cx="606" cy="49" r="3"/>
+  <circle class="fill-on" cx="666" cy="100" r="3"/>
+  <circle class="fill-on" cx="648" cy="106" r="3"/>
+  <circle class="fill-on" cx="653" cy="99" r="3"/>
+  <circle class="fill-on" cx="665" cy="98" r="3"/>
+  <circle class="fill-on" cx="683" cy="114" r="3"/>
+  <circle class="fill-on" cx="653" cy="107" r="3"/>
+  <circle class="fill-on" cx="664" cy="95" r="3"/>
+  <circle class="fill-on" cx="662" cy="101" r="3"/>
+  <circle class="fill-on" cx="666" cy="85" r="3"/>
+  <circle class="fill-on" cx="476" cy="119" r="3"/>
+  <circle class="fill-on" cx="478" cy="113" r="3"/>
+  <circle class="fill-on" cx="478" cy="128" r="3"/>
+  <circle class="fill-on" cx="490" cy="113" r="3"/>
+  <circle class="fill-on" cx="476" cy="131" r="3"/>
+  <circle class="fill-on" cx="473" cy="128" r="3"/>
+  <circle class="fill-on" cx="472" cy="107" r="3"/>
+  <circle class="fill-on" cx="485" cy="130" r="3"/>
+  <circle class="fill-on" cx="475" cy="116" r="3"/>
+  <text class="th" x="430" y="32">LOCOMOTE</text>
+  <text class="th" x="512" y="76">REAR</text>
+  <text class="th" x="590" y="24">FACEGROOM</text>
+  <text class="th" x="646" y="80">BODYGROOM</text>
+  <text class="th" x="470" y="96">DEFECATE</text>
+  <text class="dg-big" x="0" y="158">Annotation becomes checking, not labelling</text>
+  <text x="0" y="178">The behaviours separate on their own, so a person confirms clusters instead of marking every frame.</text>
+  <line class="rule" x1="0" y1="190" x2="720" y2="190"/>
+</svg>
+</div>
+<figcaption><em>Concept map</em> &nbsp;Drawn for this page. Cluster positions are illustrative; the five behaviour names are the ones the pipeline actually separates.</figcaption>
+</figure>
+      </article>
+    </div>
+  </section>
+
+
+  <section class="row">
+    <p class="rail">Publications</p>
+    <div class="col">
+      <h2>Publications</h2>
+      <ul class="pubs">
+        <li>
+          <span class="status">Under review</span>
+          <span class="pub-title">Data-efficient inverse design of recyclable electronics</span>
+          <span class="pub-meta">Manuscript under review at <em>Nature Communications</em>. My contribution
+          is the LLM-based retrieval pipeline that mines the experimental measurements out of the
+          chemistry literature and the structured dataset it produces, which the inverse-design
+          workflow is built on.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <span>Tingxuan Huang &middot; Seattle, WA</span>
+    <span><a href="mailto:thuang27@cs.washington.edu">thuang27@cs.washington.edu</a></span>
+    <span><a href="https://github.com/TingXuan-Huang">github.com/TingXuan-Huang</a></span>
+  </footer>
+
+</div>
+</body>
+</html>
