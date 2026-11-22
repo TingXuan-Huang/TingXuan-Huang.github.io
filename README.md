@@ -20,10 +20,11 @@ Live at <https://tingxuan-huang.github.io/>. Pushing to `main` publishes it.
 The three files in `content/` explain their own format at the top. The pages
 read them directly, so saving the file and pushing is all it takes.
 
-After changing `site.css`, also change the `?v=...` tag after `site.css` in the
-`<link rel="stylesheet">` line of every page (the six `.html` files and
-`_layouts/post.html`) to any new value. Browsers keep the stylesheet for a
-while, and the new tag makes them fetch the new one straight away.
+After changing `site.css` or one of the `.js` files, also change the `?v=...`
+tag after that file's name wherever a page loads it (`site.css` in every page
+and in `_layouts/post.html`; the scripts at the bottom of `travel.html` and
+`food.html`) to any new value. Browsers keep these files for a while, and the
+new tag makes them fetch the new one straight away.
 
 ## Writing a blog post
 

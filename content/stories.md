@@ -9,6 +9,22 @@ Under each part:
 
 then a blank line, then your story. Leave a blank line between paragraphs.
 
+The "when:" line also feeds the time bar above the globe. Pick a year on the
+bar and the globe keeps the places of that year, joined in date order by a
+line. For that the line needs a year written in digits:
+
+  when: 2019               a visit that year
+  when: 2019.7             with a month (July 2019 and 2019年7月 work too)
+  when: 2019.7.15          with a day
+  when: 2018.5, 2023.12    two visits
+  when: 2015 - 2019        a stay: shown in every year from 2015 to 2019
+  when: 2023.9 - now       a stay that is still going
+
+Places in the same year are joined from the earliest date to the latest, so
+add the month when the order matters. A line with no year in it (like "Now")
+still shows on the story card but is left off the time bar. It is enough to
+date one language; the other can say the same thing in words.
+
 You can also use **bold**, *italic*, [a link](https://example.com),
 "> " in front of a quote, "- " in front of list items, "### " in front of a
 small heading, and ![caption](photos/file.jpg) for a picture.

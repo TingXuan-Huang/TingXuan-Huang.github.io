@@ -304,6 +304,26 @@ a.feature:hover{text-decoration:none;transform:translateY(-2px);}
   background:transparent;border:1px solid var(--line);border-radius:999px;cursor:pointer;
 }
 .chip-btn:hover{background:var(--hover);}
+/* the time bar above the globe: pick a year, the globe keeps that year's places */
+.timebar{width:100%;max-width:520px;margin-bottom:.9rem;}
+.timebar-top{display:flex;align-items:center;justify-content:space-between;gap:.5rem .8rem;flex-wrap:wrap;}
+.timebar .chip-btn[aria-pressed="true"]{background:#FFFFFF;border-color:#FFFFFF;color:var(--theme);}
+.time-now{display:inline-flex;align-items:center;gap:.3rem;}
+.time-year{font-family:var(--font-display);font-size:2rem;line-height:1;min-width:5.2rem;text-align:center;}
+.timebar.is-all .time-year{font-size:1.25rem;}
+.time-step{
+  font:inherit;font-size:1.25rem;line-height:1;width:1.9rem;height:1.9rem;padding:0 0 .15rem;
+  border:1px solid var(--line);border-radius:50%;background:transparent;color:var(--ink);cursor:pointer;
+}
+.time-step:hover{background:var(--hover);}
+.time-step:disabled{opacity:.35;cursor:default;}
+.time-count{min-width:4.6rem;text-align:right;font-size:.84rem;color:var(--ink-3);}
+#time-range{display:block;width:100%;margin:.7rem 0 .1rem;accent-color:var(--peach);cursor:pointer;}
+.timebar.is-all #time-range{opacity:.6;}
+.time-ends{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.72rem;color:var(--ink-3);}
+.time-path{min-height:1.5em;margin-top:.35rem;font-size:.86rem;line-height:1.6;color:var(--ink-3);}
+.time-path button{font:inherit;color:var(--ink);background:none;border:none;padding:0 .1rem;cursor:pointer;text-decoration:underline;text-underline-offset:3px;}
+.pin.out{display:none;}
 
 .legend{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.3rem 1.2rem;margin-top:.9rem;font-size:.84rem;color:var(--ink-3);}
 .legend span{display:inline-flex;align-items:center;gap:.4rem;}

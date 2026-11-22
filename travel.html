@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="site.css?v=20261122e">
+<link rel="stylesheet" href="site.css?v=20261122f">
 </head>
 <body data-theme="travel">
 <div class="site">
@@ -37,6 +37,21 @@
 
     <section class="tile fill green atlas" aria-label="Globe and the selected place">
       <div class="atlas-globe">
+        <!-- The time bar: shown once any place or trip has a year in its "when:" line. -->
+        <div class="timebar is-all" id="timebar" hidden>
+          <div class="timebar-top">
+            <button type="button" class="chip-btn" id="time-all" aria-pressed="true">All years</button>
+            <span class="time-now">
+              <button type="button" class="time-step" id="time-prev" aria-label="Earlier year">&lsaquo;</button>
+              <output class="time-year" id="time-year" for="time-range">All years</output>
+              <button type="button" class="time-step" id="time-next" aria-label="Later year">&rsaquo;</button>
+            </span>
+            <span class="time-count" id="time-count"></span>
+          </div>
+          <input type="range" id="time-range" min="0" max="0" step="1" aria-label="Year shown on the globe">
+          <div class="time-ends" aria-hidden="true"><span id="time-min"></span><span id="time-max"></span></div>
+          <p class="time-path" id="time-path"></p>
+        </div>
         <div id="map" role="group" aria-label="A map on a globe with a pin on each place. Double-click or double-tap to zoom in; select a pin to read about that place."></div>
         <div class="legend">
           <span><i class="mark lived"></i>Lived</span>
@@ -106,10 +121,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.1/dist/maplibre-gl.js"></script>
-<script src="places.js"></script>
-<script src="photos.js"></script>
-<script src="trips.js"></script>
-<script src="common.js"></script>
-<script src="globe.js"></script>
+<script src="places.js?v=20261122f"></script>
+<script src="photos.js?v=20261122f"></script>
+<script src="trips.js?v=20261122f"></script>
+<script src="common.js?v=20261122f"></script>
+<script src="globe.js?v=20261122f"></script>
 </body>
 </html>

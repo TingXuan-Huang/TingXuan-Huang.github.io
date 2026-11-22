@@ -87,11 +87,12 @@ def read_trips(path, places):
             if at:
                 trip['stops'].append([float(at.group(3)), float(at.group(2))])
                 continue
-            p = match_place(raw, places)
+            name = raw.split('|')[0].strip()      # "Name | 中文名": the page shows the second one in Chinese
+            p = match_place(name, places)
             if p:
                 trip['stops'].append([p['lon'], p['lat']])
             else:
-                trip['missing'].append(raw)
+                trip['missing'].append(name)
     return trips
 
 
