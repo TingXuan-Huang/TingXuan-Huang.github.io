@@ -28,9 +28,20 @@ Under the stops, "## English" and "## 中文" work as in stories.md:
   note:  one line on what the trip was           (optional)
 
 then a blank line and the story of the trip. Save this file and reload the
-travel page. The trip below is a made-up example ("example: yes" gives it
-the Example badge): replace it with a real one.
+travel page.
 -->
+
+# New England loop | 新英格兰环线
+stops: Boston | 波士顿 @ 42.3601, -71.0589 > Plymouth | 普利茅斯 @ 41.9584, -70.6673 > Kennebunkport | 肯纳邦克港 @ 43.3615, -70.4767 > Portland Head Light | 波特兰灯塔 @ 43.6231, -70.2079 > Camden | 卡姆登 @ 44.2098, -69.0648 > Acadia | 阿卡迪亚 @ 44.3876, -68.2039 > Colby College | 科尔比学院 @ 44.5639, -69.6626 > North Conway | 北康威 @ 44.0537, -71.1284 > Kancamagus Pass | 坎卡马格斯山口 @ 44.0256, -71.4930 > Flume Gorge | 弗鲁姆峡谷 @ 44.0970, -71.6810 > Stowe | 斯托 @ 44.4654, -72.6874 > Smugglers' Notch | 走私者峡谷 @ 44.5564, -72.7940 > Concord, NH | 康科德 @ 43.2081, -71.5376 > Boston | 波士顿 @ 42.3601, -71.0589
+
+## English
+when: September 2026
+note: A loop out of Boston: Plymouth, up the Maine coast to Acadia, inland to Colby, then New Hampshire, Vermont and back.
+
+## 中文
+when: 2026年9月
+note: 从波士顿出发的一圈：普利茅斯，沿缅因海岸到阿卡迪亚，经科尔比到新罕布什尔和佛蒙特，再回波士顿。
+
 
 # G318: Chengdu to Lhasa | 318国道：成都到拉萨
 stops: Chengdu > Ya'an | 雅安 @ 29.98, 103.00 > Luding | 泸定 @ 29.91, 102.23 > Kangding | 康定 @ 30.05, 101.96 > Litang | 理塘 @ 30.00, 100.27 > Batang | 巴塘 @ 30.00, 99.11 > Markam | 芒康 @ 29.68, 98.59 > Zogang | 左贡 @ 29.67, 97.84 > Baxoi | 八宿 @ 30.05, 96.92 > Rawu | 然乌 @ 29.50, 96.77 > Bomi | 波密 @ 29.86, 95.77 > Nyingchi | 林芝 @ 29.65, 94.36 > Lhasa | 拉萨 @ 29.65, 91.13
@@ -42,21 +53,3 @@ note: National Highway 318, the southern Sichuan–Tibet road, from the Sichuan 
 ## 中文
 when:
 note: 318国道川藏南线，从成都平原一路开上高原。
-
-
-# Example: down the Yangtze | 示例：沿长江而下
-example: yes
-stops: Chengdu > Chongqing > Three Gorges @ 30.82, 111.00 > Wuhan > Nanjing > Hangzhou
-
-## English
-when: Example dates
-note: A made-up trip that joins six stops, to show what a route looks like.
-
-Write the story of the trip here: who came, what the road was like, where
-you would stop again.
-
-## 中文
-when: 示例时间
-note: 这是一条示例路线，连接六个地点。
-
-在这里写这趟旅行的故事。

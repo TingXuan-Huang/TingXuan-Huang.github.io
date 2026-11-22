@@ -105,7 +105,7 @@ note:
 # Seattle
 
 ## English
-when: Now
+when: 2023 - now
 note: Where I live now, and where I studied at the University of Washington.
 
 ## 中文
