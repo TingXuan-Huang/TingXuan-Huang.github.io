@@ -176,6 +176,7 @@ h1,h2,h3{font-family:var(--font-display);font-weight:400;letter-spacing:-.01em;m
 .home h1 .zh-name{display:block;font-size:.4em;line-height:1;margin-top:.55em;}
 .prose .opening .zh-name{font-size:.82em;letter-spacing:0;color:var(--accent);}
 .home .intro{font-size:1.15rem;line-height:1.5;max-width:34rem;color:var(--ink-2);}
+.home .intro + .intro{margin-top:.9rem;}
 /* the front-page photo: a small print beside the greeting, its caption underneath */
 .home-top{display:grid;gap:2.2rem;}
 @media (min-width:640px){.home-top{grid-template-columns:minmax(0,1fr) 210px;align-items:end;gap:2.5rem;}}
