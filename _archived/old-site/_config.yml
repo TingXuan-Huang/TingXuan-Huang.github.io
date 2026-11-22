@@ -1,0 +1,52 @@
+title: "tingxuan"
+tagline: "Welcome to my personal blog! Hope you can find the writing interesting and helpful."
+now: "Currently trying to learn about various topics ranging from machine learning theory and neuroscience to investment and economics. I also like to read books on philosophy, history and literature.
+      I am also learning singing, the flute and origami as hobbies."
+
+description: "Essays and notes by Tingxuan Huang."
+author: "Tingxuan Huang"
+
+github_url: "https://github.com/TingXuan-Huang"
+
+# Repo is named `TingXuan-Huang.github.io`, which makes this a user page served
+# at the root of the domain. baseurl is therefore empty.
+url: "https://tingxuan-huang.github.io"
+baseurl: ""
+
+# Pretty URLs: /2026/on-jingwei/
+permalink: /:year/:slug/
+
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Sass is compiled by jekyll-sass-converter; output the compressed CSS to /assets/css/main.css.
+sass:
+  style: compressed
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
+      category: essay
+
+exclude:
+  - .claude/
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - SETUP.md
+  - _archived/
+  - demo/
+  - vendor/
+  - .bundle/
+  - node_modules/

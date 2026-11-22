@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Colour mixer — Tingxuan Huang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+  /* =========================================================================
+     Colour roles. The script at the bottom sets these on <html> from the mix
+     you choose, and works out a readable text colour for every fill. The
+     values here are only the starting mix, used before the script runs.
+     ========================================================================= */
+  :root{
+    --font-display:"Instrument Serif",Georgia,"Times New Roman",serif;
+    --font-body:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --font-mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --radius:22px;
+
+    --bg:#F6F9FC; --surface:#BFE7EA; --travel:#4C784A; --hello:#35297F; --now:#DDE7D3;
+    --ocean:#3A8BC8; --land:#1F4A2B; --pin:#FBA17E; --link:#5A4BC8; --button:#4C784A; --spark:#8E1523;
+
+    --ink:#1C1A3A; --ink-2:#3F4263; --ink-3:#575B7C;
+    --s-ink:#1C1A3A; --s-ink-2:#3F4263; --s-ink-3:#575B7C;
+    --n-ink:#1C1A3A; --n-ink-2:#3F4263; --n-ink-3:#575B7C;
+    --on-travel:#FFFFFF; --on-hello:#FFFFFF; --on-button:#FFFFFF; --on-spark:#FFFFFF;
+    --tag:#8E1523; --now-label:#8E1523;
+    --globe-ink:#FFFFFF; --globe-label:#1C1A3A; --pin-ring:#FFFFFF;
+
+    --line:color-mix(in srgb,var(--ink) 14%,transparent);
+    --hover:color-mix(in srgb,var(--ink) 8%,transparent);
+  }
+
+  *,*::before,*::after{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--link);text-decoration:none;}
+  a:hover{text-decoration:underline;text-underline-offset:3px;}
+  a:focus-visible,button:focus-visible{outline:2px solid #1C1A3A;outline-offset:3px;border-radius:6px;}
+  p{margin:0;}
+
+  .label{
+    font-family:var(--font-mono);
+    font-size:.69rem;
+    font-weight:500;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink-3);
+    margin:0;
+  }
+
+  /* =========================================================================
+     Mixer controls — fixed neutral colours so they stay usable whatever you pick
+     ========================================================================= */
+  .mixbar{
+    position:sticky;top:0;z-index:20;
+    padding:.6rem 20px .65rem;
+    background:#FFFFFF;
+    color:#1C1A3A;
+    border-bottom:1px solid #D9DDE6;
+    font-size:.8rem;
+  }
+  .mixbar-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:.3rem 1rem;margin-bottom:.5rem;}
+  .mixbar-title{font-family:var(--font-mono);font-size:.69rem;letter-spacing:.12em;text-transform:uppercase;color:#575B7C;}
+  .mixbar-hint{color:#3F4263;margin-right:auto;}
+  .chips{display:flex;flex-wrap:wrap;gap:.35rem;}
+  .mixbar button,.pop button.plain{
+    font:inherit;color:#1C1A3A;
+    display:inline-flex;align-items:center;gap:.4rem;
+    padding:.28rem .65rem .28rem .4rem;
+    background:#FFFFFF;
+    border:1px solid #D9DDE6;
+    border-radius:999px;
+    cursor:pointer;
+  }
+  .mixbar button:hover{border-color:#575B7C;}
+  .mixbar button.plain{padding-left:.65rem;}
+  .mixbar button[aria-expanded="true"]{border-color:#1C1A3A;box-shadow:inset 0 0 0 1px #1C1A3A;}
+  .mixbar .dot{width:15px;height:15px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(28,26,58,.22);}
+  @media (max-width:760px){.mixbar{position:static;}}
+
+  .pop{
+    position:fixed;z-index:30;
+    width:252px;
+    padding:.8rem .85rem .85rem;
+    background:#FFFFFF;
+    color:#1C1A3A;
+    border:1px solid #D9DDE6;
+    border-radius:16px;
+    box-shadow:0 14px 40px rgba(20,20,45,.2);
+    font-size:.82rem;
+  }
+  .pop[hidden]{display:none;}
+  .pop-title{font-weight:600;font-size:.9rem;margin-bottom:.1rem;}
+  .pop-now{font-family:var(--font-mono);font-size:.72rem;color:#575B7C;margin-bottom:.6rem;min-height:1.1em;}
+  .pop-swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
+  .pop-swatches button{
+    aspect-ratio:1;width:100%;padding:0;
+    border-radius:50%;
+    border:none;
+    box-shadow:inset 0 0 0 1px rgba(28,26,58,.22);
+    cursor:pointer;
+  }
+  .pop-swatches button:hover{transform:scale(1.08);}
+  .pop-swatches button[aria-pressed="true"]{outline:2px solid #1C1A3A;outline-offset:2px;}
+  .pop-custom{display:flex;align-items:center;gap:.5rem;margin-top:.75rem;padding-top:.65rem;border-top:1px solid #E6E9F0;color:#3F4263;}
+  .pop-custom input{width:38px;height:26px;padding:0;border:1px solid #D9DDE6;border-radius:6px;background:none;cursor:pointer;}
+
+  /* =========================================================================
+     Site frame
+     ========================================================================= */
+  .site{max-width:1120px;margin:0 auto;padding:0 20px 72px;}
+  .site [data-role]{cursor:pointer;}
+  .top{
+    display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.5rem 1.5rem;
+    padding:1.6rem 4px 1.4rem;
+  }
+  .wordmark{font-family:var(--font-display);font-size:1.6rem;line-height:1;color:var(--ink);letter-spacing:-.01em;}
+  .wordmark:hover{text-decoration:none;}
+  .nav{display:flex;flex-wrap:wrap;gap:.25rem;}
+  .nav a{color:var(--ink-2);font-size:.92rem;padding:.3rem .75rem;border-radius:999px;}
+  .nav a:hover{text-decoration:none;background:var(--hover);color:var(--ink);}
+  .nav a[aria-current="page"]{background:var(--button);color:var(--on-button);}
+
+  /* =========================================================================
+     Tile grid
+     ========================================================================= */
+  .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px;}
+  .tile{
+    --ink:var(--s-ink); --ink-2:var(--s-ink-2); --ink-3:var(--s-ink-3);
+    --line:color-mix(in srgb,var(--ink) 14%,transparent);
+    --hover:color-mix(in srgb,var(--ink) 8%,transparent);
+    grid-column:span 12;
+    display:flex;flex-direction:column;
+    min-width:0;
+    padding:26px;
+    background:var(--surface);
+    color:var(--ink);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+  }
+  .tile .label{margin-bottom:1rem;}
+  .tile h2{
+    font-family:var(--font-display);
+    font-weight:400;
+    font-size:1.75rem;
+    line-height:1.12;
+    letter-spacing:-.01em;
+    margin:0 0 .6rem;
+    text-wrap:balance;
+  }
+  .tile p{color:var(--ink-2);}
+  .more{margin-top:auto;padding-top:1.25rem;font-size:.92rem;font-weight:500;}
+  .more a::after{content:" \2192";display:inline-block;transition:transform .18s ease;}
+  .more a:hover::after{transform:translateX(3px);}
+
+  @media (min-width:640px){
+    .t-now,.t-post{grid-column:span 6;}
+  }
+  @media (min-width:940px){
+    .t-hero{grid-column:span 7;}
+    .t-globe{grid-column:span 5;}
+    .t-now,.t-post,.t-research{grid-column:span 4;}
+    .t-off{grid-column:span 8;}
+    .t-hello{grid-column:span 4;}
+  }
+
+  /* hero */
+  .t-hero{padding:32px;min-height:26rem;}
+  .where{display:inline-flex;align-items:center;gap:.5rem;}
+  .where::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--spark);}
+  .t-hero h1{
+    font-family:var(--font-display);
+    font-weight:400;
+    font-size:clamp(3rem,8vw,5.4rem);
+    line-height:.98;
+    letter-spacing:-.02em;
+    margin:auto 0 1.1rem;
+    padding-top:2rem;
+  }
+  .t-hero h1 em{font-style:italic;color:var(--link);}
+  .t-hero .intro{font-size:1.1rem;line-height:1.5;max-width:34rem;color:var(--ink-2);}
+  .actions{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.6rem;}
+  .btn{
+    display:inline-flex;align-items:center;
+    padding:.6rem 1.1rem;
+    border-radius:999px;
+    font-size:.94rem;font-weight:500;
+    border:1px solid var(--ink);
+    color:var(--ink);
+  }
+  .btn:hover{text-decoration:none;background:var(--hover);}
+  .btn.primary{background:var(--button);border-color:var(--button);color:var(--on-button);}
+  .btn.primary:hover{background:var(--button);filter:brightness(.9);}
+
+  /* travel tile and globe */
+  .t-globe{
+    --ink:var(--on-travel); --ink-2:var(--on-travel); --ink-3:var(--on-travel);
+    background:var(--travel);border-color:transparent;
+  }
+  .t-globe .label{margin-bottom:.25rem;}
+  .t-globe h2{margin:0;}
+  .t-globe p{font-size:.9rem;}
+  .t-globe .more a{color:var(--ink);}
+  .globe-wrap{flex:1;display:grid;place-items:center;padding:.5rem 0;}
+  #globe{width:100%;max-width:330px;height:auto;display:block;touch-action:pan-y;user-select:none;-webkit-user-select:none;}
+  #globe .sea{fill:var(--ocean);cursor:grab;}
+  #globe.dragging .sea,#globe.dragging .land{cursor:grabbing;}
+  #globe .rim{fill:none;stroke:var(--globe-ink);stroke-opacity:.35;stroke-width:1;pointer-events:none;}
+  #globe .graticule{fill:none;stroke:var(--globe-ink);stroke-opacity:.2;stroke-width:.6;pointer-events:none;}
+  #globe .land{fill:var(--land);cursor:grab;}
+  #globe .pin circle.dot{fill:var(--pin);stroke:var(--pin-ring);stroke-width:2;}
+  #globe .pin circle.pulse{fill:none;stroke:var(--pin-ring);stroke-width:1.5;transform-box:fill-box;transform-origin:center;animation:pulse 2.4s ease-out infinite;pointer-events:none;}
+  #globe .pin text{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;fill:var(--globe-label);paint-order:stroke;stroke:var(--ocean);stroke-width:3px;stroke-linejoin:round;pointer-events:none;}
+  @keyframes pulse{0%{transform:scale(1);opacity:.9;}100%{transform:scale(3.4);opacity:0;}}
+  .globe-foot{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.4rem 1rem;}
+  .globe-foot .more{margin:0;padding:0;}
+
+  /* now */
+  .t-now{
+    --ink:var(--n-ink); --ink-2:var(--n-ink-2); --ink-3:var(--n-ink-3);
+    background:var(--now);border-color:transparent;
+  }
+  .t-now .label{color:var(--now-label);}
+  .t-now p{color:var(--ink);font-size:1.02rem;}
+
+  /* latest post */
+  .tile .tags,.tags{font-family:var(--font-mono);font-size:.69rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--tag);margin-bottom:.5rem;}
+  .t-post time{font-size:.85rem;color:var(--ink-3);}
+
+  /* research */
+  .t-research ul{list-style:none;margin:.4rem 0 0;padding:0;}
+  .t-research li{padding:.6rem 0;border-top:1px solid var(--line);font-size:.93rem;line-height:1.35;color:var(--ink);}
+  .t-research li span{display:block;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.15rem;}
+
+  /* off the clock */
+  .hobbies{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:1.1rem .9rem;}
+  .hobbies li{font-size:.86rem;line-height:1.35;color:var(--ink-2);}
+  .hobbies b{display:block;font-weight:600;font-size:.95rem;color:var(--ink);margin:.6rem 0 .1rem;}
+  .ico{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;}
+  .ico svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+  .ico.a{background:var(--now);color:var(--n-ink);}
+  .ico.b{background:var(--button);color:var(--on-button);}
+  .ico.c{background:var(--travel);color:var(--on-travel);}
+  .ico.d{background:var(--hello);color:var(--on-hello);}
+  .ico.w{background:var(--spark);color:var(--on-spark);}
+
+  /* hello */
+  .t-hello{
+    --ink:var(--on-hello); --ink-2:var(--on-hello); --ink-3:var(--on-hello);
+    background:var(--hello);border-color:transparent;
+  }
+  .t-hello a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;}
+  .t-hello ul{list-style:none;margin:auto 0 0;padding:1.2rem 0 0;display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;font-weight:500;font-size:.94rem;}
+
+  /* =========================================================================
+     Your mix
+     ========================================================================= */
+  .mix{margin-top:56px;}
+  .mix-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem 1rem;margin:0 4px 1rem;}
+  .mix-head h2{font-family:var(--font-display);font-weight:400;font-size:2rem;line-height:1.1;margin:0;}
+  .mix-head p{color:var(--ink-2);max-width:44rem;}
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px;margin:0;padding:0;list-style:none;}
+  .swatches li{border:1px solid #D9DDE6;border-radius:14px;overflow:hidden;background:#FFFFFF;color:#1C1A3A;cursor:pointer;}
+  .swatches .chip{height:58px;border-bottom:1px solid #D9DDE6;}
+  .swatches .meta{padding:.5rem .7rem .6rem;font-size:.84rem;line-height:1.3;}
+  .swatches code{display:block;font-family:var(--font-mono);font-size:.72rem;color:#575B7C;}
+  .export{margin-top:12px;padding:14px 16px;border:1px solid #D9DDE6;border-radius:14px;background:#FFFFFF;color:#1C1A3A;}
+  .export p{font-size:.86rem;color:#3F4263;margin-bottom:.5rem;}
+  .export textarea{width:100%;min-height:4.6em;padding:.6rem .7rem;border:1px solid #D9DDE6;border-radius:8px;font-family:var(--font-mono);font-size:.76rem;line-height:1.5;color:#1C1A3A;background:#F6F7FA;resize:vertical;}
+  .export-row{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1rem;margin-top:.5rem;}
+  .export button{font:inherit;font-size:.82rem;padding:.35rem .8rem;border:1px solid #1C1A3A;border-radius:999px;background:#1C1A3A;color:#FFFFFF;cursor:pointer;}
+  .warn{list-style:none;margin:0;padding:0;font-size:.82rem;color:#8E1523;}
+  .warn li::before{content:"\26A0\FE0E  ";}
+
+  .reading{margin-top:14px;display:grid;gap:14px;}
+  .reading .tile{grid-column:auto;}
+  @media (min-width:940px){.reading{grid-template-columns:minmax(0,7fr) minmax(0,5fr);}}
+  .prose h3{font-family:var(--font-display);font-weight:400;font-size:2rem;line-height:1.1;margin:0 0 .8rem;}
+  .prose p:not(.label):not(.tags){color:var(--ink);font-size:1.03rem;line-height:1.65;margin-bottom:1rem;max-width:60ch;}
+  .prose blockquote{margin:0 0 1rem;padding:.8rem 1.1rem;border-left:3px solid var(--spark);background:var(--hover);border-radius:0 12px 12px 0;color:var(--ink);font-family:var(--font-display);font-style:italic;font-size:1.25rem;line-height:1.35;}
+  .prose code{font-family:var(--font-mono);font-size:.88em;background:var(--hover);padding:.1em .35em;border-radius:5px;}
+  .prose pre{margin:0;padding:1rem;border-radius:12px;background:var(--hello);color:var(--on-hello);font-family:var(--font-mono);font-size:.82rem;line-height:1.6;overflow-x:auto;}
+  .list a.row{display:block;padding:.9rem 0;border-top:1px solid var(--line);color:inherit;}
+  .list a.row:first-of-type{border-top:none;padding-top:0;}
+  .list a.row:hover{text-decoration:none;}
+  .list strong{display:block;font-family:var(--font-display);font-weight:400;font-size:1.35rem;line-height:1.2;color:var(--ink);}
+  .list small{font-size:.86rem;color:var(--ink-3);}
+  .placeholder{font-family:var(--font-mono);font-size:.69rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-top:1rem;}
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="mixbar" role="region" aria-label="Colour mixer">
+  <div class="mixbar-top">
+    <span class="mixbar-title">Colour mixer</span>
+    <span class="mixbar-hint">Click any part of the page, or a chip below, to change its colour.</span>
+    <button type="button" class="plain" id="resetMix">Reset</button>
+  </div>
+  <div class="chips" id="chips"></div>
+</div>
+
+<div class="pop" id="pop" role="dialog" aria-label="Choose a colour" hidden>
+  <p class="pop-title" id="pop-title"></p>
+  <p class="pop-now" id="pop-now"></p>
+  <div class="pop-swatches" id="pop-swatches"></div>
+  <label class="pop-custom">Any other colour <input type="color" id="pop-custom" aria-label="Pick any colour"></label>
+</div>
+
+<div class="site">
+  <header class="top">
+    <a class="wordmark" href="#">Tingxuan Huang</a>
+    <nav class="nav" aria-label="Site">
+      <a href="#" aria-current="page" data-role="button">Home</a>
+      <a href="#">Writing</a>
+      <a href="#">Research</a>
+      <a href="#">Travel</a>
+      <a href="#">About</a>
+    </nav>
+  </header>
+
+  <main class="grid">
+    <section class="tile t-hero" data-role="surface">
+      <p class="label where"><span data-role="spark">Seattle, WA</span></p>
+      <h1>Hi, I&rsquo;m <em data-role="link">Tingxuan.</em></h1>
+      <p class="intro">I build machine-learning tools for the physical and life sciences, and I write here about what I&rsquo;m learning along the way &mdash; slower than a tweet, less formal than a paper, more public than a notebook.</p>
+      <div class="actions">
+        <a class="btn primary" href="#" data-role="button">About me</a>
+        <a class="btn" href="#">Read the blog</a>
+      </div>
+    </section>
+
+    <section class="tile t-globe" aria-labelledby="globe-h" data-role="travel">
+      <p class="label">Travel</p>
+      <h2 id="globe-h">Places I&rsquo;ve been</h2>
+      <div class="globe-wrap">
+        <svg id="globe" viewBox="0 0 400 400" role="img" aria-label="A globe you can drag to rotate, with a marker on each place visited."></svg>
+      </div>
+      <div class="globe-foot">
+        <p id="globe-note">Drag to spin.</p>
+        <p class="more"><a href="#">Open the map</a></p>
+      </div>
+    </section>
+
+    <section class="tile t-now" data-role="now">
+      <p class="label">Now</p>
+      <p>Learning my way through machine learning theory, neuroscience, investing and economics, and reading philosophy, history and literature.</p>
+    </section>
+
+    <section class="tile t-post" data-role="surface">
+      <p class="label">Latest writing</p>
+      <p class="tags" data-role="spark">Learning &middot; LLM</p>
+      <h2>Building an LLM from scratch</h2>
+      <time datetime="2026-05-26">May 26, 2026</time>
+      <p class="more"><a href="#" data-role="link">All writing</a></p>
+    </section>
+
+    <section class="tile t-research" data-role="surface">
+      <p class="label">Research</p>
+      <h2>Machine learning where the data is the hard part</h2>
+      <ul>
+        <li><span>Climate imaging</span>Air temperature from one outdoor photo</li>
+        <li><span>Mathematics and AI</span>Does the AI follow the proof you gave it?</li>
+        <li><span>Cell biology</span>Four cell-model designs, one fair comparison</li>
+      </ul>
+      <p class="more"><a href="#" data-role="link">Full research profile</a></p>
+    </section>
+
+    <section class="tile t-off" data-role="surface">
+      <p class="label">Off the clock</p>
+      <ul class="hobbies">
+        <li>
+          <span class="ico a" data-role="now"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4"/></svg></span>
+          <b>Singing</b>Learning, slowly.
+        </li>
+        <li>
+          <span class="ico b" data-role="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.5 18.5 15-13 2 2-15 13Z"/><path d="M9.5 14.5h.01M12.5 12h.01M15.5 9.5h.01"/></svg></span>
+          <b>Flute</b>Also learning.
+        </li>
+        <li>
+          <span class="ico c" data-role="travel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 14h18l-4 5H7Z"/><path d="M12 4 7 14h10Z"/><path d="M12 4v10"/></svg></span>
+          <b>Origami</b>Paper, folded.
+        </li>
+        <li>
+          <span class="ico d" data-role="hello"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c-2-1.5-5-2-8-1.5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5v-13c-3-.5-6 0-8 1.5Z"/><path d="M12 6v13"/></svg></span>
+          <b>Reading</b>Philosophy, history, literature.
+        </li>
+        <li>
+          <span class="ico w" data-role="spark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 9 5v10l-9 5-9-5V7Z"/><path d="m12 7 5 8H7Z"/><path d="M12 2v5M3 17l4-2M21 17l-4-2"/></svg></span>
+          <b>D&amp;D</b>Designing for the table.
+        </li>
+      </ul>
+    </section>
+
+    <section class="tile t-hello" data-role="hello">
+      <p class="label">Say hello</p>
+      <h2>The easiest way to reach me is email.</h2>
+      <p><a href="mailto:thuang27@cs.washington.edu">thuang27@cs.washington.edu</a></p>
+      <ul>
+        <li><a href="https://github.com/TingXuan-Huang">GitHub</a></li>
+        <li><a href="#">RSS</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- ===================================================================== -->
+  <section class="mix" aria-labelledby="mix-h">
+    <div class="mix-head">
+      <h2 id="mix-h">Your mix</h2>
+      <p>What each part of the page is set to right now. Click a card to change it.</p>
+    </div>
+    <ul class="swatches" id="swatches"></ul>
+    <div class="export">
+      <p>When you like what you see, copy this line and paste it to me in chat.</p>
+      <textarea id="export" readonly aria-label="Your colour mix as text"></textarea>
+      <div class="export-row">
+        <button type="button" id="copyMix">Copy</button>
+        <ul class="warn" id="warn" aria-live="polite"></ul>
+      </div>
+    </div>
+
+    <div class="reading">
+      <article class="tile prose" data-role="surface">
+        <p class="label">How a post would read</p>
+        <p class="tags" data-role="spark">Learning &middot; LLM</p>
+        <h3>Building an LLM from scratch</h3>
+        <p>Modern language models are evolving extremely quickly, yet the overall transformer-based architecture has remained <a href="#" data-role="link">surprisingly stable</a>. Most progress is careful engineering layered onto a shared foundation.</p>
+        <blockquote data-role="spark">The best way to learn is by teaching.</blockquote>
+        <p>Each module connects back to a real implementation, starting with the tokenizer and <code>attention</code>.</p>
+        <pre data-role="hello">q = self.proj(x).view(B, L, H, D)   # [B, L, 8, 64]
+q = q.transpose(1, 2)               # [B, 8, L, 64]</pre>
+      </article>
+      <div class="tile list" data-role="surface">
+        <p class="label">How a post list would look</p>
+        <a class="row" href="#"><p class="tags">Learning &middot; LLM</p><strong>Building an LLM from scratch</strong><small>May 26, 2026</small></a>
+        <a class="row" href="#"><p class="tags">Note</p><strong>A second post title goes here</strong><small>Placeholder row</small></a>
+        <a class="row" href="#"><p class="tags">Essay</p><strong>And a third, a little longer than the others</strong><small>Placeholder row</small></a>
+        <p class="placeholder">Only the first row is a real post.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var root = document.documentElement;
+
+  /* ---------- the palette you can pick from ---------- */
+  var PALETTE = [
+    ['Main green', '#4C784A'], ['Bamboo green', '#789262'], ['Leaf green', '#1F4A2B'], ['Bamboo tint', '#DDE7D3'],
+    ['Lighter purple', '#5A4BC8'], ['Darker purple', '#35297F'],
+    ['Light blue', '#BFE7EA'], ['Light blue, earlier', '#DDEBF8'], ['Ocean blue', '#3A8BC8'],
+    ['Peach', '#FBA17E'], ['Deep red', '#8E1523'],
+    ['Sand', '#E8D6AE'], ['Rice paper', '#F7F2E7'], ['Cool white', '#F6F9FC'], ['White', '#FFFFFF'], ['Ink', '#1C1A3A']
+  ];
+  /* ---------- the parts of the page you can colour ---------- */
+  var ROLES = [
+    ['page', 'Page background'], ['surface', 'Boxes'], ['travel', 'Travel tile'], ['hello', 'Contact tile'],
+    ['now', 'Now tile'], ['ocean', 'Globe ocean'], ['land', 'Globe land'], ['pin', 'Globe pins'],
+    ['link', 'Name and links'], ['button', 'Buttons'], ['spark', 'Small accents']
+  ];
+  var DEFAULTS = {
+    page: '#F6F9FC', surface: '#BFE7EA', travel: '#4C784A', hello: '#35297F', now: '#DDE7D3',
+    ocean: '#3A8BC8', land: '#1F4A2B', pin: '#FBA17E', link: '#5A4BC8', button: '#4C784A', spark: '#8E1523'
+  };
+  var CSS_VAR = { page: '--bg' };
+  var DARK = { ink: '#1C1A3A', ink2: '#3F4263', ink3: '#575B7C' };
+  var LIGHT = { ink: '#FFFFFF', ink2: '#E3E6F2', ink3: '#C6CBDD' };
+
+  function store(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function load(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function isHex(v) { return typeof v === 'string' && /^#[0-9a-fA-F]{6}$/.test(v); }
+
+  function lum(hex) {
+    var c = [1, 3, 5].map(function (i) {
+      var v = parseInt(hex.substr(i, 2), 16) / 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  }
+  function contrast(a, b) {
+    var la = lum(a), lb = lum(b);
+    return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05);
+  }
+  // The text colour to put on top of a fill: whichever of ink or white reads better.
+  function on(fill) { return contrast(DARK.ink, fill) >= contrast('#FFFFFF', fill) ? DARK.ink : '#FFFFFF'; }
+  // Three strengths of text for a background, falling back to stronger ones on mid-tones.
+  function inkSet(bg) {
+    var s = contrast(DARK.ink, bg) >= contrast(LIGHT.ink, bg) ? DARK : LIGHT;
+    var ink2 = contrast(s.ink2, bg) >= 4.5 ? s.ink2 : s.ink;
+    var ink3 = contrast(s.ink3, bg) >= 4.5 ? s.ink3 : ink2;
+    return { ink: s.ink, ink2: ink2, ink3: ink3 };
+  }
+  function firstReadable(candidates, bg, fallback) {
+    for (var i = 0; i < candidates.length; i++) if (contrast(candidates[i], bg) >= 4.5) return candidates[i];
+    return fallback;
+  }
+  function nameOf(hex) {
+    for (var i = 0; i < PALETTE.length; i++) if (PALETTE[i][1].toUpperCase() === hex.toUpperCase()) return PALETTE[i][0];
+    return 'Custom';
+  }
+
+  /* ---------- state ---------- */
+  var state = {};
+  Object.keys(DEFAULTS).forEach(function (k) { state[k] = DEFAULTS[k]; });
+  try {
+    var saved = JSON.parse(load('demo-mix-v1') || '{}');
+    Object.keys(DEFAULTS).forEach(function (k) { if (isHex(saved[k])) state[k] = saved[k].toUpperCase(); });
+  } catch (e) {}
+  // A link such as demo/#page=F7F2E7&hello=8E1523 opens with those parts set.
+  var q = new URLSearchParams(location.hash.slice(1));
+  Object.keys(DEFAULTS).forEach(function (k) {
+    var v = q.get(k);
+    if (v && isHex('#' + v)) state[k] = ('#' + v).toUpperCase();
+  });
+
+  function apply() {
+    var set = function (k, v) { root.style.setProperty(k, v); };
+    ROLES.forEach(function (r) { set(CSS_VAR[r[0]] || '--' + r[0], state[r[0]]); });
+
+    var pageInk = inkSet(state.page), boxInk = inkSet(state.surface), nowInk = inkSet(state.now);
+    set('--ink', pageInk.ink); set('--ink-2', pageInk.ink2); set('--ink-3', pageInk.ink3);
+    set('--s-ink', boxInk.ink); set('--s-ink-2', boxInk.ink2); set('--s-ink-3', boxInk.ink3);
+    set('--n-ink', nowInk.ink); set('--n-ink-2', nowInk.ink2); set('--n-ink-3', nowInk.ink3);
+    set('--on-travel', on(state.travel));
+    set('--on-hello', on(state.hello));
+    set('--on-button', on(state.button));
+    set('--on-spark', on(state.spark));
+    // Small text takes the accent colour only where it stays readable.
+    set('--tag', firstReadable([state.spark, state.link], state.surface, boxInk.ink3));
+    set('--now-label', firstReadable([state.spark, state.link], state.now, nowInk.ink3));
+    set('--globe-ink', lum(state.ocean) < 0.45 ? '#FFFFFF' : DARK.ink);
+    set('--globe-label', on(state.ocean));
+    set('--pin-ring', contrast(state.pin, '#FFFFFF') >= 1.5 ? '#FFFFFF' : DARK.ink);
+
+    store('demo-mix-v1', JSON.stringify(state));
+    paintControls();
+  }
+
+  /* ---------- controls ---------- */
+  var chips = document.getElementById('chips');
+  ROLES.forEach(function (r) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('data-chip', r[0]);
+    b.setAttribute('aria-expanded', 'false');
+    var dot = document.createElement('span');
+    dot.className = 'dot';
+    b.appendChild(dot);
+    b.appendChild(document.createTextNode(r[1]));
+    chips.appendChild(b);
+  });
+
+  function paintControls() {
+    chips.querySelectorAll('[data-chip]').forEach(function (b) {
+      b.querySelector('.dot').style.background = state[b.getAttribute('data-chip')];
+    });
+
+    var ul = document.getElementById('swatches');
+    ul.textContent = '';
+    ROLES.forEach(function (r) {
+      var li = document.createElement('li');
+      li.setAttribute('data-card', r[0]);
+      var chip = document.createElement('div');
+      chip.className = 'chip';
+      chip.style.background = state[r[0]];
+      var meta = document.createElement('div');
+      meta.className = 'meta';
+      meta.textContent = r[1];
+      var code = document.createElement('code');
+      code.textContent = nameOf(state[r[0]]) + ' ' + state[r[0]];
+      meta.appendChild(code);
+      li.appendChild(chip);
+      li.appendChild(meta);
+      ul.appendChild(li);
+    });
+
+    document.getElementById('export').value = ROLES.map(function (r) {
+      return r[1] + ' ' + state[r[0]];
+    }).join(' · ');
+
+    var warn = [];
+    var c = contrast(state.link, state.surface);
+    if (c < 4.5) warn.push('Name and links are hard to read on the boxes (' + c.toFixed(1) + ':1; 4.5 is the usual minimum).');
+    if (contrast(state.land, state.ocean) < 1.6) warn.push('Globe land and ocean are very close; the map outline will be faint.');
+    if (contrast(state.pin, state.land) < 1.6 && contrast(state.pin, state.ocean) < 1.6) warn.push('Pins are close to both the land and the ocean colour.');
+    var wl = document.getElementById('warn');
+    wl.textContent = '';
+    warn.forEach(function (w) { var li = document.createElement('li'); li.textContent = w; wl.appendChild(li); });
+
+    if (!pop.hidden) paintPop();
+  }
+
+  /* ---------- colour popover ---------- */
+  var pop = document.getElementById('pop');
+  var popRole = null;
+  var custom = document.getElementById('pop-custom');
+
+  function paintPop() {
+    var label = ROLES.filter(function (r) { return r[0] === popRole; })[0][1];
+    document.getElementById('pop-title').textContent = label;
+    document.getElementById('pop-now').textContent = nameOf(state[popRole]) + ' ' + state[popRole];
+    var box = document.getElementById('pop-swatches');
+    box.textContent = '';
+    PALETTE.forEach(function (p) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.style.background = p[1];
+      b.title = p[0] + ' ' + p[1];
+      b.setAttribute('aria-label', p[0] + ' ' + p[1]);
+      b.setAttribute('aria-pressed', String(p[1].toUpperCase() === state[popRole].toUpperCase()));
+      b.addEventListener('click', function () { state[popRole] = p[1]; apply(); });
+      box.appendChild(b);
+    });
+    custom.value = state[popRole];
+  }
+  custom.addEventListener('input', function () {
+    if (popRole && isHex(custom.value)) { state[popRole] = custom.value.toUpperCase(); apply(); }
+  });
+
+  function openPop(role, x, y) {
+    popRole = role;
+    pop.hidden = false;
+    paintPop();
+    var w = pop.offsetWidth, h = pop.offsetHeight;
+    var left = Math.max(8, Math.min(x, window.innerWidth - w - 8));
+    var top = (y + h > window.innerHeight - 8) ? Math.max(8, y - h - 16) : y;
+    pop.style.left = left + 'px';
+    pop.style.top = top + 'px';
+    chips.querySelectorAll('[data-chip]').forEach(function (b) {
+      b.setAttribute('aria-expanded', String(b.getAttribute('data-chip') === role));
+    });
+  }
+  function closePop() {
+    pop.hidden = true;
+    popRole = null;
+    chips.querySelectorAll('[data-chip]').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
+  }
+
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (pop.contains(t)) return;
+    var link = t.closest('a');
+    if (link) e.preventDefault();          // links do nothing in the mixer
+
+    var chip = t.closest('[data-chip]');
+    if (chip) {
+      var role = chip.getAttribute('data-chip');
+      if (!pop.hidden && popRole === role) { closePop(); return; }
+      var r = chip.getBoundingClientRect();
+      openPop(role, r.left, r.bottom + 6);
+      return;
+    }
+    if (!pop.hidden) { closePop(); return; }   // a click elsewhere just closes it
+    if (t.closest('.mixbar') || t.closest('.export')) return;
+
+    var card = t.closest('[data-card]');
+    if (card) { openPop(card.getAttribute('data-card'), e.clientX + 8, e.clientY + 8); return; }
+    var el = t.closest('[data-role]');
+    if (el) { openPop(el.getAttribute('data-role'), e.clientX + 8, e.clientY + 8); return; }
+    if (t.closest('.mix')) return;
+    openPop('page', e.clientX + 8, e.clientY + 8);
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePop(); });
+  window.addEventListener('scroll', function () { if (!pop.hidden) closePop(); }, { passive: true });
+
+  document.getElementById('resetMix').addEventListener('click', function () {
+    Object.keys(DEFAULTS).forEach(function (k) { state[k] = DEFAULTS[k]; });
+    apply();
+  });
+  document.getElementById('copyMix').addEventListener('click', function () {
+    var ta = document.getElementById('export');
+    var btn = this;
+    var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1400); };
+    var fallback = function () { ta.focus(); ta.select(); try { document.execCommand('copy'); done(); } catch (err) {} };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(ta.value).then(done, fallback);
+    } else { fallback(); }
+  });
+
+  apply();
+
+  /* ---------- globe ---------- */
+  // The real site would read this list from a data file. Only Seattle is known so far.
+  var PLACES = [
+    { name: 'Seattle', lon: -122.33, lat: 47.61 }
+  ];
+
+  var note = document.getElementById('globe-note');
+  if (!window.d3 || !window.topojson) { note.textContent = 'The globe could not load.'; return; }
+
+  var svg = d3.select('#globe');
+  var R = 186, C = 200;
+  var rot = [104, -34];
+  var projection = d3.geoOrthographic().scale(R).translate([C, C]).clipAngle(90).rotate(rot);
+  var path = d3.geoPath(projection);
+  var graticule = d3.geoGraticule10();
+
+  svg.append('circle').attr('class', 'sea').attr('data-role', 'ocean').attr('cx', C).attr('cy', C).attr('r', R);
+  var gGrat = svg.append('path').attr('class', 'graticule');
+  var gLand = svg.append('path').attr('class', 'land').attr('data-role', 'land');
+  svg.append('circle').attr('class', 'rim').attr('cx', C).attr('cy', C).attr('r', R);
+  var pins = svg.append('g').selectAll('g').data(PLACES).join('g').attr('class', 'pin').attr('data-role', 'pin');
+  pins.append('circle').attr('class', 'pulse').attr('r', 5);
+  pins.append('circle').attr('class', 'dot').attr('r', 6);
+  pins.append('text').attr('x', -12).attr('y', 4).attr('text-anchor', 'end').text(function (d) { return d.name; });
+
+  var land = null;
+  function render() {
+    projection.rotate(rot);
+    gGrat.attr('d', path(graticule));
+    if (land) gLand.attr('d', path(land));
+    var centre = [-rot[0], -rot[1]];
+    pins.each(function (d) {
+      var visible = d3.geoDistance([d.lon, d.lat], centre) < Math.PI / 2 - 0.06;
+      var p = projection([d.lon, d.lat]);
+      d3.select(this)
+        .attr('display', visible ? null : 'none')
+        .attr('transform', 'translate(' + p[0] + ',' + p[1] + ')');
+    });
+  }
+  render();
+
+  note.textContent = 'Drag to spin. ' + PLACES.length + (PLACES.length === 1 ? ' place' : ' places') + ' marked so far.';
+
+  d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/land-110m.json').then(function (world) {
+    land = topojson.feature(world, world.objects.land);
+    render();
+  }).catch(function () {
+    note.textContent = 'The map outline could not load.';
+  });
+
+  var dragging = false, resumeAt = 0;
+  var k = 180 / (Math.PI * R);
+  svg.call(d3.drag()
+    .on('start', function () { dragging = true; svg.classed('dragging', true); })
+    .on('drag', function (e) {
+      rot[0] += e.dx * k;
+      rot[1] = Math.max(-70, Math.min(70, rot[1] - e.dy * k));
+      render();
+    })
+    .on('end', function () { dragging = false; svg.classed('dragging', false); resumeAt = performance.now() + 4000; }));
+
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var last = null;
+    d3.timer(function () {
+      var now = performance.now();
+      // The globe holds still while a colour is being chosen for it.
+      if (last !== null && !dragging && now > resumeAt && pop.hidden) {
+        rot[0] += (now - last) * 0.005;
+        render();
+      }
+      last = now;
+    });
+  }
+})();
+</script>
+</body>
+</html>

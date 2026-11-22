@@ -1,6 +1,6 @@
 ---
 layout: null
-permalink: /search.json
+permalink: /posts.json
 sitemap: false
 ---
 [
@@ -9,7 +9,6 @@ sitemap: false
     "title":    {{ post.title | jsonify }},
     "url":      {{ post.url | relative_url | jsonify }},
     "date":     {{ post.date | date: "%Y-%m-%d" | jsonify }},
-    "date_fmt": {{ post.date | date: "%b %-d, %Y" | jsonify }},
     "category": {{ post.category | default: "essay" | jsonify }},
     "topic":    {{ post.topic | jsonify }},
     "excerpt":  {{ post.excerpt | strip_html | strip_newlines | jsonify }}

@@ -1,52 +1,74 @@
-# Tingxuan Huang
+# tingxuan-huang.github.io
 
-_ I am an undergraduate at the University of Washington — class of 2026. Interested in exploring various ideas in science, and experiencing the world around us._
+My personal site: writing, research, travel and a bit about me.
+Live at <https://tingxuan-huang.github.io/>. Pushing to `main` publishes it.
 
-I gravitate toward problems that sit between fields: molecular dynamics that needs better-than-classical potentials, statistical methods that need to survive contact with messy data, and the slow work of turning a vague idea into something you can actually measure.
+## Where things are
 
-When I'm not at a terminal, I'm usually reading or writing — about science, about books, about the long arc of small daily work.
+| To change | Edit |
+|---|---|
+| Front page | `index.html` |
+| About page | `about.html` |
+| Research page | `research.html` |
+| Places on the map (pins) | `places.js` |
+| Stories, dates and photo captions for each place (English and 中文) | `content/stories.md` |
+| Restaurants | `content/food.md` |
+| Road trips | `content/trips.md` |
+| A new blog post | a new file in `_posts/` (see below) |
+| Colours and layout | `site.css` |
 
+The three files in `content/` explain their own format at the top. The pages
+read them directly, so saving the file and pushing is all it takes.
+
+## Writing a blog post
+
+Add `_posts/YYYY-MM-DD-short-name.md`:
+
+```markdown
+---
+title: "The title"
+date: 2026-06-01
+category: essay        # essay, note, learning, research, interest or news
+topic: "optional"
+excerpt: "One or two sentences shown in the list of posts."
 ---
 
-## Now
+The post, in Markdown.
+```
 
-Running LAMMPS simulations with the UMA potential — and writing a long essay about Jingwei.
+It appears on the Writing page by itself. For a photo with a caption, put the
+picture in `photos/` and add this where it should appear:
 
-<sub>This line mirrors the "Now" callout on my blog. I try to keep it honest.</sub>
+```liquid
+{% include figure.html src="/photos/west-lake.jpg" caption="Dusk over West Lake." %}
+```
 
----
+## Photos and tools
 
-## Writing
+Originals stay outside this folder; the tools make small copies with the
+location, date and camera data removed. They need macOS and Python 3.
 
-I keep a small blog at **[tingxuan-huang.github.io](https://tingxuan-huang.github.io/)** — essays and research-leaning notes, written for myself but published in case anyone else finds them useful.
+```bash
+# front-page and About photos: files named home.* and about.* in ../site-photos
+python3 tools/make_album.py --pages ../site-photos --write
 
-A few recent pieces:
+# a photo album for each place, from folders of trip photos
+python3 tools/make_album.py ../travel-photos --write
 
-- _[Notes on running UMA potentials in LAMMPS](https://tingxuan-huang.github.io/2026/uma-potentials/)_ — getting Meta's UMA potential running in LAMMPS for a small water box.
-- _[On Jingwei, and other small persistences](https://tingxuan-huang.github.io/2026/on-jingwei/)_ — practice as direction, not destination.
+# add places to the map from where photos were taken
+python3 tools/photos_to_places.py ../travel-photos --write
 
----
+# give new places an empty section in content/stories.md
+python3 tools/add_story_sections.py
 
-## Projects
+# make road-trip lines follow the real roads (sends only the stops' positions
+# to the public routing service router.project-osrm.org)
+python3 tools/trace_trips.py --write
+```
 
-<!-- TODO: Replace these with 2–4 repos you want to feature. -->
-<!-- Each line: link to repo + one-sentence description of what it does. -->
+Every tool only shows what it would do until `--write` is added
+(`add_story_sections.py` writes straight away, and only ever appends).
 
-- _[project-name](https://github.com/TingXuan-Huang/project-name)_ — what it does in one short sentence.
-- _[project-name](https://github.com/TingXuan-Huang/project-name)_ — what it does in one short sentence.
+## The old site
 
----
-
-## Elsewhere
-
-- **Email** — [thuang27@uw.edu](mailto:thuang27@uw.edu)
-
-<!-- TODO: Uncomment any of these you want public on your profile. -->
-<!-- - **Google Scholar** — [scholar.google.com/citations?user=...](https://scholar.google.com/citations?user=...) -->
-<!-- - **ORCID** — [orcid.org/0000-0000-0000-0000](https://orcid.org/0000-0000-0000-0000) -->
-<!-- - **LinkedIn** — [linkedin.com/in/...](https://www.linkedin.com/in/...) -->
-<!-- - **Personal site** — [your-other-link.com](https://your-other-link.com) -->
-
----
-
-<sub>This repo is also the source of my blog — see [SETUP.md](SETUP.md) for local build and deploy instructions.</sub>
+The previous design is kept, unpublished, in `_archived/old-site/`.

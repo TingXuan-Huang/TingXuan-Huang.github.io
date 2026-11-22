@@ -1,0 +1,16 @@
+{%- comment -%}
+  A photo with a caption inside a post.
+
+    {% include figure.html src="/photos/west-lake.jpg" caption="Dusk over West Lake." %}
+
+  src      the picture: a path on this site (put the file in photos/) or a full URL
+  caption  optional: the words under the picture; Markdown such as *italic* works
+  alt      optional: a description for people who cannot see the picture
+           (the caption is used when this is left out)
+{%- endcomment -%}
+<figure class="post-figure">
+  <img src="{% if include.src contains '://' %}{{ include.src }}{% else %}{{ include.src | relative_url }}{% endif %}" alt="{{ include.alt | default: include.caption | strip_html | escape }}" loading="lazy">
+  {%- if include.caption %}
+  <figcaption>{{ include.caption | markdownify | remove: '<p>' | remove: '</p>' | strip }}</figcaption>
+  {%- endif %}
+</figure>

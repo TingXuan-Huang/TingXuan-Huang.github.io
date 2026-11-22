@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Restaurants Tingxuan Huang would send a friend to, city by city.">
+<link rel="alternate" type="application/atom+xml" title="Tingxuan Huang" href="feed.xml">
+<title>Food · Tingxuan Huang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="site.css">
+</head>
+<body data-theme="travel">
+<div class="site">
+  <header class="top">
+    <a class="wordmark" href="index.html">Tingxuan Huang</a>
+    <nav class="nav" aria-label="Site">
+      <a href="writing.html" data-t="writing">Writing</a>
+      <a href="research.html" data-t="research">Research</a>
+      <a href="travel.html" data-t="travel" aria-current="true">Travel</a>
+      <a href="about.html" data-t="about">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <header class="page-head">
+      <p class="label kicker"><a href="travel.html">Travel</a>&ensp;/&ensp;Food</p>
+      <h1>Where I ate well</h1>
+      <p>Restaurants I&rsquo;d send a friend to, city by city.</p>
+      <div class="page-links">
+        <a class="btn" href="travel.html">&larr; Back to the globe</a>
+        <div class="lang" role="group" aria-label="Language">
+          <button type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang="zh" aria-pressed="false" lang="zh-Hans">中文</button>
+        </div>
+      </div>
+    </header>
+
+    <p class="demo-note" id="food-note" hidden>The entries marked &ldquo;Example&rdquo; are made up to show how the page looks. They will be replaced by real ones.</p>
+
+    <div class="filters" id="food-filter" role="group" aria-label="Filter by city" hidden></div>
+    <div id="food-list"></div>
+  </main>
+
+  <footer class="foot">
+    <span>Tingxuan Huang &middot; Seattle, WA</span>
+    <ul>
+      <li><a href="mailto:thuang27@cs.washington.edu">Email</a></li>
+      <li><a href="https://github.com/TingXuan-Huang">GitHub</a></li>
+      <li><a href="feed.xml">RSS</a></li>
+    </ul>
+  </footer>
+</div>
+
+<script src="places.js"></script>
+<script src="common.js"></script>
+<script src="food.js"></script>
+</body>
+</html>

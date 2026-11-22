@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Research interests, projects, background and publications of Tingxuan Huang.">
+<link rel="alternate" type="application/atom+xml" title="Tingxuan Huang" href="feed.xml">
+<title>Research · Tingxuan Huang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="site.css">
+</head>
+<body data-theme="research">
+<div class="site">
+  <header class="top">
+    <a class="wordmark" href="index.html">Tingxuan Huang</a>
+    <nav class="nav" aria-label="Site">
+      <a href="writing.html" data-t="writing">Writing</a>
+      <a href="research.html" data-t="research" aria-current="page">Research</a>
+      <a href="travel.html" data-t="travel">Travel</a>
+      <a href="about.html" data-t="about">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <header class="page-head">
+      <p class="label kicker">Research</p>
+      <h1>Research</h1>
+      <p>I build the software layer that turns a research question into an answer you can check.</p>
+    </header>
+
+    <section class="tile fill lead" aria-labelledby="interests-h">
+      <div>
+        <p class="label" id="interests-h">Research interests</p>
+        <p class="big">Machine learning for the physical and life sciences, particularly problems where the binding constraint is the data rather than the model.</p>
+        <p>That means properties obtainable only from first-principles simulation too costly to run at scale, measurements reported only in unstructured published literature, and biological and behavioural data for which reliable annotation does not exist.</p>
+        <p>Across these settings the recurring methodological question is how far a result can be trusted, so my work has concentrated on evaluation as much as on modelling: holding out conditions rather than samples, reporting performance on rare regimes separately from aggregate accuracy, and comparing design choices under a single protocol instead of across papers.</p>
+        <p>I have worked in three research groups at the University of Washington &mdash; in materials and sensing, in program analysis, and in computational biology &mdash; in each case alongside domain scientists rather than other computer scientists. I am seeking collaborations of the same kind, where the scientific question is the difficult part and the computational work needs someone to take responsibility for it end to end.</p>
+      </div>
+      <div class="side">
+        <div>
+          <p class="label">Keywords</p>
+          <ul class="chips">
+            <li>Physics-informed machine learning</li>
+            <li>Scientific information extraction</li>
+            <li>Representation learning under label scarcity</li>
+            <li>Evaluation under distribution shift</li>
+          </ul>
+        </div>
+        <div>
+          <p class="label">Technical background</p>
+          <p>Python and PyTorch primarily; also C/C++, Java, JavaScript, OCaml and SQL. Domain tooling: LAMMPS, ASE, MDAnalysis, RDKit, OpenCV.</p>
+        </div>
+        <div class="actions" style="margin-top:0">
+          <a class="btn primary" href="mailto:thuang27@cs.washington.edu">Get in touch</a>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="section-h" id="projects">Selected projects</h2>
+    <p class="section-p">Nothing listed is hypothetical or in planning. Each card links to the code, or says where the manuscript stands.</p>
+
+    <div class="cards">
+      <article class="tile card" id="surrogate">
+        <p class="label accent">Materials science</p>
+        <h3>Predicting a battery material without the week-long simulation</h3>
+        <p>Solid-state lithium batteries made from nanocellulose &mdash; essentially processed plant fibre &mdash; could be safer and biodegradable. The problem is that testing one design change costs days of physics simulation on a supercomputer, so researchers only ever try a handful. I built the pipeline that runs those simulations to generate trustworthy training data, then trains a model to approximate the result at a small fraction of the cost. Instead of five candidate designs, you can screen hundreds.</p>
+        <details><summary>Method</summary><p>DFT for electronic-structure ground truth, molecular dynamics for transport; LAMMPS with DeepMD DPA-2 and a Meta UMA cross-check; k-fold cross-validation because the simulation budget is small and overfitting would be invisible otherwise.</p></details>
+        <p class="links"><a href="https://github.com/TingXuan-Huang/Chem_AI">Chem_AI</a></p>
+      </article>
+
+      <article class="tile card" id="literature">
+        <p class="label accent">Literature at scale</p>
+        <h3>An AI agent that reads chemistry papers so people don&rsquo;t have to</h3>
+        <p>Most of the measurements you need to design a new recyclable material have already been published &mdash; scattered across thousands of papers as prose, in tables, in figure captions, never as data. I built a retrieval pipeline that mines those papers into a structured dataset, which then feeds an inverse-design workflow: you state the properties you want, it proposes materials that should have them. The resulting paper is now under review.</p>
+        <details><summary>Method</summary><p>Transformer-based retrieval with structured prompting, chosen because rule-based parsers break the moment scientific prose stops being consistent &mdash; which is immediately.</p></details>
+        <p class="links"><span class="status">Manuscript under review</span></p>
+      </article>
+
+      <article class="tile card" id="temperature">
+        <p class="label accent">Climate imaging</p>
+        <h3>Air temperature from one outdoor photo, with an honest error bar</h3>
+        <p>Hand the model a single frame from an outdoor webcam and it estimates the air temperature. The accuracy on cameras it trained with is the boring part. The part I care about: I tested it on cameras it had never seen, and on the rare extreme temperatures where models quietly fall apart while the average score still looks fine. That gap is the difference between a demo and a result you can build on.</p>
+        <details><summary>Method</summary><p>Deep imbalanced regression (label- and feature-distribution smoothing) on the SkyFinder dataset; an 8-experiment by 5-fold sweep run as SLURM array jobs on UW Hyak; leave-one-camera-out test split; ablations for noisy labels and dropped rare bins; constant and metadata-tree baselines so improvements have something to beat.</p></details>
+        <p class="links"><a href="https://github.com/TingXuan-Huang/DIR-SkyFinder">DIR-SkyFinder</a></p>
+      </article>
+
+      <article class="tile card" id="sensor">
+        <p class="label accent">Sensors and mobile</p>
+        <h3>A paper sensor you read with a phone camera</h3>
+        <p>Disposable electronics are a fast-growing waste stream. Our lab built a biodegradable sensor from cellulose that changes colour in response to humidity, pH, stretch and toxic gases. I built the Android side: point the camera at the sensor and get a reading, with the model running on the phone itself so it works with no signal and no server.</p>
+        <details><summary>Method</summary><p>Image segmentation to locate the sensor region, because simple colour thresholds fail the moment lighting stops being a lab bench; on-device inference for latency and offline use.</p></details>
+        <p class="links"><span class="status">Ubicomp sensor application</span></p>
+      </article>
+
+      <article class="tile card" id="single-cell">
+        <p class="label accent">Cell biology</p>
+        <h3>A brain-cell foundation model, and a fair fight between four designs</h3>
+        <p>&ldquo;Foundation models&rdquo; for cells are the field&rsquo;s current bet, but papers rarely compare designs under identical conditions, so nobody can say which choice actually helped. I trained four different ways of feeding gene-expression data into a model, at two model sizes, on the same Allen Brain Atlas mouse data, and evaluated every one on the same suite. The deliverable is an honest comparison table, not another leaderboard claim.</p>
+        <details><summary>Method</summary><p>Dense highly-variable-gene baseline, sparse EmbeddingBag, Geneformer-style rank tokens, scGPT-style binned-value tokens; linear and kNN probes plus geometry and biology checks; synthetic-data fixtures so the whole thing can be developed on a laptop before it touches a GPU.</p></details>
+        <p class="links"><a href="https://github.com/TingXuan-Huang/single_cell">single_cell</a></p>
+      </article>
+
+      <article class="tile card" id="proofs">
+        <p class="label accent">Mathematics and AI</p>
+        <h3>Does the AI actually follow the proof you gave it?</h3>
+        <p>Give a proof assistant two different human proofs of the same theorem. Does its machine-checked output follow the strategy you supplied, or does it quietly do its own thing and hand you a green checkmark? I built the benchmark and the pipeline that measures the difference. The write-up targets the MATH-AI workshop at NeurIPS 2026, and the repository&rsquo;s status page lists what failed just as plainly as what worked.</p>
+        <details><summary>Method</summary><p>The Lean statement stays fixed while the supplied informal proof switches strategy; calibrated against GPT-OSS 120B, Qwen3-32B and DeepSeek-Prover-V2-7B; 283 tests, Ruff, Pyright and lake build all green at the last checkpoint.</p></details>
+        <p class="links"><a href="https://github.com/TingXuan-Huang/proof-conditioned-faithfulness">proof-conditioned-faithfulness</a></p>
+      </article>
+
+      <article class="tile card" id="fusion">
+        <p class="label accent">Developer tooling</p>
+        <h3>Reading machine-learning code you did not write</h3>
+        <p>In machine-learning code the logic is short but the shapes of the data moving through it are everything, and none of those shapes appear in the source. The usual remedy is to scatter print statements through the forward pass, read the numbers, delete them, and lose the map the moment you clean up. Fusion runs the model under a tracer and prints the shape, dtype and device of every tensor beside the line that produced it, so the understanding survives the edit.</p>
+        <details><summary>Status</summary><p>The backend tracer and the shared core are the tested parts; the desktop shell is experimental. Built as a personal tool, n = 1, and described that way in the repository.</p></details>
+        <p class="links"><a href="https://github.com/TingXuan-Huang/ML-IDE">ML-IDE</a></p>
+      </article>
+
+      <article class="tile card" id="vitrimer">
+        <p class="label accent">Reproducibility</p>
+        <h3>Auditing whether a published prediction still reproduces</h3>
+        <p>My honours-thesis work asks a narrow and uncomfortable question: does a published model for predicting the glass-transition temperature of vitrimers still produce its reported numbers when it is run again from its original checkpoint? The repository is deliberately plan-only &mdash; scientific context, execution plan, acceptance criteria, and a list of decisions reserved for me &mdash; and no result is described as reproduced until the first implementation has actually run.</p>
+        <details><summary>Materials</summary><p>The 57 MB audited checkpoint and the original inference sources must both be staged before any work begins. Governing documents: CONTEXT, EXECPLAN, SERVER-HANDOFF, RUNBOOK, DECISIONS-NEEDED.</p></details>
+        <p class="links"><a href="https://github.com/TingXuan-Huang/vitrimer-exp">vitrimer-exp</a></p>
+      </article>
+
+      <article class="tile card" id="chi">
+        <p class="label accent">Research meta-analysis</p>
+        <h3>Measuring where a research field is drifting</h3>
+        <p>Human&ndash;computer interaction has grown fast enough that nobody reads all of it, which makes the shape of the field hard to see. This pipeline classifies themes across recent CHI publications using both supervised and unsupervised methods &mdash; and because the answer depends on how the text is represented, it runs the whole analysis through three different scientific text encoders rather than trusting one.</p>
+        <details><summary>Method</summary><p>SBERT, SciBERT and SPECTER2 embeddings over the same corpus; UMAP projections by label and cosine-similarity heatmaps produced separately for each encoder.</p></details>
+        <p class="links"><a href="https://github.com/TingXuan-Huang/CHI_Paper_Analysis">CHI_Paper_Analysis</a></p>
+      </article>
+
+      <article class="tile card" id="behaviour">
+        <p class="label accent">Behavioural neuroscience</p>
+        <h3>Finding behaviour in video without labelling every frame</h3>
+        <p>Manual annotation is the dominant cost in large-scale behavioural work: somebody has to watch the video and mark what the animal is doing, frame by frame. Here a video transformer embeds short clips and the behaviours separate within that embedding space on their own, which turns annotation into a matter of checking clusters rather than marking everything.</p>
+        <details><summary>Method</summary><p>VideoMAE embeddings with t-SNE projection over locomotion, rearing, face-grooming, body-grooming and defecation; representative frames plotted at their positions in the embedding. A separate Kaggle MABe workspace supplies a sliding-window PyTorch dataset over pose-tracking files.</p></details>
+        <p class="links"><a href="https://github.com/TingXuan-Huang/behavior_analysis">behavior_analysis</a><a href="https://github.com/TingXuan-Huang/MABe-Competition">MABe-Competition</a></p>
+      </article>
+
+      <article class="tile card" id="electrochemistry">
+        <p class="label accent">Electrochemistry tooling</p>
+        <h3>Batch electrochemical analysis from raw potentiostat exports</h3>
+        <p>Tafel, EIS and linear polarisation resistance, computed in batch from raw potentiostat exports.</p>
+        <p class="links"><a href="https://github.com/TingXuan-Huang/gamry-corrosion-analyzer">gamry-corrosion-analyzer</a></p>
+      </article>
+    </div>
+
+    <div class="split">
+      <section class="tile span-7" aria-labelledby="background-h">
+        <h2 class="tile-h" id="background-h">Background</h2>
+        <ol class="timeline">
+          <li>
+            <span class="when">2024 &ndash; present</span>
+            <div><b>Undergraduate researcher &mdash; Ubicomp Lab, Paul G. Allen School</b>
+            <span>With Prof. Shwetak Patel and Zhihan Zhang. Physics-informed machine learning for solid-state electrolytes, LLM-based extraction from the chemistry literature, and biodegradable chipless sensing.</span></div>
+          </li>
+          <li>
+            <span class="when">Apr &ndash; Sep 2025</span>
+            <div><b>Undergraduate researcher &mdash; PLSE, Paul G. Allen School</b>
+            <span>With Prof. Ren&eacute; Just and Moses Lurbur. Self-supervised representation learning for animal behaviour, and what vision foundation-model latents encode about it.</span></div>
+          </li>
+          <li>
+            <span class="when">Apr &ndash; Dec 2024</span>
+            <div><b>Undergraduate researcher &mdash; computational biology, Paul G. Allen School</b>
+            <span>With Prof. Sheng Wang and Zixuan Liu. Pathology foundation models for spatial transcriptomics, and cross-modal retinal image generation.</span></div>
+          </li>
+          <li>
+            <span class="when">2023 &ndash; 2026</span>
+            <div><b>B.S. Computer Science, Honors &mdash; University of Washington</b>
+            <span>Conferred August 2026. GPA 3.90.</span></div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="tile span-5" aria-labelledby="pubs-h">
+        <h2 class="tile-h" id="pubs-h">Publications</h2>
+        <div class="pub">
+          <p class="label accent">Under review</p>
+          <b>Data-efficient inverse design of recyclable electronics</b>
+          <p>Manuscript under review at <i>Nature Communications</i>. My contribution is the LLM-based retrieval pipeline that mines the experimental measurements out of the chemistry literature and the structured dataset it produces, which the inverse-design workflow is built on.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <span>Tingxuan Huang &middot; Seattle, WA</span>
+    <ul>
+      <li><a href="mailto:thuang27@cs.washington.edu">Email</a></li>
+      <li><a href="https://github.com/TingXuan-Huang">GitHub</a></li>
+      <li><a href="feed.xml">RSS</a></li>
+    </ul>
+  </footer>
+</div>
+</body>
+</html>

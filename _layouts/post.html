@@ -1,27 +1,52 @@
----
-layout: default
----
-<article class="post">
-  {% assign category = page.category | default: "essay" %}
-  <header class="post-header">
-    <div class="post-meta">
-      <time class="post-date" datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
-      <span class="post-tag-group">
-        <span class="post-tag post-tag--{{ category }}">{{ category }}</span>
-        {% if page.topic %}
-          <span class="post-topic-sep" aria-hidden="true">·</span>
-          <span class="post-topic post-topic--{{ category }}">{{ page.topic }}</span>
-        {% endif %}
-      </span>
-    </div>
-    <h1 class="post-title-page">{{ page.title }}</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="{{ '/site.css' | relative_url }}">
+{% feed_meta %}
+{% seo %}
+</head>
+<body data-theme="writing">
+{% assign category = page.category | default: "essay" %}
+<div class="site">
+  <header class="top">
+    <a class="wordmark" href="{{ '/' | relative_url }}">Tingxuan Huang</a>
+    <nav class="nav" aria-label="Site">
+      <a href="{{ '/writing.html' | relative_url }}" data-t="writing" aria-current="true">Writing</a>
+      <a href="{{ '/research.html' | relative_url }}" data-t="research">Research</a>
+      <a href="{{ '/travel.html' | relative_url }}" data-t="travel">Travel</a>
+      <a href="{{ '/about.html' | relative_url }}" data-t="about">About</a>
+    </nav>
   </header>
 
-  <div class="prose">
-    {{ content }}
-  </div>
+  <main>
+    <article>
+      <header class="page-head">
+        <p class="label kicker"><a href="{{ '/writing.html' | relative_url }}">Writing</a>&ensp;/&ensp;{{ category }}{% if page.topic %} &middot; {{ page.topic }}{% endif %}</p>
+        <h1>{{ page.title }}</h1>
+        <p><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time></p>
+      </header>
 
-  <footer class="post-footer">
-    <a class="back-link" href="{{ '/' | relative_url }}">← Back to writing</a>
+      <div class="tile article">
+        {{ content }}
+      </div>
+
+      <p class="post-foot"><a class="btn" href="{{ '/writing.html' | relative_url }}">&larr; All writing</a></p>
+    </article>
+  </main>
+
+  <footer class="foot">
+    <span>Tingxuan Huang &middot; Seattle, WA</span>
+    <ul>
+      <li><a href="mailto:thuang27@cs.washington.edu">Email</a></li>
+      <li><a href="https://github.com/TingXuan-Huang">GitHub</a></li>
+      <li><a href="{{ '/feed.xml' | relative_url }}">RSS</a></li>
+    </ul>
   </footer>
-</article>
+</div>
+</body>
+</html>

@@ -56,6 +56,15 @@ The built site lands in `_site/`.
    the site's typography.
 4. The `category` field controls the colored tag and hover accent. Defaults
    to `essay` if omitted.
+5. For a photo with a caption, put the picture in `assets/img/` and add this
+   line where it should appear:
+
+   ```liquid
+   {% include figure.html src="/assets/img/west-lake.jpg" caption="Dusk over West Lake." %}
+   ```
+
+   `caption` is optional, and `alt="..."` adds a description for screen
+   readers (the caption is used if you leave it out).
 
 The post URL is `/<year>/<slug>/` (set by `permalink` in `_config.yml`).
 

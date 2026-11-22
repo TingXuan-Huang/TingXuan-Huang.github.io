@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Essays, technical notes and running logs by Tingxuan Huang.">
+<link rel="alternate" type="application/atom+xml" title="Tingxuan Huang" href="feed.xml">
+<title>Writing · Tingxuan Huang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="site.css">
+</head>
+<body data-theme="writing">
+<div class="site">
+  <header class="top">
+    <a class="wordmark" href="index.html">Tingxuan Huang</a>
+    <nav class="nav" aria-label="Site">
+      <a href="writing.html" data-t="writing" aria-current="page">Writing</a>
+      <a href="research.html" data-t="research">Research</a>
+      <a href="travel.html" data-t="travel">Travel</a>
+      <a href="about.html" data-t="about">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <header class="page-head">
+      <p class="label kicker">Writing</p>
+      <h1>Writing</h1>
+      <p>Essays, technical notes and running logs &mdash; slower than a tweet, less formal than a paper, more public than a notebook.</p>
+    </header>
+
+    <a class="tile fill feature" href="2026/llm-from-scratch/">
+      <div class="post-meta">
+        <span class="label">Latest &middot; Learning &middot; LLM</span>
+        <time datetime="2026-05-26">May 26, 2026</time>
+      </div>
+      <h2>Building an LLM from scratch</h2>
+      <p>Notes from building a small language model from the ground up &mdash; for myself, and (hopefully) for anyone else trying to do the same.</p>
+      <span class="go">Read the post</span>
+    </a>
+
+    <h2 class="list-h">All posts</h2>
+    <div class="filters" role="group" aria-label="Filter posts by kind">
+      <button type="button" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" data-filter="essay" aria-pressed="false">Essays</button>
+      <button type="button" data-filter="note learning" aria-pressed="false">Notes</button>
+      <button type="button" data-filter="research" aria-pressed="false">Research</button>
+      <button type="button" data-filter="interest" aria-pressed="false">Interests</button>
+      <button type="button" data-filter="news" aria-pressed="false">News</button>
+    </div>
+
+    <section class="tile posts" aria-label="Posts">
+      <a class="post" data-cat="learning" href="2026/llm-from-scratch/">
+        <div class="post-meta">
+          <span class="label accent">Learning &middot; LLM</span>
+          <time datetime="2026-05-26">May 26, 2026</time>
+        </div>
+        <h2>Building an LLM from scratch</h2>
+        <p>Notes from building a small language model from the ground up &mdash; for myself, and (hopefully) for anyone else trying to do the same.</p>
+      </a>
+      <p class="empty" id="empty" hidden>No posts here yet.</p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>Tingxuan Huang &middot; Seattle, WA</span>
+    <ul>
+      <li><a href="mailto:thuang27@cs.washington.edu">Email</a></li>
+      <li><a href="https://github.com/TingXuan-Huang">GitHub</a></li>
+      <li><a href="feed.xml">RSS</a></li>
+    </ul>
+  </footer>
+</div>
+
+<script>
+/* The posts above are written into this page so it works on its own. On the
+   live site the list is rebuilt from posts.json, which Jekyll fills from the
+   _posts folder: a new post appears here without touching this file. */
+(function () {
+  'use strict';
+  var buttons = document.querySelectorAll('[data-filter]');
+  var box = document.querySelector('.posts');
+  var empty = document.getElementById('empty');
+  var current = 'all';
+
+  function apply() {
+    var want = current.split(' '), shown = 0;
+    box.querySelectorAll('.post').forEach(function (p) {
+      var match = want[0] === 'all' || want.indexOf(p.getAttribute('data-cat')) !== -1;
+      p.hidden = !match;
+      if (match) shown++;
+    });
+    empty.hidden = shown > 0;
+    buttons.forEach(function (o) { o.setAttribute('aria-pressed', String(o.getAttribute('data-filter') === current)); });
+  }
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () { current = b.getAttribute('data-filter'); apply(); });
+  });
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function kind(p) {
+    var c = String(p.category || 'essay');
+    return c.charAt(0).toUpperCase() + c.slice(1) + (p.topic ? ' \u00b7 ' + p.topic : '');
+  }
+  function day(text) {
+    var d = new Date(text + 'T00:00:00Z');
+    return isNaN(d) ? text : d.toLocaleDateString('en-US', { timeZone: 'UTC', month: 'short', day: 'numeric', year: 'numeric' });
+  }
+  function meta(p, labelClass, prefix) {
+    var m = el('div', 'post-meta');
+    m.appendChild(el('span', labelClass, (prefix || '') + kind(p)));
+    var t = el('time', null, day(p.date));
+    t.dateTime = p.date;
+    m.appendChild(t);
+    return m;
+  }
+  function build(list) {
+    var first = list[0], f = document.querySelector('.feature');
+    f.href = first.url;
+    f.textContent = '';
+    f.appendChild(meta(first, 'label', 'Latest \u00b7 '));
+    f.appendChild(el('h2', null, first.title));
+    f.appendChild(el('p', null, first.excerpt || ''));
+    f.appendChild(el('span', 'go', 'Read the post'));
+    box.querySelectorAll('.post').forEach(function (p) { p.remove(); });
+    list.forEach(function (p) {
+      var a = el('a', 'post');
+      a.href = p.url;
+      a.setAttribute('data-cat', p.category || 'essay');
+      a.appendChild(meta(p, 'label accent'));
+      a.appendChild(el('h2', null, p.title));
+      a.appendChild(el('p', null, p.excerpt || ''));
+      box.insertBefore(a, empty);
+    });
+    apply();
+  }
+  fetch('posts.json', { cache: 'no-cache' })
+    .then(function (r) { if (!r.ok) throw new Error('posts ' + r.status); return r.json(); })
+    .then(function (list) { if (Array.isArray(list) && list.length) build(list); })
+    .catch(function () {});     // no posts.json (or not built yet): the list written above stays
+})();
+</script>
+</body>
+</html>

@@ -6,9 +6,9 @@ permalink: /about/
 
 # About Me
 
-My name is Tingxuan. I am interested in explore various ideas around natural science, brain, intelligence, computational sciences and anywhere in between.
+My name is Tingxuan. I am interested in exploring ideas around natural science, the brain, intelligence, the computational sciences and anywhere in between.
 
-This site is a small, quiet corner of the internet where I keep track of the ideas I contemplated, the projects did, and technical skills learned, and share them with you. I always believe the best way to learn is by teaching, so I hope that we can make progress together through these blogs. I think writing blog here is very nice because it is slower than a tweet, less formal than a paper, and more public than a notebook.
+This site is a small, quiet corner of the internet where I keep track of the ideas I have contemplated, the projects I have done, and the technical skills I have learned, and share them with you. I have always believed the best way to learn is by teaching, so I hope that we can make progress together through these posts. I think writing a blog here is very nice because it is slower than a tweet, less formal than a paper, and more public than a notebook.
 
 A few kinds of writing live here:
 
@@ -22,6 +22,6 @@ A few kinds of writing live here:
 
 Right now, I am especially interested in AI for science, creating scientific data pipelines, and models that can survive contact with messy real-world systems and help us understand or answer scientific questions. I am also drawn to questions in neuroscience and cognition, and how they might be related to computational methods we have today.
 
-If you want to get in touch, the easiest way is through my email listed in the homepage.
+If you want to get in touch, the easiest way is the email listed on the [homepage]({{ '/' | relative_url }}).
 
 <!-- [GitHub]({{ site.github_url }}). -->

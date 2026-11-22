@@ -1,7 +1,7 @@
 title: "tingxuan"
 tagline: "Welcome to my personal blog! Hope you can find the writing interesting and helpful."
-now: "Currently trying to learn about various topics ranging from machine learning theory, neural science to investment and economics. I also like to read books on philosophy, history and literature.
-      I am also learning singing and playing flute, and origimami as hobbies."
+now: "Currently trying to learn about various topics ranging from machine learning theory and neuroscience to investment and economics. I also like to read books on philosophy, history and literature.
+      I am also learning singing, the flute and origami as hobbies."
 
 description: "Essays and notes by Tingxuan Huang."
 author: "Tingxuan Huang"
@@ -22,9 +22,10 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
 
-# Sass is compiled by jekyll-sass-converter; output the compressed CSS to /assets/css/main.css.
-sass:
-  style: compressed
+# The files in content/ are read by the pages as plain text. Keep GitHub Pages from
+# turning Markdown files without front matter into pages of their own.
+optional_front_matter:
+  enabled: false
 
 plugins:
   - jekyll-feed
@@ -46,6 +47,7 @@ exclude:
   - README.md
   - SETUP.md
   - _archived/
+  - tools/
   - vendor/
   - .bundle/
   - node_modules/
