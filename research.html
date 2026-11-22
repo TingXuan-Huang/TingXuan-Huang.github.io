@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="site.css?v=20261122b">
+<link rel="stylesheet" href="site.css?v=20261122c">
 </head>
 <body data-theme="research">
 <div class="site">
@@ -55,6 +55,54 @@
         <div class="actions" style="margin-top:0">
           <a class="btn primary" href="mailto:thuang27@cs.washington.edu">Get in touch</a>
         </div>
+      </div>
+    </section>
+
+    <!-- Background.
+         One block (<article class="exp">) per place: a school, a company, a lab
+         outside a school. Newest first. What I did inside that place (research
+         roles, projects) goes in the list under it. A new job or a new school
+         gets a block of its own: copy one whole <article class="exp"> ... </article>,
+         paste it above the others and change the words. The small label is the
+         kind of place: Education, Industry, Research. A block with nothing to
+         list under it simply leaves out the "exp-sub" line and the <ol>. -->
+    <section class="tile stacked" aria-labelledby="background-h">
+      <h2 class="tile-h" id="background-h">Background</h2>
+
+      <article class="exp">
+        <header class="exp-head">
+          <p class="label accent">Education</p>
+          <h3>University of Washington</h3>
+          <span class="when">2023 &ndash; 2026</span>
+          <p class="exp-what">B.S. Computer Science, Honors &middot; Conferred August 2026 &middot; GPA 3.90</p>
+        </header>
+        <p class="label exp-sub">Research at UW</p>
+        <ol class="timeline">
+          <li>
+            <span class="when">2024 &ndash; present</span>
+            <div><b>Undergraduate researcher &mdash; Ubicomp Lab, Paul G. Allen School</b>
+            <span>With Prof. Shwetak Patel and Zhihan Zhang. Physics-informed machine learning for solid-state electrolytes, LLM-based extraction from the chemistry literature, and biodegradable chipless sensing.</span></div>
+          </li>
+          <li>
+            <span class="when">Apr &ndash; Sep 2025</span>
+            <div><b>Undergraduate researcher &mdash; PLSE, Paul G. Allen School</b>
+            <span>With Prof. Ren&eacute; Just and Moses Lurbur. Self-supervised representation learning for animal behaviour, and what vision foundation-model latents encode about it.</span></div>
+          </li>
+          <li>
+            <span class="when">Apr &ndash; Dec 2024</span>
+            <div><b>Undergraduate researcher &mdash; computational biology, Paul G. Allen School</b>
+            <span>With Prof. Sheng Wang and Zixuan Liu. Pathology foundation models for spatial transcriptomics, and cross-modal retinal image generation.</span></div>
+          </li>
+        </ol>
+      </article>
+    </section>
+
+    <section class="tile stacked" aria-labelledby="pubs-h">
+      <h2 class="tile-h" id="pubs-h">Publications</h2>
+      <div class="pub">
+        <p class="label accent">Under review</p>
+        <b>Data-efficient inverse design of recyclable electronics</b>
+        <p>Manuscript under review at <i>Nature Communications</i>. My contribution is the LLM-based retrieval pipeline that mines the experimental measurements out of the chemistry literature and the structured dataset it produces, which the inverse-design workflow is built on.</p>
       </div>
     </section>
 
@@ -148,43 +196,6 @@
         <p>Tafel, EIS and linear polarisation resistance, computed in batch from raw potentiostat exports.</p>
         <p class="links"><a href="https://github.com/TingXuan-Huang/gamry-corrosion-analyzer">gamry-corrosion-analyzer</a></p>
       </article>
-    </div>
-
-    <div class="split">
-      <section class="tile span-7" aria-labelledby="background-h">
-        <h2 class="tile-h" id="background-h">Background</h2>
-        <ol class="timeline">
-          <li>
-            <span class="when">2024 &ndash; present</span>
-            <div><b>Undergraduate researcher &mdash; Ubicomp Lab, Paul G. Allen School</b>
-            <span>With Prof. Shwetak Patel and Zhihan Zhang. Physics-informed machine learning for solid-state electrolytes, LLM-based extraction from the chemistry literature, and biodegradable chipless sensing.</span></div>
-          </li>
-          <li>
-            <span class="when">Apr &ndash; Sep 2025</span>
-            <div><b>Undergraduate researcher &mdash; PLSE, Paul G. Allen School</b>
-            <span>With Prof. Ren&eacute; Just and Moses Lurbur. Self-supervised representation learning for animal behaviour, and what vision foundation-model latents encode about it.</span></div>
-          </li>
-          <li>
-            <span class="when">Apr &ndash; Dec 2024</span>
-            <div><b>Undergraduate researcher &mdash; computational biology, Paul G. Allen School</b>
-            <span>With Prof. Sheng Wang and Zixuan Liu. Pathology foundation models for spatial transcriptomics, and cross-modal retinal image generation.</span></div>
-          </li>
-          <li>
-            <span class="when">2023 &ndash; 2026</span>
-            <div><b>B.S. Computer Science, Honors &mdash; University of Washington</b>
-            <span>Conferred August 2026. GPA 3.90.</span></div>
-          </li>
-        </ol>
-      </section>
-
-      <section class="tile span-5" aria-labelledby="pubs-h">
-        <h2 class="tile-h" id="pubs-h">Publications</h2>
-        <div class="pub">
-          <p class="label accent">Under review</p>
-          <b>Data-efficient inverse design of recyclable electronics</b>
-          <p>Manuscript under review at <i>Nature Communications</i>. My contribution is the LLM-based retrieval pipeline that mines the experimental measurements out of the chemistry literature and the structured dataset it produces, which the inverse-design workflow is built on.</p>
-        </div>
-      </section>
     </div>
   </main>
 

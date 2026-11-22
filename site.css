@@ -512,6 +512,19 @@ a.feature:hover{text-decoration:none;transform:translateY(-2px);}
 .timeline b{display:block;font-weight:600;}
 .timeline span{display:block;font-size:.92rem;color:var(--ink-2);margin-top:.15rem;}
 @media (max-width:520px){.timeline li{grid-template-columns:1fr;}}
+/* background: one block per place (school, company), what I did there listed under it */
+.tile.stacked{margin-top:14px;}
+.exp{padding:1.1rem 0 .3rem;border-top:1px solid var(--line);}
+.exp + .exp{margin-top:1rem;}
+.exp-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.25rem 1rem;align-items:baseline;}
+.exp-head .label,.exp-head .exp-what{grid-column:1 / -1;}
+.exp-head h3{font-size:1.75rem;line-height:1.15;}
+.exp-head .when{font-family:var(--font-mono);font-size:.78rem;color:var(--ink-3);white-space:nowrap;}
+.exp-head .exp-what{font-size:.98rem;}
+.exp-sub{margin:1.4rem 0 .35rem;}
+.exp .timeline{padding-left:1.1rem;border-left:2px solid var(--line);}
+.exp .timeline li:first-child{border-top:0;}
+.pub p{max-width:70ch;}
 .pub{padding:.9rem 0;border-top:1px solid var(--line);}
 .pub b{display:block;font-family:var(--font-display);font-weight:400;font-size:1.35rem;line-height:1.2;margin:.4rem 0 .5rem;}
 .pub p{font-size:.92rem;}
