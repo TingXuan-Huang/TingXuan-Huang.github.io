@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="site.css?v=20261122c">
+<link rel="stylesheet" href="site.css?v=20261122e">
 </head>
 <body data-theme="about">
 <div class="site">
@@ -46,11 +46,17 @@
           <img src="photos/about.jpg" alt="Tingxuan sitting on stone steps between old buildings at Wuhan University.">
           <figcaption>Wuhan University, cherry blossom season &middot; 2026.3.26</figcaption>
         </figure>
-        <ul class="facts">
-          <li><span class="label">Based</span><span>Seattle, WA</span></li>
-          <li><span class="label">Studied</span><span>B.S. Computer Science, Honors &mdash; University of Washington</span></li>
-          <li><span class="label">Works on</span><span>Machine learning for the physical and life sciences</span></li>
-        </ul>
+        <!-- Name and contacts under the photo. To add a contact, copy one <li> line.
+             Xiaohongshu has no link yet: when there is one, change its
+             <span class="pending"> ... </span> into <a href="THE LINK"> ... </a>. -->
+        <div class="who">
+          <p class="who-name"><span class="zh-name" lang="zh-Hans">黄廷轩</span> <span>Tingxuan Huang</span></p>
+          <ul class="contacts">
+            <li><a href="mailto:huangtingxuan42@gmail.com"><span class="ci mail" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7.5 12 13.5l8.5-6"/></svg></span><span><span class="what">Email</span>huangtingxuan42@gmail.com</span></a></li>
+            <li><a href="https://github.com/TingXuan-Huang"><span class="ci github" aria-hidden="true"><svg class="solid" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span><span><span class="what">GitHub</span>TingXuan-Huang</span></a></li>
+            <li><span class="pending"><span class="ci xhs" aria-hidden="true" lang="zh-Hans">红</span><span><span class="what">Xiaohongshu</span><span lang="zh-Hans">小红书</span></span></span></li>
+          </ul>
+        </div>
       </section>
 
       <section class="tile soft span-7" aria-labelledby="now-h">
