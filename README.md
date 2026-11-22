@@ -20,6 +20,11 @@ Live at <https://tingxuan-huang.github.io/>. Pushing to `main` publishes it.
 The three files in `content/` explain their own format at the top. The pages
 read them directly, so saving the file and pushing is all it takes.
 
+After changing `site.css`, also change the `?v=...` tag after `site.css` in the
+`<link rel="stylesheet">` line of every page (the six `.html` files and
+`_layouts/post.html`) to any new value. Browsers keep the stylesheet for a
+while, and the new tag makes them fetch the new one straight away.
+
 ## Writing a blog post
 
 Add `_posts/YYYY-MM-DD-short-name.md`:
